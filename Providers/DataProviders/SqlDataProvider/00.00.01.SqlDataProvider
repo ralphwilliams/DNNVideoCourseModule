@@ -1,0 +1,41 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Calvary_VideoCourse_Videos]') AND type in (N'U'))
+CREATE TABLE {databaseOwner}{objectQualifier}Calvary_VideoCourse_Videos
+    (
+    videoId int NOT NULL IDENTITY (1, 1),
+    vimeoId int NOT NULL,
+    orderIndex int NOT NULL,
+    courseId int NOT NULL,
+    AssignedUserId int NULL,
+    ModuleId int NOT NULL,
+    CreatedOnDate datetime NOT NULL,
+    CreatedByUserId int NOT NULL,
+    LastModifiedOnDate datetime NOT NULL,
+    LastModifiedByUserId int NOT NULL
+    )  ON [PRIMARY]
+     TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Calvary_VideoCourse_Videos]') AND type in (N'U'))
+ALTER TABLE {databaseOwner}{objectQualifier}Calvary_VideoCourse_Videos ADD CONSTRAINT
+    PK_{objectQualifier}Calvary_VideoCourse_Videos PRIMARY KEY CLUSTERED 
+    (
+    videoId
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

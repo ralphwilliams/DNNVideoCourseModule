@@ -1,0 +1,86 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="Calvary_VideoCourse" type="Module" version="01.00.05">
+      <friendlyName>Calvary_VideoCourse</friendlyName>
+      <description>Calvary_VideoCourse module</description>
+      <iconFile>Images/logo_min.png</iconFile>
+      <owner>
+        <name>Ralph Williams</name>
+        <organization>Ralph Williams Consulting</organization>
+        <url>http://www.ralphwilliams.com</url>
+        <email>me@ralphwilliams.com</email>
+      </owner>
+      <license src="License.txt"></license>
+      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+      <dependencies>
+        <dependency type="CoreVersion">07.03.00</dependency>
+      </dependencies>
+      
+      <components>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\Calvary_VideoCourse</basePath>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>00.00.01.SqlDataProvider</name>
+              <version>01.00.01</version>
+            </script>
+            <script type="UnInstall">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>01.00.05</version>
+            </script>
+          </scripts>
+        </component>
+
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/Calvary_VideoCourse</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>Calvary_VideoCourse</moduleName>
+            <foldername>Calvary_VideoCourse</foldername>
+            <businessControllerClass>RalphWilliams.Modules.Calvary_VideoCourse.Components.FeatureController, RalphWilliams.Calvary_VideoCourse</businessControllerClass>
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>Calvary_VideoCourse</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/Calvary_VideoCourse/View.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>RalphWilliams.Calvary_VideoCourse.dll</name>
+              <path>bin</path>
+            </assembly>
+          </assemblies>
+        </component>
+
+        <component type="Cleanup" version="01.00.05" fileName ="01.00.05.txt" />
+        
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

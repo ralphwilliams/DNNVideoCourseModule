@@ -1,0 +1,59 @@
+﻿<h3>Calvary_VideoCourse Module</h3>
+<p>
+	Ralph Williams <br />
+	<a href="mailto:me@ralphwilliams.com">me@ralphwilliams.com</a><br />
+	<a href="http://www.ralphwilliams.com" target="_blank">http://www.ralphwilliams.com</a><br />
+</p>
+<hr/>
+<div>
+	<h3>About the Calvary_VideoCourse Module</h3>
+	<p>
+		This modue allows you to have a LMS-style video gallery experience for your website visitors, based on security roles, and security role groups.
+	</p>
+
+	<h4>Version 01.00.05</h4>
+	<p>This update fixes the following bugs and adds the following features.</p>
+	<ul>
+		<li>Resolved: Email subject line did not include course title.</li>
+		<li>Enhanced: Marks course complete automatically after final course video completes.</li>
+		<li>Enhanced: When session times out and video attempts to mark complete, redirect to home page.</li>
+	</ul>	
+	
+	<h4>Version 01.00.04</h4>
+	<p>This update fixes the following bugs and adds the following features.</p>
+	<ul>
+		<li>Removed: Update Vimeo Id for current video to remove confusion.</li>
+		<li>Enhanced: Minor style update for progress view</li>
+	</ul>
+
+	<h4>Version 01.00.03</h4>
+	<p>This update fixes the following bugs and adds the following features.</p>
+	<ul>
+		<li>Added: User Progress View</li>
+		<li>Enhanced: Security for accessing courses</li>
+		<li>Enhanced: Changed module namespace and updated code and files to match common code standards.</li>
+	</ul>
+
+	<h4>Version 01.00.02</h4>
+	<p>This update fixes the following bugs and adds the following features.</p>
+	<ul>
+		<li>Fixed: Next button not working on consecutive watched video.</li>
+		<li>Enhanced: Saves progress on video completion, instead of clicking next button, except for course completion as this is still on button click</li>
+		<li>Enhanced: Increased security for adding and removing videos</li>
+		<li>Enhanced: Minor styling updates
+			<ul>
+				<li>DNN Standard buttons</li>
+				<li>Minor layout issues</li>
+				<li>Minor layout issues on mobile</li>
+			</ul>
+			</li>
+		<li>Added: Video count in video player (Video x of y)</li>
+	</ul>
+
+	<h4>Version 01.00.01</h4>
+	<p>This update adds new styling and better organization of code.</p>
+	
+	<h4>Version 01.00.00</h4>
+	<p>This is the initial release of the module.</p>
+	
+</div>

@@ -1,0 +1,63 @@
+﻿<div class="status-view">
+	<div class="module-heading">
+		<div class="container">
+			<div class="row">
+				<h1 class="col-sm-10">Course Progress</h1>
+				<a ng-click="courseList()" class="btn btn-secondary return-button visible-xs-block">
+					<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> Return to Course List
+				</a>
+
+				<div class="return-btn col-md-2 hidden-xs">
+					<a ng-click="courseList()" class="btn btn-secondary return-button">
+						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Return to Course List
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="col-md-12 list-unstyled">
+					<li class="course-categories" ng-repeat="category in userData">
+						<h2 class="page-header">{{ category.Name }} <!--| {{ category.ID }}--></h2>
+						<ul class="list-unstyled">
+							<li class="course-courses" ng-repeat="course in category.Roles" ng-cloak>
+								<h3 class="page-header">
+									{{ course.Name }} <!--| {{ course.RoleID }}-->
+								</h3>
+								<div class="row">
+									<div class="col-md-12 alert alert-warning" role="alert" ng-hide="course.Users.length > 0">
+										There are no users assinged to this course.
+									</div>
+									<ul class="user-list list-unstyled" ng-show="course.Users.length > 0">
+										<li ng-repeat="user in course.Users" class="col-xs-6 col-md-sm-4 col-md-2 {{user.courseComplete}} {{user.notStarted}}" ng-cloak>
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h3 class="panel-title">{{ user.name }}</h3>
+												</div>
+												<div class="panel-body">
+													<p class="not-started-text">
+														<span class="glyphicon glyphicon-off" aria-hidden="true"></span><br />Course not started.
+													</p>
+													<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ user.percentComplete }}" a aria-valuemin="0" aria-valuemax="100" ng-style="{width:user.percentComplete}">
+															<span class="sr-only">40% Complete (success)</span>
+														</div>
+													</div>
+													<p class="course-status">{{ user.numberComplete + ' of ' + user.totalVideos }} completed</p>
+													<p class="course-complete" ng-show="user.courseComplete">Course complete</p>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
