@@ -209,11 +209,5 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-# DNN website
-[Ww]ebsite/
-
-# DNN Lucene.net index files
-[Ww]ebsite/[Aa]pp_[Dd]ata/[Ss]earch/
-
-# DNN Logs
-[Ww]ebsite/[Pp]ortals/_default/[Ll]ogs/
+# prevent the generated installation packages from being checked in to source control
+[Ii]nstall/
