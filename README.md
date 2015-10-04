@@ -15,7 +15,7 @@ DNN SPA module that uses DNN Security Roles and Role Groups to create dynamic Co
 10. Submit a pull request
  
 
-## Setting up DNN Environment
+## Creating Categories and Courses
 After installing the module onto a DNN website, follow the instructions below for setting up the courses.
 
 This module makes use of DNN's Security and Role groups to create courses and course categories. Roles create courses and Role Groups create the courses' categories.
