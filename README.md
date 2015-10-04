@@ -21,12 +21,14 @@ After installing the module onto a DNN website, follow the instructions below fo
 This module makes use of DNN's Security and Role groups to create courses and course categories. Roles create courses and Role Groups create the courses' categories.
 
 To create a new Categories and Courses, follow the instructions below:
+
 1. While logged in as an Administrator or Host, navigate to Admin > Security Roles.
 2. Add New Role Group and prepend the Role Group Name with "CCV_". The module uses this to show only the role groups intended to be used for the module. 
 3. Add new Roles to the Role Group for each course you wish to create in each category. The module will only use the roles within the Role Groups whose names are prepended with the string "CCV_".
 
 ## Adding Videos
 Once the Categories and Courses are created, videos can then be added to the module. This module uses videos that have already been added to your Vimeo account.
+
 1. Click the Add Video button for the course you wish to add videos. In the Edit Course screen, add the Vimeo video Id in the input box and click Add Video. 
 2. Once the videos have been added, they can be sorted by dragging and dropping them into the desired order.
 (Videos are saved immediately upon adding, sorting or deleting.)
