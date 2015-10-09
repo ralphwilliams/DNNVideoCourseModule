@@ -32,5 +32,3 @@ Once the Categories and Courses are created, videos can then be added to the mod
 1. Click the Add Video button for the course you wish to add videos. In the Edit Course screen, add the Vimeo video Id in the input box and click Add Video. 
 2. Once the videos have been added, they can be sorted by dragging and dropping them into the desired order.
 (Videos are saved immediately upon adding, sorting or deleting.)
-
-This will be upgraded to DNN 8 soon.
