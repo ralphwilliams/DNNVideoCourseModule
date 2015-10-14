@@ -1,4 +1,4 @@
-﻿<div class="course-list">
+﻿<div class="course-list" ng-hide="noCourses">
 	<div class="module-heading">
 		<div class="container">
 			<div class="row">
@@ -14,7 +14,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="row"></div>
+		<div class="row">
 			<div class="col-md-12">
 				<ul class="col-md-12 list-unstyled">
 					<li class="course-categories" ng-repeat="category in categories">
@@ -40,7 +40,7 @@
 											</h4>
 											<a ng-href="{{ '#/videos/' + video.VideoId }}" class="img-responsive" title="{{ video.description }}" ng-class="[{disabled: video.complete != true && video.isNext != true}]">
 												<span class=""></span>
-												<img class="video-list-thumb img-rounded" ng-src="{{ video.thumbnail_url }}" alt="{{ video.title }}" />
+												<img class="video-list-thumb img-rounded" ng-src="{{ video.thumbnail_url }}" alt="{{ video.title }}"/>
 											</a>
 											<p class="text-right small">Duration: {{ video.duration }}</p>
 										</li>
@@ -53,3 +53,8 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div ng-show="noCourses">
+	<h2>No Courses Exist</h2>
+	<p>No courses have been set up for this module. Please <a href="/Admin/Security-Roles">add new Role Groups and Roles</a>.</p>
+</div>

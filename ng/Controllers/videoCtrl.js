@@ -99,6 +99,9 @@ angular
 		// Create Video List
 		$scope.videoList = function (videos) {
 
+			// show or hide list depending onf if courses and categories list exists
+			$scope.noCourses = $scope.categories.length > 0 ? false : true;
+
 			// Iterate through each Category
 			angular.forEach($scope.categories, function (valueCategory, keyCategory) {
 
