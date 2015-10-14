@@ -1,6 +1,24 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
 
 
+/*#region DNN Overrides */
+
+#ControlBar_ControlPanel *,
+.actionMenu *,
+#ControlBar_ControlPanel *:after,
+.actionMenu *:after,
+#ControlBar_ControlPanel *:before,
+.actionMenu *:before,
+#userControls * {
+  -moz-box-sizing: content-box !important;
+  -webkit-box-sizing: content-box !important;
+  box-sizing: content-box !important;
+}
+#ControlEditPageMenu .mark, #ControlEditPageMenu mark {
+	background-color: transparent;
+}
+
+/*#endregion */
 
 .video-title {
 	text-transform: capitalize;
