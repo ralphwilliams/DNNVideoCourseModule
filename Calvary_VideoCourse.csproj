@@ -186,6 +186,8 @@
     <Content Include="ng\Views\statusView.html" />
     <Content Include="ng\Views\videoListView.html" />
     <Content Include="ng\Views\videoPlayerView.html" />
+    <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.dll" />
+    <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.xml" />
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -212,6 +214,17 @@
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
     <Content Include="fonts\BebasNeue.otf" />
+    <Content Include="View.html" />
+    <Content Include="packages\MSBuildTasks.1.4.0.88\content\MSBuild.Community.Tasks.ReadMe.md" />
+    <Content Include="packages\MSBuildTasks.1.4.0.88\MSBuildTasks.1.4.0.88.nupkg" />
+    <Content Include="packages\MSBuildTasks.1.4.0.88\tools\Build.proj" />
+    <Content Include="packages\MSBuildTasks.1.4.0.88\tools\Install.ps1" />
+    <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.Targets" />
+    <None Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.psm1" />
+    <Content Include="packages\repositories.config" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
