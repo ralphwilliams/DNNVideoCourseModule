@@ -19,6 +19,7 @@ using System.Web.Http;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
 using RalphWilliams.Modules.Calvary_VideoCourse.Entities;
 using DotNetNuke.Security.Roles;
@@ -31,7 +32,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 	public class Calvary_VideoCourseController : DnnApiController
 	{
 		// Get Videos
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetVideos(int moduleId)
 		{
@@ -52,7 +54,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		}
         
         // Get Videos
-        [AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
         [HttpGet]
         public HttpResponseMessage GetVideosByUser(int moduleId, int userId)
         {
@@ -74,7 +77,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
         }
 
 		//  Get Role Groups
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetAllGroups() 
 		{
@@ -83,7 +87,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
                 //
                 // TODO: don't hard code the PortalID
                 //
-			    var portalId = PortalSettings.PortalId;
+			    var portalId = DotNetNuke.Entities.Portals.PortalSettings.PortalId;
 			    var filteredRoleGroups = string.Empty;
 
                 if (UserInfo == null || (UserInfo != null && UserInfo.UserID < 1))
@@ -148,7 +152,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		}
         
 		//  Get Role Groups by User
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetGroupsByUser()
 		{
@@ -166,7 +171,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		}
         
 		// Get Users Video Complete status
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetVideosComplete()
 		{
@@ -186,7 +192,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		}
 
 		// Get list of users
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetListOfUsers()
 		{
@@ -261,9 +268,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 
 		}
         
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
-		// [ValidateAntiForgeryToken]
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage DeleteVideo(VideoInfo video)
 		{
@@ -294,9 +300,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			}
 		}
         
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
-		// [ValidateAntiForgeryToken]
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage AddVideo(VideoInfo videoDto)
 		{
@@ -357,7 +362,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			}
 		}
 
-		[AllowAnonymous]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage SaveComplete(NewVideoDTO thisVideo)
 		{
@@ -403,8 +409,9 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
 			}
 		}
-        
-		[AllowAnonymous]
+
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage SendEmail(SubjLineDTO newEmail)
 		{

@@ -2,6 +2,7 @@
 <script type="text/javascript">
 	var d = new Date();
 	var moduleId = <%= ModuleId %>;
+	var moduleName = "<%=ModuleConfiguration.DesktopModule.FolderName%>";
 	var portalId = <%= PortalId %>;
 	var currentUser = <%= UserId %>;
 	var currentDate = d;

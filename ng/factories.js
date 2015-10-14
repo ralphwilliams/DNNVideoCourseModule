@@ -7,6 +7,19 @@
 	// var dataUrl = "/DesktopModules/Calvary_VideoCourse/data/users.json";
 	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
 
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
 	// GET - SET - UPDATE
 	this.setUsers = function (users) {
 		_users = users;
@@ -18,7 +31,8 @@
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-			url: dataUrl + "GetListOfUsers"
+			url: dataUrl + "GetListOfUsers",
+			headers: $self.Headers
 	    }).success(function(data) {
 			deferred.resolve(data);
 	    }).error(function() {
@@ -39,6 +53,18 @@
 	// var dataUrl = "/DesktopModules/Calvary_VideoCourse/data/users.json";
 	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
 
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
 
 	// GET - SET - UPDATE
 	service.setUsersData = function (videoDto) {
@@ -46,6 +72,7 @@
 		return $http({
 			method: 'POST',
 			url: dataUrl + "SaveComplete",
+			headers: $self.Headers,
 			data: videoDto
 		});
 	};
@@ -62,7 +89,8 @@
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-			url: dataUrl + "GetVideosComplete"
+			url: dataUrl + "GetVideosComplete",
+			headers: $self.Headers
 		}).success(function (data) {
 			deferred.resolve(data);
 		}).error(function () {
@@ -73,6 +101,19 @@
 	return service;
 })
 .factory('myInterceptor', ['$log', function ($log) {
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
 	// var sessionInjector = {
 	// 	request: function (config) {
 	// 		
@@ -88,6 +129,19 @@
 	//var dataUrl = "/DesktopModules/Calvary_VideoCourse/data/videos.json";
 	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
 
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
 	// GET - SET - UPDATE
 	service.setVideos = function (videos) {
 		var sf = $.ServicesFramework(moduleId);
@@ -95,6 +149,7 @@
 		return $http({
 			method: 'POST',
 			url: dataUrl + 'AddVideo?moduleId=' + moduleId,
+			headers: $self.Headers,
 			data: JSON.stringify(videos)
 		});
 	};
@@ -120,7 +175,8 @@
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-			url: dataUrl + 'GetVideos?moduleId=' + moduleId
+			url: dataUrl + 'GetVideos?moduleId=' + moduleId,
+			headers: $self.Headers
 		}).success(function (data) {
 			deferred.resolve(data);
 		}).error(function () {
@@ -135,6 +191,19 @@
 
 	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/GetAllGroups";
 
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
 	// GET - SET - UPDATE
 	this.setCategories = function (categories) {
 		_categories = categories;
@@ -147,7 +216,8 @@
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-	        url: dataUrl
+			url: dataUrl,
+			headers: $self.Headers
 	    }).success(function(data) {
 			deferred.resolve(data);
 	    }).error(function() {
@@ -163,11 +233,25 @@
 	// var dataUrl = "/DesktopModules/Calvary_VideoCourse/data/users.json";
 	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
 
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
 	// GET - SET - UPDATE
 	service.sendEmail = function (subjectTitle) {
 		return $http({
 			method: 'POST',
 			url: dataUrl + "SendEmail",
+			headers: $self.Headers,
 			data: subjectTitle
 		});
 	};
@@ -184,7 +268,8 @@
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-			url: dataUrl + "GetVideosComplete"
+			url: dataUrl + "GetVideosComplete",
+			headers: $self.Headers
 	    }).success(function(data) {
 			deferred.resolve(data);
 	    }).error(function() {
