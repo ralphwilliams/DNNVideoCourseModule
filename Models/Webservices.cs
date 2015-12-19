@@ -84,11 +84,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		{
 			try
 			{
-                //
-                // TODO: don't hard code the PortalID
-                //
-			    var portalId = DotNetNuke.Entities.Portals.PortalSettings.PortalId;
-			    var filteredRoleGroups = string.Empty;
+				var portalId = PortalSettings.PortalId;
+				var filteredRoleGroups = string.Empty;
 
                 if (UserInfo == null || (UserInfo != null && UserInfo.UserID < 1))
 			    {
@@ -160,8 +157,6 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			// Get Role Groups
 		    var portalId = PortalSettings.PortalId;
             // NOTE: these two variables are never used
-			var checkRoleGroup = Controllers.RoleController.GetRoleGroupByName(portalId, "Role Group");
-			var roleGroup = Controllers.RoleController.GetRoleGroups(portalId);
 
             var roles = Controllers.RoleController.GetUserRoles(UserInfo);
 
@@ -200,7 +195,6 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			try
 			{
 				var portalId = PortalSettings.PortalId;
-				var checkRoleGroup = Controllers.RoleController.GetRoleGroupByName(portalId, "Role Group");
                 var groups = Controllers.RoleController.GetRoleGroups(portalId);
 
 				var returnGroups = new List<RoleGroupsInListDTO>();

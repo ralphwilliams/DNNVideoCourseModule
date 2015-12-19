@@ -1,19 +1,19 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Calvary_VideoCourse" type="Module" version="01.00.05">
+    <package name="Calvary_VideoCourse" type="Module" version="01.00.06">
       <friendlyName>Calvary_VideoCourse</friendlyName>
       <description>Calvary_VideoCourse module</description>
       <iconFile>Images/logo_min.png</iconFile>
       <owner>
         <name>Ralph Williams</name>
-        <organization>Ralph Williams Consulting</organization>
+        <organization>Ralph Williams</organization>
         <url>http://www.ralphwilliams.com</url>
         <email>me@ralphwilliams.com</email>
       </owner>
       <license src="License.txt"></license>
       <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
       <dependencies>
-        <dependency type="CoreVersion">07.03.00</dependency>
+        <dependency type="CoreVersion">08.00.00</dependency>
       </dependencies>
       
       <components>
@@ -55,7 +55,7 @@
                 <moduleControls>
                   <moduleControl>
                     <controlKey />
-                    <controlSrc>DesktopModules/Calvary_VideoCourse/View.ascx</controlSrc>
+                    <controlSrc>DesktopModules/Calvary_VideoCourse/View.html</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle />
                     <controlType>View</controlType>
@@ -78,7 +78,7 @@
           </assemblies>
         </component>
 
-        <component type="Cleanup" version="01.00.05" fileName ="01.00.05.txt" />
+        <component type="Cleanup" version="01.00.06" fileName ="01.00.06.txt" />
         
       </components>
     </package>

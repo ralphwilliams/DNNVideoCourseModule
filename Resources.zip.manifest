@@ -2,7 +2,7 @@
   <files>
     <file>
       <path />
-      <name>01.00.03.txt</name>
+      <name>01.00.06.txt</name>
     </file>
     <file>
       <path />
@@ -26,7 +26,7 @@
     </file>
     <file>
       <path />
-      <name>View.ascx</name>
+      <name>View.html</name>
     </file>
     <file>
       <path>App_LocalResources/</path>
@@ -38,7 +38,7 @@
     </file>
     <file>
       <path>App_LocalResources/</path>
-      <name>View.ascx.resx</name>
+      <name>View.resx</name>
     </file>
     <file>
       <path>Content/</path>

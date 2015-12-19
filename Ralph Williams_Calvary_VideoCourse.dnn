@@ -51,7 +51,7 @@
             <moduleControls>
               <moduleControl>
                 <controlKey />
-                <controlSrc>DesktopModules/Calvary_VideoCourse/View.ascx</controlSrc>
+                <controlSrc>DesktopModules/Calvary_VideoCourse/View.html</controlSrc>
                 <supportsPartialRendering>False</supportsPartialRendering>
                 <controlTitle />
                 <controlType>View</controlType>
