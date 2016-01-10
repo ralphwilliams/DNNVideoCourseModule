@@ -1,4 +1,5 @@
-﻿[CSS:{ path: "~/DesktopModules/Calvary_VideoCourse/Content/bootstrap-flat.min.css"}]
+﻿[CSS:{ path: "~/DesktopModules/Calvary_VideoCourse/Content/bootstrap.min.css"}]
+[CSS:{ path: "~/DesktopModules/Calvary_VideoCourse/Content/bootstrap-flat.min.css"}]
 [CSS:{ path: "~/DesktopModules/Calvary_VideoCourse/Content/bootstrap-flat-extras.min.css"}]
 
 [JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js", priority: 50}]
@@ -12,6 +13,7 @@
 [JavaScript:{ path: "~/DesktopModules/Calvary_VideoCourse/ng/Controllers/videoCtrl.js"}]
 [JavaScript:{ path: "~/DesktopModules/Calvary_VideoCourse/ng/Controllers/videoPlayerCtrl.js"}]
 [JavaScript:{ path: "~/DesktopModules/Calvary_VideoCourse/ng/Controllers/editCourseCtrl.js"}]
+[JavaScript:{ path: "~/DesktopModules/Calvary_VideoCourse/ng/Controllers/editCategoriesCtrl.js"}]
 [JavaScript:{ path: "~/DesktopModules/Calvary_VideoCourse/ng/Controllers/statusCtrl.js"}]
 [JavaScript:{ path: "~/DesktopModules/Calvary_VideoCourse/Scripts/bootstrap.min.js"}]
 
@@ -21,7 +23,7 @@
 	var portalId = parseInt("[ModuleContext:PortalId]");
 	var sf = $.ServicesFramework(moduleId);
 	var moduleName = "Calvary_VideoCourse";
-	if ("[ModuleContext:EditMode]") {
+	if ("[ModuleContext:EditMode]" === 'True') {
 		var editMode = true;
 	}
 	var currentDate = d;

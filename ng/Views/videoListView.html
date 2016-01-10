@@ -7,10 +7,15 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-2 pull-right" ng-show="editMode">
+		<div class="row" ng-show="editMode">
+			<div class="col-md-2 pull-right">
 				<a ng-href="{{ '#/status' }}" class="btn btn-xs btn-tertiary btn-edit" aria-label="View User Status">
 					<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> View Course Progress
+				</a>
+			</div>
+			<div class="col-md-2 pull-right">
+				<a href="#/categories" class="btn btn-xs btn-tertiary btn-edit" aria-label="View User Status">
+					<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Edit Categories &amp; Courses
 				</a>
 			</div>
 		</div>
@@ -18,11 +23,11 @@
 			<div class="col-md-12">
 				<ul class="col-md-12 list-unstyled">
 					<li class="course-categories" ng-repeat="category in categories">
-						<h2>{{ category.RoleGroupName }} <!--| {{ category.RoleGroupID }}--></h2>
+						<h2>{{ category.RoleGroupName }}</h2>
 						<ul class="list-unstyled">
 							<li class="course-courses" ng-repeat="course in category.Roles">
 								<h3>
-									{{ course.RoleName }} <!--| {{ course.RoleID }}-->
+									{{course.RoleName }} <!--| {{ course.RoleID }}-->
 									<a ng-href="{{ course.Description }}" ng-show="course.Description.length > 0" class="btn btn-tertiary pull-right" target="_blank">Download Workbook</a>
 									<span class="small">
 										<a ng-href="{{ '#/courses/' + course.CourseId}}" ng-show="editMode" class="btn btn-xs btn-tertiary btn-edit" aria-label="Edit this course">
@@ -40,7 +45,7 @@
 											</h4>
 											<a ng-href="{{ '#/videos/' + video.VideoId }}" class="img-responsive" title="{{ video.description }}" ng-class="[{disabled: video.complete != true && video.isNext != true}]">
 												<span class=""></span>
-												<img class="video-list-thumb img-rounded" ng-src="{{ video.thumbnail_url }}" alt="{{ video.title }}"/>
+												<img class="video-list-thumb img-rounded" ng-src="{{ video.thumbnail_url }}" alt="{{ video.title }}" />
 											</a>
 											<p class="text-right small">Duration: {{ video.duration }}</p>
 										</li>
@@ -53,8 +58,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-<div ng-show="noCourses">
-	<h2>No Courses Exist</h2>
-	<p>No courses have been set up for this module. Please <a href="/Admin/Security-Roles">add new Role Groups and Roles</a>.</p>
 </div>

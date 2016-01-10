@@ -69,15 +69,16 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Controllers
             return DotNetNuke.Security.Roles.RoleController.Instance.GetUsersByRole(portalId, roleName).ToList();
         }
 
-        /// <summary>
-        /// Gets the roles by role group identifier.
-        /// </summary>
-        /// <param name="portalId">The portal identifier.</param>
-        /// <param name="roleGroupId">The role group identifier.</param>
-        /// <returns></returns>
-        public static List<RoleInfo> GetRolesByRoleGroupID(int portalId, int roleGroupId)
-        {
-            return DotNetNuke.Security.Roles.RoleController.Instance.GetRoles(portalId).Where(r => r.RoleGroupID == roleGroupId).ToList();
-        } 
-    }
+		/// <summary>
+		/// Gets the roles by role group identifier.
+		/// </summary>
+		/// <param name="portalId">The portal identifier.</param>
+		/// <param name="roleGroupId">The role group identifier.</param>
+		/// <returns></returns>
+		public static List<RoleInfo> GetRolesByRoleGroupID(int portalId, int roleGroupId)
+		{
+			return DotNetNuke.Security.Roles.RoleController.Instance.GetRoles(portalId).Where(r => r.RoleGroupID == roleGroupId).ToList();
+		}
+
+	}
 }

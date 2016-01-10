@@ -100,6 +100,48 @@
 	}
 	return service;
 })
+.factory('rolesFactory', function ($http, $q) {
+	var service = {};
+	var _users = '';
+	var _userName = '';
+	var _userId = '';
+
+	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
+
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
+	// GET - SET - UPDATE
+	service.editRole = function (NewRolesDTO) {
+		var sf = $.ServicesFramework(moduleId);
+		return $http({
+			method: 'POST',
+			url: dataUrl + "EditRole",
+			headers: $self.Headers,
+			data: NewRolesDTO
+		});
+	};
+	service.editRoleGroup = function (NewRoleGroupDTO) {
+		var sf = $.ServicesFramework(moduleId);
+		return $http({
+			method: 'POST',
+			url: dataUrl + "editRoleGroup",
+			headers: $self.Headers,
+			data: NewRoleGroupDTO
+		});
+	};
+	return service;
+})
 .factory('myInterceptor', ['$log', function ($log) {
 	// DNN Services Framework
 	var $self = this;
@@ -161,9 +203,7 @@
 		return $http({
 			method: 'POST',
 			url: dataUrl + 'DeleteVideo',
-			headers: {
-				"Content-Type": "application/json"
-			},
+			headers: $self.Headers,
 			data: angular.fromJson(videoToDelete)
 		});
 	}

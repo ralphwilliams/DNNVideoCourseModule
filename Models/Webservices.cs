@@ -25,6 +25,8 @@ using RalphWilliams.Modules.Calvary_VideoCourse.Entities;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Mail;
+using DotNetNuke.Security.Roles.Internal;
+using DotNetNuke.Services.Localization;
 using RalphWilliams.Modules.Calvary_VideoCourse.Controllers;
 
 namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
@@ -127,7 +129,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 				        foreach (var role in newGroup.Roles.ToList())
 				        {
 				            var roleInfo = (RoleInfo) role.Value;
-				            if (roleInfo.IsSystemRole || !UserInfo.IsInRole(roleInfo.RoleName))
+				            if (roleInfo.IsSystemRole || !UserInfo.IsInRole(roleInfo.RoleName) ||
+								roleInfo.Status.ToString() == "Disabled")
 				            {
 				                newGroup.Roles.Remove(role.Key);
 				            }
@@ -186,6 +189,39 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			return Request.CreateResponse(HttpStatusCode.OK, videosComplete);
 		}
 
+		// Delete Video
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
+		[HttpPost]
+		public HttpResponseMessage DeleteVideo(VideoInfo video)
+		{
+			try
+			{
+                Requires.NotNull("video", video);
+                Requires.NotNegative("video.ModuleId", video.ModuleId);
+                Requires.NotNegative("video.VideoId", video.VideoId);
+
+				if (UserInfo.IsInRole(PortalSettings.AdministratorRoleName))
+				{
+					var vc = new VideoController();
+
+					//vc.DeleteVideo(video);
+                    vc.DeleteVideo(video.VideoId, video.ModuleId);
+					
+                    return Request.CreateResponse(HttpStatusCode.OK);
+				}
+				else
+				{
+					return Request.CreateResponse(HttpStatusCode.Forbidden);
+				}
+			}
+			catch (Exception exc)
+            {
+                Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+        
 		// Get list of users
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
 		[ValidateAntiForgeryToken]
@@ -261,39 +297,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			}
 
 		}
-        
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
-		[ValidateAntiForgeryToken]
-		[HttpPost]
-		public HttpResponseMessage DeleteVideo(VideoInfo video)
-		{
-			try
-			{
-                Requires.NotNull("video", video);
-                Requires.NotNegative("video.ModuleId", video.ModuleId);
-                Requires.NotNegative("video.VideoId", video.VideoId);
-
-				if (UserInfo.IsInRole(PortalSettings.AdministratorRoleName))
-				{
-					var vc = new VideoController();
-
-					//vc.DeleteVideo(video);
-                    vc.DeleteVideo(video.VideoId, video.ModuleId);
-					
-                    return Request.CreateResponse(HttpStatusCode.OK);
-				}
-				else
-				{
-					return Request.CreateResponse(HttpStatusCode.Forbidden);
-				}
-			}
-			catch (Exception exc)
-            {
-                Exceptions.LogException(exc);
-				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
-			}
-		}
-        
+		
+		// Add Video
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
 		[ValidateAntiForgeryToken]
 		[HttpPost]
@@ -356,6 +361,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			}
 		}
 
+		// Save Completion Status
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		[ValidateAntiForgeryToken]
 		[HttpPost]
@@ -404,6 +410,92 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			}
 		}
 
+		// Add New Role Group
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
+		[HttpPost]
+		public HttpResponseMessage editRoleGroup(NewRoleGroupDTO roleGroupName)
+		{
+			try
+			{
+				DotNetNuke.Security.Roles.RoleController oDnnRoleController = new DotNetNuke.Security.Roles.RoleController();
+				RoleGroupInfo oRoleGroup = new RoleGroupInfo();
+				oRoleGroup.PortalID = this.PortalSettings.PortalId;
+				oRoleGroup.RoleGroupName = "CCV_" + roleGroupName.Name;
+				oRoleGroup.RoleGroupID = roleGroupName.RoleGroupID;
+
+				if (oRoleGroup.RoleGroupID == -1)
+				{
+					DotNetNuke.Security.Roles.RoleController.AddRoleGroup(oRoleGroup);
+				}
+				else
+				{
+					DotNetNuke.Security.Roles.RoleController.UpdateRoleGroup(oRoleGroup);
+				}
+				return Request.CreateResponse(HttpStatusCode.OK);
+				
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+
+		#region Private Members
+
+		private int _roleID = -1;
+
+		#endregion
+
+		// Add or Edit Role
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
+		[HttpPost]
+		public HttpResponseMessage EditRole(NewRoleDTO roleName)
+		{
+			try
+			{
+				if ((roleName.RoleId != -1))
+				{
+					_roleID = roleName.RoleId;
+				}
+				DotNetNuke.Security.Roles.RoleController oDnnRoleController = new DotNetNuke.Security.Roles.RoleController();
+				RoleInfo oRole = new RoleInfo();
+				oRole.PortalID = this.PortalSettings.PortalId;
+				oRole.RoleName = roleName.Name;
+				oRole.IsPublic = false;
+				oRole.Status = RoleStatus.Approved;
+				oRole.AutoAssignment = false;
+				oRole.RoleGroupID = roleName.RoleGroup;
+				oRole.Status = (RoleStatus)roleName.Status;
+
+
+				if (_roleID == -1)
+				{
+					var rolename = oRole.RoleName.ToUpper();
+					if (DotNetNuke.Security.Roles.RoleController.Instance.GetRole(oRole.PortalID,
+						r => rolename.Equals(r.RoleName, StringComparison.InvariantCultureIgnoreCase)) == null)
+					{
+						oDnnRoleController.AddRole(oRole);
+					}
+				}
+				else
+				{
+					oRole.RoleID = roleName.RoleId;
+					DotNetNuke.Security.Roles.RoleController.Instance.UpdateRole(oRole, true);
+				}
+
+				return Request.CreateResponse(HttpStatusCode.OK);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+
+		// Send Email
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		[ValidateAntiForgeryToken]
 		[HttpPost]

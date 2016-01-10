@@ -1,0 +1,106 @@
+﻿<div class="category-view">
+	<div class="module-heading">
+		<div class="container">
+			<div class="row">
+				<h1 class="col-sm-10">Edit Categories and Courses</h1>
+				<a ng-click="courseList()" class="btn btn-secondary return-button visible-xs-block">
+					<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> Return to Course List
+				</a>
+				<div class="return-btn col-md-2 hidden-xs" ng-hide="noCourses">
+					<a ng-click="courseList()" class="btn btn-secondary return-button">
+						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Return to Course List
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div ng-show="noCourses">
+					<h2>No Courses Exist</h2>
+					<p>No courses have been set up for this module. Please begin by creating your first Category. Once a Category has been added, you may add more categories and courses.</p>
+					<p>
+						<input ng-model="addNewRoleGroupName" type="text" ng-hide="addCategoryMode" />
+						<button ng-click="addNewRoleGroup()" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="addCategoryMode">Add Category</button>
+						<button ng-click="addCategoryMode = !addCategoryMode" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="addCategoryMode">Cancel</button>
+						<button ng-click="addCategoryMode = !addCategoryMode" type="button" class="btn btn-tertiary btn-edit" ng-show="addCategoryMode">Add A New Category</button>
+					</p>
+				</div>
+				<div class="edit-list" ng-hide="noCourses">
+					<div class="panel panel-primary">
+						<div class="panel-heading"> <h3 class="panel-title">Instructions</h3> </div>
+						<div class="panel-body">
+							<p>Create and edit categories and courses. Creating a category will create a new Security Role Group. Creating a new course will create a new Security Role.</p>
+							<p>Add users to courses by clicking the users icon <img src="/icons/Sigma/Users_16X16_Standard.png" /> for that course.</p>
+							<p>Disabling all courses within a category will hide the category from the user in the Video list view as well.</p>
+							<p><em>Note: Category and course names may not be used more than once.</em></p>
+							<div class="row">
+								<div class="col-md-12">
+									<p>
+										<input ng-model="addNewRoleGroupName" type="text" ng-hide="addCategoryMode" />
+										<button ng-click="addNewRoleGroup(addNewRoleGroupName)" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="addCategoryMode">Add Category</button>
+										<button ng-click="addCategoryMode = !addCategoryMode" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="addCategoryMode">Cancel</button>
+										<button ng-click="addCategoryMode = !addCategoryMode" type="button" class="btn btn-tertiary btn-edit" ng-show="addCategoryMode">Add A New Category</button>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h2>Categories and Courses</h2>
+					<div class="row">
+						<div class="col-md-6 category-cards" ng-repeat="category in categories" ng-class-odd="'odd-card'">
+							<div class="panel panel-default" >
+								<div class="panel-heading clearfix">
+									<h2 class="panel-title pull-left" ng-show="editCategoryName">
+										{{ category.RoleGroupName }}<!--| {{ category.RoleGroupID }}-->
+									</h2>
+									<h2 class="panel-title pull-left" ng-hide="editCategoryName">
+										<input ng-model="category.RoleGroupName" type="text" />
+										<button ng-click="editRoleGroupName(category.RoleGroupName, category.RoleGroupID)" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="editCategoryName">Edit Category Name</button>
+										<button ng-click="editCategoryName = !editCategoryName" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="editCategoryName">Cancel</button>
+									</h2>
+									<span class="small pull-right">
+										<button ng-click="editCategoryName = !editCategoryName" type="button" class="btn btn-xs btn-tertiary btn-edit" title="Rename Category" aria-label="Rename Category">
+											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+										</button>
+									</span>
+								</div>
+								<ul class="list-group">
+									<li class="list-group-item clearfix" ng-class="course.Status == true ? '' : 'disabled-row'" ng-repeat="course in category.Roles">
+										<span ng-show="editCourseName" class="course-name">
+											{{ course.RoleName }} <!--{{ course.RoleID }}-->
+										</span>
+										<input ng-model="course.RoleName" type="text" ng-hide="editCourseName" />
+										<button ng-click="editRoleName(course.RoleName, category.RoleGroupID, course.RoleID, course.Status)" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="editCourseName">Edit Course Name</button>
+										<button ng-click="editCourseName = !editCourseName" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="editCourseName">Cancel</button>
+										<span class="small pull-right status-switch">
+											<input id="status_{{ course.RoleID }}" type="checkbox" class='tgl tgl-flat' ng-model="course.Status" ng-change="editRoleName(course.RoleName, category.RoleGroupID, course.RoleID, course.Status)" />
+											<label class='tgl-btn' for='status_{{ course.RoleID }}'></label>
+										</span>
+										<span class="small pull-right edit-users">
+											<button ng-click="editCourseName = !editCourseName" ng-disabled="!course.Status" type="button" class="btn btn-xs btn-tertiary btn-edit" title="Rename Course" aria-label="Rename Course">
+												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+											</button>
+										</span>
+										<span class="small pull-right edit-users">
+											<a id="roleEdit_{{ course.RoleID }}" class="btn btn-xs btn-tertiary btn-edit role-edit" title="Edit Users in Course">
+												<img src="/icons/Sigma/Users_16X16_Standard.png" />
+											</a>
+										</span> &nbsp;
+									</li>
+									<li class="list-group-item">
+										<input ng-model="$root.addNewRoleName" type="text" ng-hide="addCourseName" />
+										<button ng-click="addNewRole(category.RoleGroupID)" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="addCourseName">Add Course</button>
+										<button ng-click="addCourseName = !addCourseName" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="addCourseName">Cancel</button>
+										<button ng-click="addCourseName = !addCourseName" type="button" class="btn btn-tertiary btn-edit" ng-show="addCourseName">Add A New Course</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

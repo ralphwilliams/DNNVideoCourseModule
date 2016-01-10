@@ -126,9 +126,6 @@
   <data name="ConfirmDelete.Text" xml:space="preserve">
     <value>Are you sure you want to delete this Item</value>
   </data>
-  <data name="DeleteVideo.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
   <data name="EditItem.Text" xml:space="preserve">
     <value>Edit</value>
   </data>

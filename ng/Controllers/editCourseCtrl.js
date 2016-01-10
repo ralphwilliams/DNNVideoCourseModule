@@ -150,10 +150,10 @@ function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFact
 				this.CourseId = video.CourseId;
 				this.OrderIndex = video.OrderIndex;
 				this.ModuleId = moduleId;
-				this.CreatedOnDate = currentDate;
-				this.CreatedByUserId = currentUser;
-				this.LastModifiedOnDate = currentDate;
-				this.LastModifiedByUserId = currentUser;
+				// this.CreatedOnDate = currentDate;
+				// this.CreatedByUserId = currentUser;
+				// this.LastModifiedOnDate = currentDate;
+				// this.LastModifiedByUserId = currentUser;
 			}
 
 			// Create updated video object

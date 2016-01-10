@@ -1,10 +1,10 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers', [])
-	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory',
-	function ($scope, $http, usersFactory, videosFactory, categoriesFactory, vimeoFactory, $sce) {
+	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', '$location',
+	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, $location, $sce) {
 
-		// #region Controller Global Variables
+		// #region Test for Edit Mode
 
 		if (typeof editMode !== 'undefined') {
 			$scope.editMode = true;
@@ -19,14 +19,13 @@ angular
 
 		// Get user's completed videos
 		usersFactory.callUsersData()
-			.then(function(data) {
+			.then(function (data) {
 				$scope.videosComplete = angular.fromJson(data);
-			loadCats();
-			}, function(data) {
+				loadCats();
+			}, function (data) {
 				console.log('Error Getting User Data');
 				//console.log(data);
 			});
-
 		// Get categories
 		var loadCats = function () {
 			categoriesFactory.callCategoriesData()
@@ -63,6 +62,30 @@ angular
 			});
 		}
 
+		// Add New Roles
+		function addRole(NewRoleDTO) {
+			rolesFactory.addNewRole(NewRoleDTO)
+				.success(function () {
+					loadCats();
+				}).
+				error(function (error) {
+					$scope.status = 'Unable to Create new Role: ' + error.message;
+					console.log(NewRoleDTO);
+				});
+		}
+
+		// Add New Role Groups
+		function addRoleGroup(NewRoleGroupDTO) {
+			rolesFactory.addNewRoleGroup(NewRoleGroupDTO)
+				.success(function () {
+					loadCats();
+				}).
+				error(function (error) {
+					$scope.status = 'Unable to Create new Role Group: ' + error.message;
+					console.log(NewRoleGroupDTO);
+				});
+		}
+
 		// #endregion
 
 		// #region Load Video List
@@ -93,6 +116,7 @@ angular
 			// Once initial video list is updated with Vimeo data, 
 			// Add updated video list to categories/roles objects
 			$scope.videoList($scope.videos);
+
 		}
 
 
@@ -101,6 +125,10 @@ angular
 
 			// show or hide list depending onf if courses and categories list exists
 			$scope.noCourses = $scope.categories.length > 0 ? false : true;
+			if ($scope.noCourses == true && $scope.editMode == true) {
+				$location.path('/categories/');
+			}
+
 
 			// Iterate through each Category
 			angular.forEach($scope.categories, function (valueCategory, keyCategory) {
@@ -112,7 +140,12 @@ angular
 
 					// Set courseId to RoleID
 					$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
+					var roleLink = "/Admin/Security-Roles/ctl/User%2520Roles/mid/392/RoleId/" +
+										valueCourse.RoleID +
+										"?popUp=true";
+					var roleAction = "javascript:dnnModal.show('" + roleLink + "',/*showReturn*/false,550,950,false,'')";
 
+					$('#roleEdit_' + valueCourse.RoleID).attr('href', roleAction);
 
 					// Iterate throuh list of videos
 					var videoList = [];
@@ -161,6 +194,33 @@ angular
 		}
 
 		// #endregion 
+
+		// #region Edit Course and Category mode
+		$scope.editCourseMode = true;
+
+		$scope.addCourseName = true;
+		$scope.toggleAddCourseName = function () {
+			$scope.addCourseName = $scope.addCourseName === false ? true : false;
+		};
+
+		$scope.editCourseName = true;
+		$scope.toggleEditCourseName = function () {
+			$scope.editCourseName = $scope.editCourseName === false ? true : false;
+		};
+
+		$scope.addCategoryMode = true;
+		$scope.toggleAddCategoryMode = function () {
+			$scope.addCategoryMode = $scope.addCategoryMode === false ? true : false;
+		};
+
+		$scope.editCategoryName = true;
+		$scope.toggleEditCategoryName = function () {
+			$scope.editCategoryName = $scope.editCategoryName === false ? true : false;
+		};
+
+
+
+		// #endregion
 
 		// #region Show Duration helper function
 
