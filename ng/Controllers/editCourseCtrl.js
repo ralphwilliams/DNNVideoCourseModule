@@ -1,8 +1,8 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
-	.controller('editCourseCtrl', ['$scope', '$routeParams', '$http', '$sce', 'vimeoFactory', '$location', 'videosFactory', 'categoriesFactory',
-function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFactory, categoriesFactory) {
+	.controller('editCourseCtrl', ['$scope', '$routeParams', '$http', '$sce', 'vimeoFactory', '$location', 'videosFactory', 'categoriesFactory', 'localizationFactory',
+function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFactory, categoriesFactory, localizationFactory) {
 
 	// #region Controller Global Variables
 	thisCourse = parseInt($routeParams.courseId);
@@ -51,6 +51,13 @@ function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFact
 		});
 	}
 
+	// Get Localization Resources
+	localizationFactory.callResx()
+	.then(function (data) {
+		$scope.resx = angular.fromJson(data.ClientResources);
+	}, function (data) {
+		alert(data);
+	})
 
 	// #endregion
 

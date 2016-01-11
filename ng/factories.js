@@ -267,6 +267,46 @@
 	}
 	return service;
 })
+.factory('localizationFactory', function ($http, $q) {
+	var service = {};
+
+	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/ResxData";
+
+
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
+	// GET 
+	this.getResx = function () {
+		return _RESX;
+	}
+	service.callResx = function () {
+		var deferred = $q.defer();
+		$http({
+			method: 'GET',
+			url: dataUrl,
+			headers: $self.Headers
+		}).success(function (data) {
+			deferred.resolve(data);
+		}).error(function () {
+			console.log('There was an error getting the categories');
+		});
+		return deferred.promise;
+	}
+
+
+	return service;
+})
 .factory('emailFactory', function ($http, $q) {
 	var service = {};
 

@@ -117,19 +117,132 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BasicSettings.Text" xml:space="preserve">
+  <data name="BasicSettings" xml:space="preserve">
     <value>Basic Calvary_VideoCourse Settings</value>
   </data>
-  <data name="CollapseAll.Text" xml:space="preserve">
+  <data name="CollapseAll" xml:space="preserve">
     <value>Collapse All</value>
   </data>
-  <data name="ConfirmDelete.Text" xml:space="preserve">
+  <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete this Item</value>
   </data>
-  <data name="EditItem.Text" xml:space="preserve">
-    <value>Edit</value>
+  <data name="CouresCompletionText_Html" xml:space="preserve">
+    <value>&lt;h2&gt;Congratulations, you have completed this course!&lt;/h2&gt;
+
+&lt;p&gt;The ministry lead has been notified and a staff member will be in touch to go over your next steps as a group leader. We hope you have enjoyed this time of learning and that these lessons have given you confidence in leading your group. As always, if there are any questions of concerns feel free to contact us.&lt;/p&gt;
+
+&lt;p&gt;
+Thank you for your time and heart for serving!&lt;br /&gt;Calvary Church&lt;br /&gt;&lt;a href="http://www.calvarychurchfl.com"&gt;www.CalvaryChurchFL.com&lt;/a&gt;&lt;/p&gt;</value>
   </data>
-  <data name="EditModule.Text" xml:space="preserve">
+  <data name="CourseProgressCompleted_Txt" xml:space="preserve">
+    <value>completed</value>
+  </data>
+  <data name="CourseProgressCourseComplete_Txt" xml:space="preserve">
+    <value>Course complete</value>
+  </data>
+  <data name="CourseProgressNotStarted_Txt" xml:space="preserve">
+    <value>Course not started.</value>
+  </data>
+  <data name="CourseProgressNoUsers_Txt" xml:space="preserve">
+    <value>There are no users assigned to this course.</value>
+  </data>
+  <data name="CourseProgressPage_Title" xml:space="preserve">
+    <value>Course Progress</value>
+  </data>
+  <data name="DownloadFile_Btn" xml:space="preserve">
+    <value>Download Workbook</value>
+  </data>
+  <data name="Duration_Txt" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="EditCategoriesCourse_Btn" xml:space="preserve">
+    <value>Edit Categories &amp; Courses</value>
+  </data>
+  <data name="EditCategoriesCourse_Lbl" xml:space="preserve">
+    <value>Manage Categories and Courses</value>
+  </data>
+  <data name="EditCourseAddVideoVimeoID_Txt" xml:space="preserve">
+    <value>Video's Vimeo ID:</value>
+  </data>
+  <data name="EditCourseAddVideo_Title" xml:space="preserve">
+    <value>Add new Video to Course</value>
+  </data>
+  <data name="EditCourseEditVideo_Btn" xml:space="preserve">
+    <value>Edit this Video</value>
+  </data>
+  <data name="EditCoursePage_Title" xml:space="preserve">
+    <value>Edit Course</value>
+  </data>
+  <data name="EditCourseRemoveVideo_Btn" xml:space="preserve">
+    <value>Remove Video</value>
+  </data>
+  <data name="EditCourseTblHdr_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EditCourseTblHdr_Id" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="EditCourseTblHdr_Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="EditCourseTblHdr_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="EditCourseTblHdr_VimeoId" xml:space="preserve">
+    <value>Vimeo ID</value>
+  </data>
+  <data name="EditCourseWatchOnVimeo_Txt" xml:space="preserve">
+    <value>Watch on Vimeo</value>
+  </data>
+  <data name="EditCourse_Lbl" xml:space="preserve">
+    <value>Edit this course</value>
+  </data>
+  <data name="EditItem" xml:space="preserve">
+    <value>Edit This Item</value>
+  </data>
+  <data name="EditModule" xml:space="preserve">
     <value>Add Item</value>
+  </data>
+  <data name="Email_Body" xml:space="preserve">
+    <value>This email was sent automatically from the Ministry Partner Training website.</value>
+  </data>
+  <data name="Email_Subject" xml:space="preserve">
+    <value>Training Course</value>
+  </data>
+  <data name="ReturnToCourse_Btn" xml:space="preserve">
+    <value>Return to Course List</value>
+  </data>
+  <data name="SessionTimedOut_Alert" xml:space="preserve">
+    <value>You are no longer logged in. Please log in again.</value>
+  </data>
+  <data name="VideoDetailsLength_Text" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="VideoDetailsOf_Text" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="VideoDetailsVideo_Text" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="VideoListPage_Title" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="VideoPlayerComplete_Btn" xml:space="preserve">
+    <value>Complete Course</value>
+  </data>
+  <data name="VideoPlayerNext_Btn" xml:space="preserve">
+    <value>Next Video</value>
+  </data>
+  <data name="VideoPlayerPage_Title" xml:space="preserve">
+    <value>Watch Video</value>
+  </data>
+  <data name="VideoPlayerPrevious_Btn" xml:space="preserve">
+    <value>Previous Video</value>
+  </data>
+  <data name="ViewCourseProgress_Btn" xml:space="preserve">
+    <value>View Course Progress</value>
+  </data>
+  <data name="ViewCourseProgress_Lbl" xml:space="preserve">
+    <value>View User Status</value>
   </data>
 </root>

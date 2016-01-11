@@ -1,8 +1,8 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers', [])
-	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', '$location',
-	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, $location, $sce) {
+	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', 'localizationFactory', '$location',
+	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, localizationFactory, $location, $sce) {
 
 		// #region Test for Edit Mode
 
@@ -11,7 +11,6 @@ angular
 		} else {
 			$scope.editMode = false;
 		}
-
 
 		// #endregion
 
@@ -86,7 +85,16 @@ angular
 				});
 		}
 
+		// Get Localization Resources
+		localizationFactory.callResx()
+		.then(function (data) {
+			$scope.resx = angular.fromJson(data.ClientResources);
+		}, function (data) {
+			alert(data);
+		})
+
 		// #endregion
+
 
 		// #region Load Video List
 
@@ -140,6 +148,8 @@ angular
 
 					// Set courseId to RoleID
 					$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
+
+					// Create link for Managing users in roles
 					var roleLink = "/Admin/Security-Roles/ctl/User%2520Roles/mid/392/RoleId/" +
 										valueCourse.RoleID +
 										"?popUp=true";
@@ -147,7 +157,7 @@ angular
 
 					$('#roleEdit_' + valueCourse.RoleID).attr('href', roleAction);
 
-					// Iterate throuh list of videos
+					// Iterate through list of videos
 					var videoList = [];
 					angular.forEach($scope.videos, function (valueVideo, keyVideo) {
 

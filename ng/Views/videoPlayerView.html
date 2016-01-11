@@ -2,14 +2,14 @@
 	<div class="module-heading">
 		<div class="container">
 			<div class="row" ng-hide="courseComplete">
-				<h1 class="col-sm-10">Watch Video</h1>
+				<h1 class="col-sm-10">{{ resx.VideoPlayerPage_Title }}</h1>
 				<a ng-click="courseList()" class="btn btn-secondary return-button visible-xs-block">
-					<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> Return to Course List
+					<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> {{ resx.ReturnToCourse_Btn }}
 				</a>
 
 				<div class="return-btn col-md-2 hidden-xs">
 					<a ng-click="courseList()" class="btn btn-secondary return-button">
-						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Return to Course List
+						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>{{ resx.ReturnToCourse_Btn }}
 					</a>
 				</div>
 			</div>
@@ -19,7 +19,6 @@
 		<div class="row">
 			<div class="col-md-12" ng-hide="courseComplete">
 				<div class="container">
-					<!--<a ng-click="switchView('normal')">Normal</a> | <a ng-click="switchView('theatre')">Theatre</a>-->
 					<div class="row">
 						<div class="player col-md-11 col-md-offset-1">
 							<iframe id="player1" ng-src="{{vimeoUrl}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -32,8 +31,8 @@
 	<div class="container">
 		<div class="row" ng-hide="courseComplete">
 			<h3>{{selectedVimeo.title}} <!--: {{selectedVimeo.video_id}}--></h3>
-			<p><em>Length: {{showDuration()}}</em><br />Video {{ orderIndex + 1 }} of {{ courseLength }}</p>
-			<p> {{ selectedVimeo.description }}</p>
+			<p><em>{{ resx.VideoDetailsLength_Text }}: {{showDuration()}}</em><br />{{ resx.VideoDetailsVideo_Text }} {{ orderIndex + 1 }} {{ resx.VideoDetailsOf_Text }} {{ courseLength }}</p>
+			<p>{{ selectedVimeo.description }}</p>
 
 			<a id="nextVideo" ng-click="moveNext()" class="btn btn-primary pull-right" ng-class="{disabled: selectedVimeo.complete != true}">
 				<span ng-show="courseFinished == true && showNext == false" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
@@ -41,18 +40,14 @@
 				{{ nextButton }}
 				<span ng-show="showNext" class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
 			</a>
-			<a id="prevVideo" ng-click="prevVideo()" class="btn btn-primary pull-left" ng-class="{disabled: orderIndex == 0}"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>Previous Video</a>
+			<a id="prevVideo" ng-click="prevVideo()" class="btn btn-primary pull-left" ng-class="{disabled: orderIndex == 0}"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>{{ resx.VideoPlayerPrevious_Btn }}</a>
 		</div>
 		<div class="row" ng-show="courseComplete">
 			<div class="complete-screen col-md-8 col-md-offset-2">
 				<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
-				<h2>Congratulations, you have completed this course!</h2>
-				<p>The ministry lead has been notified and a staff member will be in touch to go over your next steps as a group leader. We hope you have enjoyed this time of learning and that these lessons have given you confidence in leading your group. As always, if there are any questions of concerns feel free to contact us.</p>
+				<div ng-bind-html="CourseCompletionTextClean_Html"></div>
 				<p>
-					Thank you for your time and heart for serving!<br />Calvary Church<br /><a href="http://www.calvarychurchfl.com">www.CalvaryChurchFL.com</a>
-				</p>
-				<p>
-					<a class="btn btn-tertiary" ng-click="courseList()">Return to Course List</a>
+					<a class="btn btn-tertiary" ng-click="courseList()">{{ resx.ReturnToCourse_Btn }}</a>
 				</p>
 			</div>
 		</div>

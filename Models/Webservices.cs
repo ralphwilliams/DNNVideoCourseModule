@@ -33,6 +33,24 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 {
 	public class Calvary_VideoCourseController : DnnApiController
 	{
+
+		public class InitData
+		{
+			public Dictionary<string, string> ClientResources { get; set; }
+		}
+
+		#region Service Methods
+		[HttpGet]
+		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		public HttpResponseMessage ResxData()
+		{
+			InitData init = new InitData();
+			init.ClientResources = LocalizationProvider.Instance.GetCompiledResourceFile(PortalSettings, "/DesktopModules/Calvary_VideoCourse/App_LocalResources/ClientResources.resx",
+				System.Threading.Thread.CurrentThread.CurrentCulture.Name);
+			return Request.CreateResponse(HttpStatusCode.OK, init);
+		}
+		#endregion
+
 		// Get Videos
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		[ValidateAntiForgeryToken]
@@ -501,11 +519,13 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		[HttpPost]
 		public HttpResponseMessage SendEmail(SubjLineDTO newEmail)
 		{
-			var subjTitle = new SubjLineDTO()
+			var EmailDetails = new SubjLineDTO()
 			{
 				Title = newEmail.Title,
 				RoleId = newEmail.RoleId,
-				CategoryId = newEmail.CategoryId
+				CategoryId = newEmail.CategoryId,
+				Body = newEmail.Body,
+				SubjectTitle = newEmail.SubjectTitle
 			};
 
 			UserInfo objInfo = new UserInfo(); // DNN Classes
@@ -517,13 +537,10 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			// Gets the email address of the current portal
 			string fromAddress = String.Empty;
 			string toAddress = PortalSettings.Email;
-            //
-            // TODO: don't hard code the HTML
-            //
-			string subject = "**Training Course: " + subjTitle.Title + "** completed by " + UserDisplayName;
-			string body = "<b>" + UserDisplayName + "</b> has completed the course " + subjTitle.Title + ". " + 
+			string subject = "**" + EmailDetails.SubjectTitle + ": " + EmailDetails.Title + "** completed by " + UserDisplayName;
+			string body = "<b>" + UserDisplayName + "</b> has completed the course " + EmailDetails.Title + ". " + 
 							"Their email address is: " + UserEmail +
-							"<br /><br /><br /><i>This email was sent automatically from the Ministry Partner Training website.</i><br />";
+							"<br /><br /><br /><i>" + EmailDetails.Body +"</i><br />";
 
 			try
 			{

@@ -19,5 +19,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Entities
         public string Title { get; set; }
         public int RoleId { get; set; }
         public int CategoryId { get; set; }
-    }
+		public string Body { get; set; }
+		public string SubjectTitle { get; set; }
+	}
 }

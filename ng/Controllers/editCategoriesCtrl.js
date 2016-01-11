@@ -1,8 +1,8 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
-	.controller('editCategoriesCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', '$location',
-	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, $location, $sce) {
+	.controller('editCategoriesCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', '$location', 'localizationFactory',
+	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, $location, localizationFactory, $sce) {
 
 		// #region Test for Edit mode
 		if (typeof editMode !== 'undefined') {
@@ -78,6 +78,14 @@ angular
 						console.log(NewRoleGroupDTO);
 					});
 			}
+
+			// Get Localization Resources
+			localizationFactory.callResx()
+			.then(function (data) {
+				$scope.resx = angular.fromJson(data.ClientResources);
+			}, function (data) {
+				alert(data);
+			})
 
 			// #endregion
 

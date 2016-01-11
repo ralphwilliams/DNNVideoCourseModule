@@ -3,8 +3,8 @@
 /// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
-	.controller('statusCtrl', ['$scope', '$http', 'statusFactory', 'videosFactory', 'categoriesFactory', '$location',
-	function ($scope, $http, statusFactory, videosFactory, categoriesFactory, $location) {
+	.controller('statusCtrl', ['$scope', '$http', 'statusFactory', 'videosFactory', 'categoriesFactory', 'localizationFactory', '$location',
+	function ($scope, $http, statusFactory, videosFactory, categoriesFactory, localizationFactory, $location) {
 
 		// #region Controller Global Variables
 
@@ -58,6 +58,14 @@ angular
 				alert(data);
 			})
 		}
+
+		// Get Localization Resources
+		localizationFactory.callResx()
+		.then(function (data) {
+			$scope.resx = angular.fromJson(data.ClientResources);
+		}, function (data) {
+			alert(data);
+		})
 
 		// #endregion
 

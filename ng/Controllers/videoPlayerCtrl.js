@@ -1,12 +1,12 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
-	.controller('videoPlayerCtrl', ['$scope', '$routeParams', '$http', '$sce', '$window', 'vimeoFactory', '$location', 'categoriesFactory', 'videosFactory', 'usersFactory', 'emailFactory',
-	function ($scope, $routeParams, $http, $sce, $window, vimeoFactory, $location, categoriesFactory, videosFactory, usersFactory, emailFactory) {
+	.controller('videoPlayerCtrl', ['$scope', '$routeParams', '$http', '$sce', '$window', 'vimeoFactory', '$location', 'categoriesFactory', 'videosFactory', 'usersFactory', 'localizationFactory', 'emailFactory',
+	function ($scope, $routeParams, $http, $sce, $window, vimeoFactory, $location, categoriesFactory, videosFactory, usersFactory, localizationFactory, emailFactory) {
 
 		// #region Controller Global Variables
 
-		$scope.nextButton = 'Next Video';
+		$scope.nextButton = 'Next Video'; // Text is localized further down before displaying on view
 		thisVideo = $routeParams.videoId;
 		var thisVideo;
 		if (typeof editMode !== 'undefined') {
@@ -92,6 +92,8 @@ angular
 					this.Title = thisCourse.RoleName;
 					this.RoleId = thisCourse.RoleID;
 					this.CategoryId = thisCourse.RoleGroupID;
+					this.Body = $scope.resx.Email_Body;
+					this.SubjectTitle = $scope.resx.Email_Subject;
 				}
 				var newEmail = new email(thisCourse);
 
@@ -109,6 +111,14 @@ angular
 			}
 
 		}
+
+		// Get Localization Resources
+		localizationFactory.callResx()
+		.then(function (data) {
+			$scope.resx = angular.fromJson(data.ClientResources);
+		}, function (data) {
+			alert(data);
+		})
 
 		// #endregion
 
@@ -228,7 +238,7 @@ angular
 					// Hide next arrow icon
 					$scope.showNext = false;
 					// Set button text to Complete Course
-					$scope.nextButton = 'Complete Course';
+					$scope.nextButton = $scope.resx.VideoPlayerComplete_Btn;
 				} else {
 					// all videos are not complete &&
 					// all videos in this course are complete
@@ -238,7 +248,7 @@ angular
 					// Hide Next arrow
 					$scope.showNext = false;
 					// Set button text to Return to Course List
-					$scope.nextButton = 'Return to Course List';
+					$scope.nextButton = $scope.resx.ReturnToCourse_Btn;
 				}
 				
 
@@ -263,7 +273,7 @@ angular
 			} else {
 				$scope.showCheck = false;
 				$scope.showNext = true;
-				$scope.nextButton = 'Next Video';
+				$scope.nextButton = $scope.resx.VideoPlayerNext_Btn;
 				$scope.moveNext = function () {
 					// console.log('move next')
 
@@ -289,7 +299,6 @@ angular
 						//do nothing
 					}
 					else {
-						console.log('markComplete');
 						//console.log($scope.thisVideo);
 						$scope.userData.push(parseInt($routeParams.VideoId));
 						// confirm($scope.videosComplete);
@@ -338,7 +347,7 @@ angular
 
 			function onFinish(id) {
 				if ($scope.userData === false) {
-					alert('You are no longer logged in. Please log in again.');
+					alert($scope.resx.SessionTimedOut_Alert);
 					window.location.href = '/';
 				} else {
 					$('#nextVideo').removeClass('disabled');
@@ -355,6 +364,10 @@ angular
 
 
 			//#endregion
+
+
+			$scope.CourseCompletionTextClean_Html = $sce.trustAsHtml($scope.resx.CouresCompletionText_Html);
+			console.log($scope.resx.CouresCompletionText_Html);
 
 
 		};
