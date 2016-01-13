@@ -9,29 +9,11 @@
 ' DEALINGS IN THE SOFTWARE.
 ' 
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Configuration;
-using System.Web.Http;
-using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Security;
-using DotNetNuke.Web.Api;
-using RalphWilliams.Modules.Calvary_VideoCourse.Entities;
-using DotNetNuke.Security.Roles;
-using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.Mail;
-using DotNetNuke.Security.Roles.Internal;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Services.Localization;
-
-using RalphWilliams.Modules.Calvary_VideoCourse.Controllers;
 
 namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 {
@@ -145,34 +127,55 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 		/// -----------------------------------------------------------------------------
 		public string UpgradeModule(string Version)
 		{
-			try
-			{
-				ProfilePropertyDefinition pdef = ProfileController.GetPropertyDefinitionByName(PortalSettings.PortalId, "newTestProperty1");
-				if (pdef == null)
-				{
-					/// Create the profile property programatically or throw error
-					var newProfile = new ProfilePropertyDefinition(PortalSettings.PortalId);
-					newProfile.PortalId = PortalSettings.PortalId;
-					newProfile.ModuleDefId = Null.NullInteger;
-					newProfile.DataType = 349;
-					newProfile.DefaultValue = "";
-					newProfile.PropertyCategory = "TestCategory";
-					newProfile.PropertyName = "newTestProperty1";
-					newProfile.ReadOnly = false;
-					newProfile.Required = false;
-					newProfile.Visible = true;
-					newProfile.Length = 0;
-					newProfile.DefaultVisibility = UserVisibilityMode.AllUsers;
+            // these could be constants instead, but this code will very rarely be run and won't be run at such scale that it will matter that much
+		    var goodResult = "true";
+		    var badResult = "false";
+		    var propertyCategory = "TestCategory";
+		    var propertyName = "newTestProperty1";
 
-					ProfileController.AddPropertyDefinition(newProfile);
-				}
-				return Request.CreateResponse(HttpStatusCode.OK);
-			}
-			catch (Exception exc)
-			{
-				Exceptions.LogException(exc);
-				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
-			}
+		    switch (Version)
+		    {
+                case "01.01.00": // should be whichever version number is being upgraded to or currently installed
+                    try
+                    {
+                        // get a collection of portals to iterate through
+                        var portals = PortalController.Instance.GetPortals();
+
+                        // update each portal since they could each potentially use the module and we'll have no idea which one already is or will be later
+                        foreach (PortalInfo portal in portals)
+                        {
+                            var pdef = ProfileController.GetPropertyDefinitionByName(portal.PortalID, "newTestProperty1");
+
+                            if (pdef == null)
+                            {
+                                // Create the profile property programatically or throw error
+                                var newProfile = new ProfilePropertyDefinition(portal.PortalID);
+                                newProfile.PortalId = portal.PortalID;
+                                newProfile.ModuleDefId = Null.NullInteger;
+                                newProfile.DataType = 349;
+                                newProfile.DefaultValue = string.Empty;
+                                newProfile.PropertyCategory = propertyCategory; // made this a static object above to save memory for performance if there are lot of portals
+                                newProfile.PropertyName = propertyName; // made this a static object above to save memory for performance if there are lot of portals
+                                newProfile.ReadOnly = false;
+                                newProfile.Required = false;
+                                newProfile.Visible = true;
+                                newProfile.Length = 0;
+                                newProfile.DefaultVisibility = UserVisibilityMode.AllUsers;
+
+                                ProfileController.AddPropertyDefinition(newProfile);
+                            }
+                        }
+
+                        return goodResult;
+                    }
+                    catch
+                    {
+                        // attempting to report the exception here is useless, because DNN will never log it anywhere for some reason
+                        return badResult;
+                    }
+                default:
+		            return goodResult;
+		    }
 		}
 
 		#endregion
