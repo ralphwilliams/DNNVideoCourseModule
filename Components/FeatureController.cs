@@ -9,6 +9,29 @@
 ' DEALINGS IN THE SOFTWARE.
 ' 
 */
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Configuration;
+using System.Web.Http;
+using DotNetNuke.Common;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Profile;
+using DotNetNuke.Entities.Users;
+using DotNetNuke.Security;
+using DotNetNuke.Web.Api;
+using RalphWilliams.Modules.Calvary_VideoCourse.Entities;
+using DotNetNuke.Security.Roles;
+using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Services.Mail;
+using DotNetNuke.Security.Roles.Internal;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Services.Localization;
+
+using RalphWilliams.Modules.Calvary_VideoCourse.Controllers;
 
 namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 {
@@ -32,7 +55,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 	/// -----------------------------------------------------------------------------
 
 	//uncomment the interfaces to add the support.
-	public class FeatureController //: IPortable, ISearchable, IUpgradeable
+	public class FeatureController : IUpgradeable //: IPortable, ISearchable, 
 	{
 
 
@@ -120,10 +143,37 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 		/// </summary>
 		/// <param name="Version">The current version of the module</param>
 		/// -----------------------------------------------------------------------------
-		//public string UpgradeModule(string Version)
-		//{
-		//	throw new System.NotImplementedException("The method or operation is not implemented.");
-		//}
+		public string UpgradeModule(string Version)
+		{
+			try
+			{
+				ProfilePropertyDefinition pdef = ProfileController.GetPropertyDefinitionByName(PortalSettings.PortalId, "newTestProperty1");
+				if (pdef == null)
+				{
+					/// Create the profile property programatically or throw error
+					var newProfile = new ProfilePropertyDefinition(PortalSettings.PortalId);
+					newProfile.PortalId = PortalSettings.PortalId;
+					newProfile.ModuleDefId = Null.NullInteger;
+					newProfile.DataType = 349;
+					newProfile.DefaultValue = "";
+					newProfile.PropertyCategory = "TestCategory";
+					newProfile.PropertyName = "newTestProperty1";
+					newProfile.ReadOnly = false;
+					newProfile.Required = false;
+					newProfile.Visible = true;
+					newProfile.Length = 0;
+					newProfile.DefaultVisibility = UserVisibilityMode.AllUsers;
+
+					ProfileController.AddPropertyDefinition(newProfile);
+				}
+				return Request.CreateResponse(HttpStatusCode.OK);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
 
 		#endregion
 

@@ -226,6 +226,36 @@
 	}
 	return service;
 })
+.factory('profileFactory', function ($http, $q) {
+	var service = {};
+
+	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
+
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
+	// GET - SET - UPDATE
+	service.addProfileProperty = function () {
+		console.log('addprofile');
+		return $http({
+			method: 'POST',
+			url: dataUrl + 'TestUpgrade',
+			headers: $self.Headers,
+			data: JSON.stringify()
+		});
+	};
+	return service;
+})
 .factory('categoriesFactory', function ($http, $q) {
 	var service = {};
 
@@ -258,11 +288,11 @@
 			method: 'GET',
 			url: dataUrl,
 			headers: $self.Headers
-	    }).success(function(data) {
+		}).success(function (data) {
 			deferred.resolve(data);
-	    }).error(function() {
+		}).error(function () {
 			console.log('There was an error getting the categories');
-	    });
+		});
 		return deferred.promise;
 	}
 	return service;

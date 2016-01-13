@@ -1,8 +1,8 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers', [])
-	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', 'localizationFactory', '$location',
-	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, localizationFactory, $location, $sce) {
+	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', 'localizationFactory', 'profileFactory', '$location',
+	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, localizationFactory, profileFactory, $location, $sce) {
 
 		// #region Test for Edit Mode
 
@@ -62,17 +62,19 @@ angular
 		}
 
 		// Add New Roles
-		function addRole(NewRoleDTO) {
-			rolesFactory.addNewRole(NewRoleDTO)
+		function addProfileProperty() {
+			profileFactory.addProfileProperty()
 				.success(function () {
-					loadCats();
+					console.log('add success');
 				}).
 				error(function (error) {
 					$scope.status = 'Unable to Create new Role: ' + error.message;
-					console.log(NewRoleDTO);
+					console.log();
 				});
 		}
-
+		$scope.testProfile = function() {
+			addProfileProperty();
+		}
 		// Add New Role Groups
 		function addRoleGroup(NewRoleGroupDTO) {
 			rolesFactory.addNewRoleGroup(NewRoleGroupDTO)
