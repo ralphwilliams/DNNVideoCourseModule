@@ -130,12 +130,12 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
             // these could be constants instead, but this code will very rarely be run and won't be run at such scale that it will matter that much
 		    var goodResult = "true";
 		    var badResult = "false";
-		    var propertyCategory = "TestCategory";
-		    var propertyName = "newTestProperty1";
+		    var propertyCategory = "Video Module Status";
+		    var propertyName = "videosComplete";
 
 		    switch (Version)
 		    {
-                case "01.01.00": // should be whichever version number is being upgraded to or currently installed
+                case "01.00.06": // should be whichever version number is being upgraded to or currently installed
                     try
                     {
                         // get a collection of portals to iterate through
@@ -144,7 +144,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
                         // update each portal since they could each potentially use the module and we'll have no idea which one already is or will be later
                         foreach (PortalInfo portal in portals)
                         {
-                            var pdef = ProfileController.GetPropertyDefinitionByName(portal.PortalID, "newTestProperty1");
+                            var pdef = ProfileController.GetPropertyDefinitionByName(portal.PortalID, propertyName);
 
                             if (pdef == null)
                             {
@@ -156,9 +156,9 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
                                 newProfile.DefaultValue = string.Empty;
                                 newProfile.PropertyCategory = propertyCategory; // made this a static object above to save memory for performance if there are lot of portals
                                 newProfile.PropertyName = propertyName; // made this a static object above to save memory for performance if there are lot of portals
-                                newProfile.ReadOnly = false;
+                                newProfile.ReadOnly = true;
                                 newProfile.Required = false;
-                                newProfile.Visible = true;
+                                newProfile.Visible = false;
                                 newProfile.Length = 0;
                                 newProfile.DefaultVisibility = UserVisibilityMode.AllUsers;
 

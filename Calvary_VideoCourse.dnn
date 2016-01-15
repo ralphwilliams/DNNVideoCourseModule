@@ -68,14 +68,14 @@
             </moduleDefinitions>
           </desktopModule>
 		  <eventMessage>
-			<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor,DotNetNuke</processorType>
-			<processorCommand>UpgradeModule</processorCommand>
-			<attributes>
-			  <businessControllerClass>SSI.DNN.SSIReplicationModule.Controllers.FeatureController, SSIReplicationModule</businessControllerClass>
-			  <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-			  <upgradeVersionsList>01.00.06</upgradeVersionsList>
-			</attributes>
-		  </eventMessage>
+            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+            <processorCommand>UpgradeModule</processorCommand>
+            <attributes>
+              <businessControllerClass>RalphWilliams.Modules.Calvary_VideoCourse.Components.FeatureController</businessControllerClass>
+              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+              <upgradeVersionsList>01.00.06</upgradeVersionsList>
+            </attributes>
+          </eventMessage>
         </component>
         
         <component type="Assembly">

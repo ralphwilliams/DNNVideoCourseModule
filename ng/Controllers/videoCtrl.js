@@ -1,8 +1,8 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers', [])
-	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', 'localizationFactory', 'profileFactory', '$location',
-	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, localizationFactory, profileFactory, $location, $sce) {
+	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', 'localizationFactory', '$location',
+	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, localizationFactory, $location, $sce) {
 
 		// #region Test for Edit Mode
 
@@ -25,6 +25,7 @@ angular
 				console.log('Error Getting User Data');
 				//console.log(data);
 			});
+
 		// Get categories
 		var loadCats = function () {
 			categoriesFactory.callCategoriesData()
@@ -42,12 +43,12 @@ angular
 		// Get videos
 		var loadVids = function () {
 			videosFactory.callVideosData()
-			.then(function (data) {
-				$scope.videos = angular.fromJson(data);
-				buildVideoList($scope.videos);
-			}, function (data) {
-				alert(data);
-			})
+				.then(function(data) {
+					$scope.videos = angular.fromJson(data);
+					buildVideoList($scope.videos);
+				}, function(data) {
+					alert(data);
+				});
 		}
 
 		// Get Vimeo data
@@ -61,20 +62,6 @@ angular
 			});
 		}
 
-		// Add New Roles
-		function addProfileProperty() {
-			profileFactory.addProfileProperty()
-				.success(function () {
-					console.log('add success');
-				}).
-				error(function (error) {
-					$scope.status = 'Unable to Create new Role: ' + error.message;
-					console.log();
-				});
-		}
-		$scope.testProfile = function() {
-			addProfileProperty();
-		}
 		// Add New Role Groups
 		function addRoleGroup(NewRoleGroupDTO) {
 			rolesFactory.addNewRoleGroup(NewRoleGroupDTO)
@@ -89,11 +76,11 @@ angular
 
 		// Get Localization Resources
 		localizationFactory.callResx()
-		.then(function (data) {
-			$scope.resx = angular.fromJson(data.ClientResources);
-		}, function (data) {
-			alert(data);
-		})
+			.then(function(data) {
+				$scope.resx = angular.fromJson(data.ClientResources);
+			}, function(data) {
+				alert(data);
+			});
 
 		// #endregion
 

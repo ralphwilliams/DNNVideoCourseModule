@@ -19,6 +19,7 @@ using System.Web.Configuration;
 using System.Web.Http;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
@@ -38,43 +39,6 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 	public class Calvary_VideoCourseController : DnnApiController
 	{
 
-		// Get Videos
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
-		[HttpPost]
-		public HttpResponseMessage TestUpgrade()
-		{
-			try
-			{
-				ProfilePropertyDefinition pdef = ProfileController.GetPropertyDefinitionByName(PortalSettings.PortalId, "myTestProperty");
-				if (pdef == null)
-				{
-					/// Create the profile property programatically or throw error
-					var newProfile = new ProfilePropertyDefinition(PortalSettings.PortalId);
-					newProfile.PortalId = PortalSettings.PortalId;
-					newProfile.ModuleDefId = Null.NullInteger;
-					newProfile.DataType = 349;
-					newProfile.DefaultValue = "";
-					newProfile.PropertyCategory = "TestCategory";
-					newProfile.PropertyName = "myTestProperty";
-					newProfile.ReadOnly = false;
-					newProfile.Required = false;
-					newProfile.Visible = true;
-					newProfile.Length = 0;
-					newProfile.DefaultVisibility = UserVisibilityMode.AllUsers;
-
-					ProfileController.AddPropertyDefinition(newProfile);
-				}
-				return Request.CreateResponse(HttpStatusCode.OK);
-			}
-			catch (Exception exc)
-			{
-				Exceptions.LogException(exc);
-				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
-			}
-		}
-
-
 		public class InitData
 		{
 			public Dictionary<string, string> ClientResources { get; set; }
@@ -82,7 +46,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 
 		#region Service Methods
 		[HttpGet]
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		public HttpResponseMessage ResxData()
 		{
 			InitData init = new InitData();

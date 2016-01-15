@@ -26,7 +26,15 @@
     </file>
     <file>
       <path />
+      <name>View.ascx</name>
+    </file>
+    <file>
+      <path />
       <name>View.html</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>ClientResources.resx</name>
     </file>
     <file>
       <path>App_LocalResources/</path>
@@ -35,10 +43,6 @@
     <file>
       <path>App_LocalResources/</path>
       <name>Settings.ascx.resx</name>
-    </file>
-    <file>
-      <path>App_LocalResources/</path>
-      <name>View.resx</name>
     </file>
     <file>
       <path>Content/</path>
@@ -234,6 +238,10 @@
     </file>
     <file>
       <path>ng/Controllers/</path>
+      <name>editCategoriesCtrl.js</name>
+    </file>
+    <file>
+      <path>ng/Controllers/</path>
       <name>editCourseCtrl.js</name>
     </file>
     <file>
@@ -247,6 +255,10 @@
     <file>
       <path>ng/Controllers/</path>
       <name>videoPlayerCtrl.js</name>
+    </file>
+    <file>
+      <path>ng/Views/</path>
+      <name>editCategories.html</name>
     </file>
     <file>
       <path>ng/Views/</path>
