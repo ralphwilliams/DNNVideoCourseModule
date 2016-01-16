@@ -165,8 +165,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\icomoon.svg" />
-    <Content Include="install\Calvary_VideoCourse_01.00.06_Install.zip" />
-    <Content Include="install\Calvary_VideoCourse_01.00.06_Source.zip" />
     <Content Include="ng\Controllers\editCourseCtrl.js" />
     <Content Include="ng\Controllers\statusCtrl.js" />
     <Content Include="ng\Controllers\editCategoriesCtrl.js" />
@@ -285,7 +283,9 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Scripts\version.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="install\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
