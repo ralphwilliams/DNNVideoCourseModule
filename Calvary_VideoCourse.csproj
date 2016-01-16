@@ -215,8 +215,6 @@
     <Content Include="packages\MSBuildTasks.1.4.0.88\tools\Build.proj" />
     <Content Include="packages\MSBuildTasks.1.4.0.88\tools\Install.ps1" />
     <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.Targets" />
-    <Content Include="install\Calvary_VideoCourse_01.00.06_Install.zip" />
-    <Content Include="install\Calvary_VideoCourse_01.00.06_Source.zip" />
     <None Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.xsd">
       <SubType>Designer</SubType>
     </None>
