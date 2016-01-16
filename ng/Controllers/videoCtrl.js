@@ -21,9 +21,8 @@ angular
 			.then(function (data) {
 				$scope.videosComplete = angular.fromJson(data);
 				loadCats();
-			}, function (data) {
+			}, function () {
 				console.log('Error Getting User Data');
-				//console.log(data);
 			});
 
 		// Get categories
@@ -31,12 +30,12 @@ angular
 			categoriesFactory.callCategoriesData()
 				.then(function(data) {
 				$scope.categories = angular.fromJson(data);
-					angular.forEach($scope.categories, function(valueCategory, keyCategory) {
+					angular.forEach($scope.categories, function(valueCategory) {
 					valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
 				});
 				loadVids();
 				}, function(data) {
-				alert(data);
+					Console.log(data);
 				});
 		}
 
@@ -47,7 +46,7 @@ angular
 					$scope.videos = angular.fromJson(data);
 					buildVideoList($scope.videos);
 				}, function(data) {
-					alert(data);
+					console.log(data);
 				});
 		}
 
@@ -56,22 +55,10 @@ angular
 			vimeoFactory.callVimeoData(vimeoId, video)
 			.then(function (data) {
 				$scope.vimeo = data;
-				loadVimeoList(data, video, videoId, completedVideos);
-			}, function (data) {
-				alert('vimeo Ajax Fail');
+				loadVimeoList(data, video);
+			}, function () {
+				console.log('vimeo Ajax Fail');
 			});
-		}
-
-		// Add New Role Groups
-		function addRoleGroup(NewRoleGroupDTO) {
-			rolesFactory.addNewRoleGroup(NewRoleGroupDTO)
-				.success(function () {
-					loadCats();
-				}).
-				error(function (error) {
-					$scope.status = 'Unable to Create new Role Group: ' + error.message;
-					console.log(NewRoleGroupDTO);
-				});
 		}
 
 		// Get Localization Resources
@@ -79,16 +66,15 @@ angular
 			.then(function(data) {
 				$scope.resx = angular.fromJson(data.ClientResources);
 			}, function(data) {
-				alert(data);
+				console.log(data);
 			});
 
 		// #endregion
 
-
 		// #region Load Video List
 
 		// update initial video list with Vimeo data
-		var buildVideoList = function (videos) {
+		var buildVideoList = function () {
 
 			for (var i = 0; i < $scope.videos.length; i++) {
 
@@ -101,7 +87,7 @@ angular
 				}
 
 				// Get Vimeo data for each video
-				callVimeo($scope.videos[i].VimeoId, $scope.videos[i], $scope.videos[i].VideoId, $scope.videosComplete, loadVimeoList)
+				callVimeo($scope.videos[i].VimeoId, $scope.videos[i], $scope.videos[i].VideoId, $scope.videosComplete, loadVimeoList);
 
 				// convert duration to minutes
 				$scope.showDuration = function () {
@@ -118,14 +104,13 @@ angular
 
 
 		// Create Video List
-		$scope.videoList = function (videos) {
+		$scope.videoList = function () {
 
 			// show or hide list depending onf if courses and categories list exists
 			$scope.noCourses = $scope.categories.length > 0 ? false : true;
 			if ($scope.noCourses == true && $scope.editMode == true) {
 				$location.path('/categories/');
 			}
-
 
 			// Iterate through each Category
 			angular.forEach($scope.categories, function (valueCategory, keyCategory) {
@@ -138,17 +123,9 @@ angular
 					// Set courseId to RoleID
 					$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
 
-					// Create link for Managing users in roles
-					var roleLink = "/Admin/Security-Roles/ctl/User%2520Roles/mid/392/RoleId/" +
-										valueCourse.RoleID +
-										"?popUp=true";
-					var roleAction = "javascript:dnnModal.show('" + roleLink + "',/*showReturn*/false,550,950,false,'')";
-
-					$('#roleEdit_' + valueCourse.RoleID).attr('href', roleAction);
-
 					// Iterate through list of videos
 					var videoList = [];
-					angular.forEach($scope.videos, function (valueVideo, keyVideo) {
+					angular.forEach($scope.videos, function (valueVideo) {
 
 						// Check to see that video is in the course
 						if (valueVideo.CourseId == valueCourse.RoleID) {
@@ -168,9 +145,6 @@ angular
 					videoList.sort(function (a, b) {
 						return a.OrderIndex > b.OrderIndex;
 					});
-
-					// Find Next Video to watch
-					var orderBig = 0;
 
 					// If first video is not complete, mark as isNext
 					// Else, iterate through each video and find the first 
@@ -194,46 +168,17 @@ angular
 
 		// #endregion 
 
-		// #region Edit Course and Category mode
-		$scope.editCourseMode = true;
-
-		$scope.addCourseName = true;
-		$scope.toggleAddCourseName = function () {
-			$scope.addCourseName = $scope.addCourseName === false ? true : false;
-		};
-
-		$scope.editCourseName = true;
-		$scope.toggleEditCourseName = function () {
-			$scope.editCourseName = $scope.editCourseName === false ? true : false;
-		};
-
-		$scope.addCategoryMode = true;
-		$scope.toggleAddCategoryMode = function () {
-			$scope.addCategoryMode = $scope.addCategoryMode === false ? true : false;
-		};
-
-		$scope.editCategoryName = true;
-		$scope.toggleEditCategoryName = function () {
-			$scope.editCategoryName = $scope.editCategoryName === false ? true : false;
-		};
-
-
-
-		// #endregion
-
 		// #region Show Duration helper function
 
 		$scope.showDuration = function () {
 			var time = $scope.selectedVimeo.duration;
 			var minutes = Math.floor(time / 60);
 			var seconds = time - minutes * 60;
-			var hours = Math.floor(time / 3600);
-			time = time - hours * 3600;
-			function str_pad_left(string, pad, length) {
+			function strPadLeft(string, pad, length) {
 				return (new Array(length + 1).join(pad) + string).slice(-length);
 			}
 
-			var finalTime = str_pad_left(minutes, '', 2) + ':' + str_pad_left(seconds, '0', 2);
+			var finalTime = strPadLeft(minutes, '', 2) + ':' + strPadLeft(seconds, '0', 2);
 			return finalTime;
 		}
 
