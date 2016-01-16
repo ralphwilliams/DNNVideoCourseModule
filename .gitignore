@@ -210,4 +210,4 @@ $RECYCLE.BIN/
 *.msp
 
 # prevent the generated installation packages from being checked in to source control
-[Ii]nstall/
+# [Ii]nstall/
