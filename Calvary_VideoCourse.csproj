@@ -165,6 +165,8 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\icomoon.svg" />
+    <Content Include="install\Calvary_VideoCourse_01.00.06_Install.zip" />
+    <Content Include="install\Calvary_VideoCourse_01.00.06_Source.zip" />
     <Content Include="ng\Controllers\editCourseCtrl.js" />
     <Content Include="ng\Controllers\statusCtrl.js" />
     <Content Include="ng\Controllers\editCategoriesCtrl.js" />
