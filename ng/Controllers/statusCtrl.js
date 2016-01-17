@@ -10,124 +10,120 @@ angular
 
 		if (typeof editMode !== 'undefined') {
 			$scope.editMode = true;
-		} else {
-			$scope.editMode = false;
-		}
+
+				// #region Get Data from sources
+
+				// Get user's completed videos
+				statusFactory.callUsersData()
+					.then(function(data) {
+						$scope.userData = angular.fromJson(data);
+						//console.log($scope.userData)
+						angular.forEach($scope.userData, function (valueCategory) {
+							valueCategory.Name = valueCategory.Name.replace('CCV_', '');
+						});
+						loadCats();
+					}, function(data) {
+						console.log('Error Getting User Data');
+						console.log(data);
+					});
 
 
-		// #endregion
+				// Get categories
+				var loadCats = function () {
+					categoriesFactory.callCategoriesData()
+						.then(function(data) {
+							$scope.categories = angular.fromJson(data);
+							angular.forEach($scope.categories, function(valueCategory, keyCategory) {
+								valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
+							});
+							loadVids();
+						}, function(data) {
+							alert(data);
+						});
+				}
 
-		// #region Get Data from sources
+				// Get videos
+				var loadVids = function () {
+					videosFactory.callVideosData()
+						.then(function(data) {
+							$scope.videos = angular.fromJson(data);
+							$scope.videoList($scope.videos);
+						}, function(data) {
+							alert(data);
+						});
+				}
 
-		// Get user's completed videos
-		statusFactory.callUsersData()
-			.then(function(data) {
-				$scope.userData = angular.fromJson(data);
-				//console.log($scope.userData)
-				angular.forEach($scope.userData, function (valueCategory, keyCategory) {
-					valueCategory.Name = valueCategory.Name.replace('CCV_', '');
-				});
-				loadCats();
-			}, function(data) {
-				console.log('Error Getting User Data');
-				console.log(data);
-			});
+				// Get Localization Resources
+				localizationFactory.callResx()
+					.then(function(data) {
+						$scope.resx = angular.fromJson(data.ClientResources);
+					}, function(data) {
+						alert(data);
+					});
 
+				// #endregion
 
-		// Get categories
-		var loadCats = function () {
-			categoriesFactory.callCategoriesData()
-			.then(function (data) {
-				$scope.categories = angular.fromJson(data);
-				angular.forEach($scope.categories, function (valueCategory, keyCategory) {
-					valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
-				});
-				loadVids();
-			}, function (data) {
-				alert(data);
-			})
-		}
+				// Create Video List
+				$scope.videoList = function () {
 
-		// Get videos
-		var loadVids = function () {
-			videosFactory.callVideosData()
-			.then(function (data) {
-				$scope.videos = angular.fromJson(data);
-				$scope.videoList($scope.videos);
-			}, function (data) {
-				alert(data);
-			})
-		}
+					// Iterate through each Category
+					angular.forEach($scope.categories, function (valueCategory, keyCategory) {
 
-		// Get Localization Resources
-		localizationFactory.callResx()
-		.then(function (data) {
-			$scope.resx = angular.fromJson(data.ClientResources);
-		}, function (data) {
-			alert(data);
-		})
+						// Iterate through each Role
+						angular.forEach($scope.categories[keyCategory].Roles, function (valueCourse, keyCourse) {
 
-		// #endregion
+							// Set courseId to RoleID
+							$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
 
-		// Create Video List
-		$scope.videoList = function (videos) {
+							angular.forEach($scope.userData, function (valueUserGroup) {
+								if (valueUserGroup.Id === valueCategory.RoleGroupID) {
+									angular.forEach(valueUserGroup.Roles, function(valueUserRole) {
+										if (valueUserRole.Id === valueCourse.RoleID) {
+											angular.forEach(valueUserRole.Users, function (valueUser) {
+												var myCounter = 0;
+												var videoCounter = 0;
+												var videoList = [];
+												angular.forEach($scope.videos, function (valueVideo) {
+													// Check to see that video is in the course
+													if (valueVideo.CourseId === valueCourse.RoleID) {
+														if (valueUser.Videos === null) {
+															myCounter = 0;
+														} else if (valueUser.Videos.match(valueVideo.VideoId)) {
+															myCounter++;
+														}
+														//console.log(valueUser);
+														videoCounter++;
+														// Create list of updated videos
+														videoList.push(valueVideo);
+													}
+												}, videoList);
+												valueUser.name = valueUser.DisplayName !== '' ? valueUser.DisplayName : valueUser.Email;
+												valueUser.numberComplete = myCounter;
+												valueUser.totalVideos = videoCounter;
+												valueUser.notStarted = valueUser.numberComplete === 0 ? 'not-started' : 'started';
+												valueUser.percentComplete = (myCounter / videoCounter) * 100 + '%';
+												valueUser.amountComplete = (myCounter / videoCounter) * 100;
+												valueUser.courseComplete = valueUser.numberComplete === valueUser.totalVideos ? 'complete' : 'not-complete';
 
-
-
-			// Iterate through each Category
-			angular.forEach($scope.categories, function (valueCategory, keyCategory) {
-
-				// Trim Category name
-
-				// Iterate through each Role
-				angular.forEach($scope.categories[keyCategory].Roles, function (valueCourse, keyCourse) {
-
-					// Set courseId to RoleID
-					$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
-
-
-					angular.forEach($scope.userData, function (valueUserGroup, keyUserGroup) {
-						if (valueUserGroup.Id === valueCategory.RoleGroupID) {
-							angular.forEach(valueUserGroup.Roles, function(valueUserRole, keyUserRole) {
-								if (valueUserRole.Id === valueCourse.RoleID) {
-									angular.forEach(valueUserRole.Users, function (valueUser, keyUser) {
-										var myCounter = 0;
-										var videoCounter = 0;
-										var videoList = [];
-										angular.forEach($scope.videos, function (valueVideo, keyVideo) {
-											// Check to see that video is in the course
-											if (valueVideo.CourseId === valueCourse.RoleID) {
-												if (valueUser.Videos === null) {
-													myCounter = 0;
-												} else if (valueUser.Videos.match(valueVideo.VideoId)) {
-													myCounter++;
-												}
-												//console.log(valueUser);
-												videoCounter++;
-												// Create list of updated videos
-												videoList.push(valueVideo);
-											}
-										}, videoList);
-										valueUser.name = valueUser.DisplayName !== '' ? valueUser.DisplayName : valueUser.Email;
-										valueUser.numberComplete = myCounter;
-										valueUser.totalVideos = videoCounter;
-										valueUser.notStarted = valueUser.numberComplete === 0 ? 'not-started' : 'started';
-										valueUser.percentComplete = (myCounter / videoCounter) * 100 + '%';
-										valueUser.amountComplete = (myCounter / videoCounter) * 100;
-										valueUser.courseComplete = valueUser.numberComplete === valueUser.totalVideos ? 'complete' : 'not-complete';
-
+											});
+										}
 									});
 								}
 							});
-						}
-					});
 
-				});
-			});
-			$('.collapse').collapse(function() {return false});
+						});
+					});
+					$('.collapse').collapse(function() {return false});
+				}
+
+				// #endregion 
+		} else {
+			$scope.editMode = false;
+			$location.path('/videos/');
+
 		}
 
-		// #endregion 
+		// #endregion
 
 		$scope.courseList = function () {
 			$location.path('/videos/');

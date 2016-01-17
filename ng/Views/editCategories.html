@@ -76,7 +76,7 @@
 										<button ng-click="editCourseName = !editCourseName" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="editCourseName">Cancel</button>
 										<span class="small pull-right status-switch">
 											<input id="status_{{ course.RoleID }}" type="checkbox" class='tgl tgl-flat' ng-model="course.Status" ng-change="editRoleName(course.RoleName, category.RoleGroupID, course.RoleID, course.Status)" />
-											<label class='tgl-btn' for='status_{{ course.RoleID }}'></label>
+											<label class="tgl-btn" for="status_{{ course.RoleID }}"></label>
 										</span>
 										<span class="small pull-right edit-users">
 											<button ng-click="editCourseName = !editCourseName" ng-disabled="!course.Status" type="button" class="btn btn-xs btn-tertiary btn-edit" title="Rename Course" aria-label="Rename Course">
@@ -90,8 +90,8 @@
 										</span> &nbsp;
 									</li>
 									<li class="list-group-item">
-										<input ng-model="$root.addNewRoleName" type="text" ng-hide="addCourseName" />
-										<button ng-click="addNewRole(category.RoleGroupID)" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="addCourseName">Add Course</button>
+										<input ng-model="category.addNewRoleName" type="text" ng-hide="addCourseName" />
+										<button ng-click="addNewRole(category.addNewRoleName, category.RoleGroupID)" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="addCourseName">Add Course</button>
 										<button ng-click="addCourseName = !addCourseName" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="addCourseName">Cancel</button>
 										<button ng-click="addCourseName = !addCourseName" type="button" class="btn btn-tertiary btn-edit" ng-show="addCourseName">Add A New Course</button>
 									</li>

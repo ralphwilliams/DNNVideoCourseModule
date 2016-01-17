@@ -245,4 +245,7 @@ Thank you for your time and heart for serving!&lt;br /&gt;Calvary Church&lt;br /
   <data name="ViewCourseProgress_Lbl" xml:space="preserve">
     <value>View User Status</value>
   </data>
+  <data name="LoggedOutMessage" xml:space="preserve">
+    <value>You are currently logged out. You must be logged in to view this content.</value>
+  </data>
 </root>

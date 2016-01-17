@@ -15,12 +15,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Configuration;
 using System.Web.Http;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Portals;
-using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
@@ -28,7 +25,6 @@ using RalphWilliams.Modules.Calvary_VideoCourse.Entities;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Mail;
-using DotNetNuke.Security.Roles.Internal;
 
 using DotNetNuke.Services.Localization;
 
@@ -45,8 +41,9 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		}
 
 		#region Service Methods
-		[HttpGet]
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
+		[HttpGet]
 		public HttpResponseMessage ResxData()
 		{
 			InitData init = new InitData();
@@ -111,18 +108,20 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 			{
 				var portalId = PortalSettings.PortalId;
 				var filteredRoleGroups = string.Empty;
+				int loginStatus = 1;
 
                 if (UserInfo == null || (UserInfo != null && UserInfo.UserID < 1))
-			    {
+                {
+					loginStatus = 0;
                     // you can only get information if you're logged in
                     Exceptions.LogException(new AccessViolationException("Unauthorized attempt to access GetAllGroups API end point"));
 
-                    // return 404 error simply to discourage hacking
-			        return Request.CreateResponse(HttpStatusCode.NotFound);
-			    }
+					// return 404 error simply to discourage hacking
+					return Request.CreateResponse(HttpStatusCode.OK, loginStatus);
+				}
 
-                // get all role groups
-                var roleGroups = Controllers.RoleController.GetRoleGroups(portalId);
+				// get all role groups
+				var roleGroups = Controllers.RoleController.GetRoleGroups(portalId);
 
 				if (UserInfo.IsInRole(PortalSettings.AdministratorRoleName) || UserInfo.IsSuperUser)
 				{
@@ -437,7 +436,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
 		[ValidateAntiForgeryToken]
 		[HttpPost]
-		public HttpResponseMessage editRoleGroup(NewRoleGroupDTO roleGroupName)
+		public HttpResponseMessage EditRoleGroup(NewRoleGroupDTO roleGroupName)
 		{
 			try
 			{
@@ -446,6 +445,8 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 				oRoleGroup.PortalID = this.PortalSettings.PortalId;
 				oRoleGroup.RoleGroupName = "CCV_" + roleGroupName.Name;
 				oRoleGroup.RoleGroupID = roleGroupName.RoleGroupID;
+				oRoleGroup.Description = "";
+
 
 				if (oRoleGroup.RoleGroupID == -1)
 				{
@@ -485,13 +486,15 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 				}
 				DotNetNuke.Security.Roles.RoleController oDnnRoleController = new DotNetNuke.Security.Roles.RoleController();
 				RoleInfo oRole = new RoleInfo();
-				oRole.PortalID = this.PortalSettings.PortalId;
+				oRole.PortalID = PortalSettings.PortalId;
 				oRole.RoleName = roleName.Name;
 				oRole.IsPublic = false;
 				oRole.Status = RoleStatus.Approved;
 				oRole.AutoAssignment = false;
 				oRole.RoleGroupID = roleName.RoleGroup;
 				oRole.Status = (RoleStatus)roleName.Status;
+				oRole.Description = "";
+				oRole.IsSystemRole = false;
 
 
 				if (_roleID == -1)
@@ -506,9 +509,9 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 				else
 				{
 					oRole.RoleID = roleName.RoleId;
-					DotNetNuke.Security.Roles.RoleController.Instance.UpdateRole(oRole, true);
+					DotNetNuke.Security.Roles.RoleController.Instance.UpdateRole(oRole);
 				}
-
+				DataCache.ClearCache();
 				return Request.CreateResponse(HttpStatusCode.OK);
 			}
 			catch (Exception exc)

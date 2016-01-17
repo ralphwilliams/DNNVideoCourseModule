@@ -5,7 +5,7 @@ angular
 	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, $location, localizationFactory, $sce) {
 
 		// #region Test for Edit mode
-		if (typeof editMode !== 'undefined') {
+		if (typeof editMode !== 'undefined' || editMode === false) {
 			$scope.editMode = true;
 
 			// #region Get Data from sources
@@ -92,7 +92,7 @@ angular
 			// #region Load Video List
 
 			// update initial video list with Vimeo data
-			var buildVideoList = function (videos) {
+			var buildVideoList = function () {
 
 				for (var i = 0; i < $scope.videos.length; i++) {
 
@@ -118,35 +118,6 @@ angular
 				// Add updated video list to categories/roles objects
 				$scope.videoList($scope.videos);
 
-				$scope.addNewRole = function (RoleGroup) {
-					function roleName(addNewRoleName, RoleGroup) {
-						this.Name = addNewRoleName;
-						this.RoleGroup = RoleGroup;
-						this.RoleId = -1;
-						this.Status = 1;
-					}
-					// Set New Role Object
-					var newRole = new roleName($scope.addNewRoleName, RoleGroup);
-					$scope.addNewRoleName = '';
-					editRole(newRole);
-				}
-
-				$scope.editRoleName = function (RoleName, RoleGroup, RoleId, Status) {
-					function roleName(RoleName, RoleGroup, RoleId, Status) {
-						this.Name = RoleName;
-						this.RoleGroup = RoleGroup;
-						this.RoleId = RoleId;
-						if (Status == true) {
-							this.Status = 1;
-						}
-						else {
-							this.Status = 0;
-						}
-					}
-					// Update Role Object
-					var newRole = new roleName(RoleName, RoleGroup, RoleId, Status);
-					editRole(newRole);
-				}
 
 				$scope.addNewRoleGroup = function (addNewRoleGroupName) {
 					function roleGroupName(addNewRoleGroupName) {
@@ -155,8 +126,8 @@ angular
 					}
 					// Set New RoleGroup Object
 					var newRoleGroup = new roleGroupName(addNewRoleGroupName);
-					$scope.addNewRoleGroupName = '';
 					editRoleGroup(newRoleGroup);
+					$scope.addNewRoleGroupName = '';
 				}
 
 				$scope.editRoleGroupName = function (RoleGroupName, RoleGroupId) {
@@ -181,8 +152,6 @@ angular
 
 				// Iterate through each Category
 				angular.forEach($scope.categories, function (valueCategory, keyCategory) {
-
-					// Trim Category name
 
 					// Iterate through each Role
 					angular.forEach($scope.categories[keyCategory].Roles, function (valueCourse, keyCourse) {
@@ -227,8 +196,6 @@ angular
 						});
 
 						// Find Next Video to watch
-						var orderBig = 0;
-
 						// If first video is not complete, mark as isNext
 						// Else, iterate through each video and find the first 
 						// video that is not complete, then break from loop
@@ -243,9 +210,42 @@ angular
 							}
 						}
 
+						$scope.editRoleName = function (RoleName, RoleGroup, RoleId, Status) {
+							function roleName(RoleName, RoleGroup, RoleId, Status) {
+								this.Name = RoleName;
+								this.RoleGroup = RoleGroup;
+								this.RoleId = RoleId;
+								if (Status == true) {
+									this.Status = 1;
+								}
+								else {
+									this.Status = 0;
+								}
+							}
+							// Update Role Object
+							var newRole = new roleName(RoleName, RoleGroup, RoleId, Status);
+							editRole(newRole);
+							$scope.addNewRoleName = '';
+						}
+
 						// Populate videos in roles with new video list
 						$scope.categories[keyCategory].Roles[keyCourse].videos = videoList;
 					});
+
+					$scope.addNewRole = function (newRoleName, roleGroup) {
+						console.log('$scope.newRoleName: ' + $scope.newRoleName);
+						function roleName(newRoleName, roleGroup) {
+							this.Name = newRoleName;
+							this.RoleGroup = roleGroup;
+							this.RoleId = -1;
+							this.Status = 1;
+						}
+						// Set New Role Object
+						var newRole = new roleName(newRoleName, roleGroup);
+						editRole(newRole);
+						$scope.categories[keyCategory].addNewRoleName = '';
+					}
+
 				});
 			}
 
@@ -306,6 +306,7 @@ angular
 
 		} else {
 			$scope.editMode = false;
+			$location.path('/videos/');
 			$scope.courseList = function () {
 				$location.path('/videos/');
 			}

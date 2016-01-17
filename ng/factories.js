@@ -135,7 +135,7 @@
 		var sf = $.ServicesFramework(moduleId);
 		return $http({
 			method: 'POST',
-			url: dataUrl + "editRoleGroup",
+			url: dataUrl + "EditRoleGroup",
 			headers: $self.Headers,
 			data: NewRoleGroupDTO
 		});

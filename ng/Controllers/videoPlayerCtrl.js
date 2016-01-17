@@ -365,11 +365,6 @@ angular
 
 			//#endregion
 
-
-			$scope.CourseCompletionTextClean_Html = $sce.trustAsHtml($scope.resx.CouresCompletionText_Html);
-			console.log($scope.resx.CouresCompletionText_Html);
-
-
 		};
 
 		// #endregion 

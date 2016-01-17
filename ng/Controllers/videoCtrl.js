@@ -12,6 +12,8 @@ angular
 			$scope.editMode = false;
 		}
 
+		$scope.viewMode;
+
 		// #endregion
 
 		// #region Get Data from sources
@@ -29,13 +31,18 @@ angular
 		var loadCats = function () {
 			categoriesFactory.callCategoriesData()
 				.then(function(data) {
-				$scope.categories = angular.fromJson(data);
-					angular.forEach($scope.categories, function(valueCategory) {
-					valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
-				});
-				loadVids();
-				}, function(data) {
-					Console.log(data);
+					$scope.categories = angular.fromJson(data);
+					if (data == 0) {
+						$scope.viewMode = true;
+					} else {
+						$scope.viewMode = false;
+						angular.forEach($scope.categories, function(valueCategory) {
+							valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
+						});
+						loadVids();
+					}
+				}, function (data) {
+					console.log(data);
 				});
 		}
 
@@ -68,7 +75,6 @@ angular
 			}, function(data) {
 				console.log(data);
 			});
-
 		// #endregion
 
 		// #region Load Video List
@@ -115,8 +121,6 @@ angular
 			// Iterate through each Category
 			angular.forEach($scope.categories, function (valueCategory, keyCategory) {
 
-				// Trim Category name
-
 				// Iterate through each Role
 				angular.forEach($scope.categories[keyCategory].Roles, function (valueCourse, keyCourse) {
 
@@ -162,6 +166,10 @@ angular
 
 					// Populate videos in roles with new video list
 					$scope.categories[keyCategory].Roles[keyCourse].videos = videoList;
+
+					// Check for videos
+					$scope.categories[keyCategory].Roles[keyCourse].hasVideos = videoList.length > 0 ? true : false;
+
 				});
 			});
 		}
