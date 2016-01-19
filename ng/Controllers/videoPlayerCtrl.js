@@ -4,6 +4,9 @@ angular
 	.controller('videoPlayerCtrl', ['$scope', '$routeParams', '$http', '$sce', '$window', 'vimeoFactory', '$location', 'categoriesFactory', 'videosFactory', 'usersFactory', 'localizationFactory', 'emailFactory',
 	function ($scope, $routeParams, $http, $sce, $window, vimeoFactory, $location, categoriesFactory, videosFactory, usersFactory, localizationFactory, emailFactory) {
 
+		// #region Test for Edit mode
+		if (typeof editMode !== 'undefined') {
+
 		// #region Controller Global Variables
 
 		$scope.nextButton = 'Next Video'; // Text is localized further down before displaying on view
@@ -372,5 +375,12 @@ angular
 		$scope.toggleComplete = function () {
 			$scope.courseComplete = $scope.courseComplete === false ? true : false;
 		};
+		} else {
+			$location.path('/videos/');
+			$scope.courseList = function () {
+				$location.path('/videos/');
+			}
+		}
+		// #endregion
 
 	}]);

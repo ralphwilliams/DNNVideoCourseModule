@@ -429,6 +429,17 @@
 /* **********   END Toggle Switch Button   ************* */
 
 
+/* Accordion */
+
+.panel-heading h2 .small .ng-hide:not(.ng-hide-animate) {
+	display: inline-block!important;
+}
+.panel-collapse {
+	padding: 0 15px;
+}
+
+/* END Accordion */
+
 /* *************   Video Player View   ***************** */
 
 .complete-screen {

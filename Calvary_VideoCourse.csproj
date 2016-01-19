@@ -164,6 +164,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="fonts\icomoon.svg" />
     <Content Include="ng\Controllers\editCourseCtrl.js" />
     <Content Include="ng\Controllers\statusCtrl.js" />
@@ -179,6 +180,8 @@
     <Content Include="ng\Views\editCourseView.html" />
     <Content Include="ng\Views\statusView.html" />
     <Content Include="ng\Views\editCategories.html" />
+    <Content Include="ng\Views\templates\accordion-group.html" />
+    <Content Include="ng\Views\templates\accordion.html" />
     <Content Include="ng\Views\videoListView.html" />
     <Content Include="ng\Views\videoPlayerView.html" />
     <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.dll" />
@@ -200,6 +203,10 @@
     <Content Include="Scripts\angular-ui.js" />
     <Content Include="Scripts\angular-ui.min.js" />
     <Content Include="Scripts\angular-ui\sortable.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />

@@ -121,8 +121,11 @@ angular
 			// Iterate through each Category
 			angular.forEach($scope.categories, function (valueCategory, keyCategory) {
 
+				var counter = 0;
+
 				// Iterate through each Role
 				angular.forEach($scope.categories[keyCategory].Roles, function (valueCourse, keyCourse) {
+
 
 					// Set courseId to RoleID
 					$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
@@ -149,7 +152,8 @@ angular
 					videoList.sort(function (a, b) {
 						return a.OrderIndex > b.OrderIndex;
 					});
-
+					
+					
 					// If first video is not complete, mark as isNext
 					// Else, iterate through each video and find the first 
 					// video that is not complete, then break from loop
@@ -163,12 +167,15 @@ angular
 							};
 						}
 					}
+					$scope.categories[keyCategory].Roles[keyCourse].isFirst = counter == 0 ? true : false;
 
 					// Populate videos in roles with new video list
 					$scope.categories[keyCategory].Roles[keyCourse].videos = videoList;
 
 					// Check for videos
 					$scope.categories[keyCategory].Roles[keyCourse].hasVideos = videoList.length > 0 ? true : false;
+
+					counter++;
 
 				});
 			});
@@ -193,3 +200,8 @@ angular
 		// #endregion
 
 	}]);
+angular
+	.module('videoControllers')
+	.controller("TabsChildController", function ($scope, $log) {
+
+});

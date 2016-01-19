@@ -1,0 +1,9 @@
+﻿<li class="course-categories">
+	<h1>{{ $parent.category.RoleGroupName }}</h1>
+	<ul class="list-unstyled">
+		<uib-accordion close-others="true">
+			<uib-accordion-group ng-repeat="course in category.Roles" ng-init="status = $first" is-open="status" template-url="/DesktopModules/Calvary_VideoCourse/ng/Views/templates/accordion-group.html">
+			</uib-accordion-group>
+		</uib-accordion>
+	</ul>
+</li>

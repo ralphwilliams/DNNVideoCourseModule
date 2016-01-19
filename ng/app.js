@@ -8,7 +8,8 @@ angular
 	.module('CCVideoApp', [
 		'ngRoute',
 		'videoControllers',
-		'ui.sortable'
+		'ui.sortable',
+		'ui.bootstrap'
 	])
 	.config(['$routeProvider', '$httpProvider',
 		function ($routeProvider) {
