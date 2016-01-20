@@ -89,6 +89,10 @@
       <name>select2.css</name>
     </file>
     <file>
+      <path>Content/</path>
+      <name>ui-bootstrap-csp.css</name>
+    </file>
+    <file>
       <path>Content/themes/base/</path>
       <name>accordion.css</name>
     </file>
@@ -277,6 +281,10 @@
       <name>videoPlayerView.html</name>
     </file>
     <file>
+      <path>ng/Views/templates/</path>
+      <name>accordion.html</name>
+    </file>
+    <file>
       <path>Scripts/</path>
       <name>angular-animate.js</name>
     </file>
@@ -395,6 +403,22 @@
     <file>
       <path>Scripts/angular-ui/</path>
       <name>sortable.js</name>
+    </file>
+    <file>
+      <path>Scripts/angular-ui/</path>
+      <name>ui-bootstrap-tpls.js</name>
+    </file>
+    <file>
+      <path>Scripts/angular-ui/</path>
+      <name>ui-bootstrap-tpls.min.js</name>
+    </file>
+    <file>
+      <path>Scripts/angular-ui/</path>
+      <name>ui-bootstrap.js</name>
+    </file>
+    <file>
+      <path>Scripts/angular-ui/</path>
+      <name>ui-bootstrap.min.js</name>
     </file>
   </files>
 </dotnetnuke>

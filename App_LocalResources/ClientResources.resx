@@ -120,9 +120,6 @@
   <data name="BasicSettings" xml:space="preserve">
     <value>Basic Calvary_VideoCourse Settings</value>
   </data>
-  <data name="CollapseAll" xml:space="preserve">
-    <value>Collapse All</value>
-  </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete this Item</value>
   </data>
@@ -162,7 +159,7 @@ Thank you for your time and heart for serving!&lt;br /&gt;Calvary Church&lt;br /
     <value>Manage Categories and Courses</value>
   </data>
   <data name="EditCourseAddVideoVimeoID_Txt" xml:space="preserve">
-    <value>Video's Vimeo ID:</value>
+    <value>Video's Vimeo URL:</value>
   </data>
   <data name="EditCourseAddVideo_Title" xml:space="preserve">
     <value>Add new Video to Course</value>
@@ -247,5 +244,14 @@ Thank you for your time and heart for serving!&lt;br /&gt;Calvary Church&lt;br /
   </data>
   <data name="LoggedOutMessage" xml:space="preserve">
     <value>You are currently logged out. You must be logged in to view this content.</value>
+  </data>
+  <data name="CourseManagement_Text" xml:space="preserve">
+    <value>Course Admin</value>
+  </data>
+  <data name="VideoListEditor_Text" xml:space="preserve">
+    <value>Edit Videos in Course</value>
+  </data>
+  <data name="VideoVimeoUrlExample_Text" xml:space="preserve">
+    <value>ex: https://vimeo.com/xxxxxxxx</value>
   </data>
 </root>

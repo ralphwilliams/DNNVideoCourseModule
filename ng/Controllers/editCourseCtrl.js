@@ -195,9 +195,23 @@ function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFact
 
 			// Video object constructor
 			function Video(videos, courseId, vimeoId, orderIndex) {
+
+				vimeo_Reg = /https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
+				console.log(vimeo_Reg);
+				console.log(vimeoId);
+				function VimeoID(url) {
+					console.log(url);
+					var match = url.match(vimeo_Reg);
+
+					if (match) {
+						return match[3];
+					} else {
+						return "<span class='error'>error</span>";
+					}
+				}
 				this.OrderIndex = orderIndex;
 				this.CourseId = courseId;
-				this.VimeoId = vimeoId;
+				this.VimeoId = VimeoID(vimeoId);
 				this.ModuleId = moduleId;
 			}
 
@@ -223,7 +237,7 @@ function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFact
 			var newIndex = $scope.videos.length;
 
 
-			var newVideo = new Video(videos, thisCourse, parseInt($scope.newVimeoId), newIndex);
+			var newVideo = new Video(videos, thisCourse, $scope.newVimeoId, newIndex);
 
 			function saveNewVideo(newVideo, newIndex) {
 				vimeoId = newVideo.VimeoId;

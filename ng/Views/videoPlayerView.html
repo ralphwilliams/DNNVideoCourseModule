@@ -1,39 +1,33 @@
 ﻿<div class="video-player" ng-class="viewMode">
-	<div class="module-heading">
-		<div class="container">
-			<div class="row" ng-hide="courseComplete">
-				<h1 class="col-sm-10">{{ resx.VideoPlayerPage_Title }}</h1>
-				<a ng-click="courseList()" class="btn btn-secondary return-button visible-xs-block">
-					<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> {{ resx.ReturnToCourse_Btn }}
+	<div class="page-header">
+		<div class="row" ng-hide="courseComplete">
+			<h1 class="col-sm-9">{{ resx.VideoPlayerPage_Title }}</h1>
+			<a ng-click="courseList()" class="btn btn-default return-button visible-xs-block">
+				<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> {{ resx.ReturnToCourse_Btn }}
+			</a>
+			<div class="return-btn col-md-3 hidden-xs">
+				<a ng-click="courseList()" class="btn btn-default return-button">
+					<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> {{ resx.ReturnToCourse_Btn }}
 				</a>
-
-				<div class="return-btn col-md-2 hidden-xs">
-					<a ng-click="courseList()" class="btn btn-secondary return-button">
-						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>{{ resx.ReturnToCourse_Btn }}
-					</a>
-				</div>
 			</div>
 		</div>
 	</div>
 	<div class="player-wrap">
 		<div class="row">
 			<div class="col-md-12" ng-hide="courseComplete">
-				<div class="container">
-					<div class="row">
-						<div class="player col-md-11 col-md-offset-1">
-							<iframe id="player1" ng-src="{{vimeoUrl}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-						</div>
+				<div class="row">
+					<div class="player col-md-12">
+						<iframe id="player1" ng-src="{{vimeoUrl}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row" ng-hide="courseComplete">
+	<div class="row" ng-hide="courseComplete">
+		<div class="col-md-12">
 			<h3>{{selectedVimeo.title}} <!--: {{selectedVimeo.video_id}}--></h3>
 			<p><em>{{ resx.VideoDetailsLength_Text }}: {{showDuration()}}</em><br />{{ resx.VideoDetailsVideo_Text }} {{ orderIndex + 1 }} {{ resx.VideoDetailsOf_Text }} {{ courseLength }}</p>
 			<p>{{ selectedVimeo.description }}</p>
-
 			<a id="nextVideo" ng-click="moveNext()" class="btn btn-primary pull-right" ng-class="{disabled: selectedVimeo.complete != true}">
 				<span ng-show="courseFinished == true && showNext == false" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
 				<span ng-show="showCheck" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -42,14 +36,14 @@
 			</a>
 			<a id="prevVideo" ng-click="prevVideo()" class="btn btn-primary pull-left" ng-class="{disabled: orderIndex == 0}"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>{{ resx.VideoPlayerPrevious_Btn }}</a>
 		</div>
-		<div class="row" ng-show="courseComplete">
-			<div class="complete-screen col-md-8 col-md-offset-2">
-				<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
-				<div ng-bind-html="CourseCompletionTextClean_Html"></div>
-				<p>
-					<a class="btn btn-tertiary" ng-click="courseList()">{{ resx.ReturnToCourse_Btn }}</a>
-				</p>
-			</div>
+	</div>
+	<div class="row" ng-show="courseComplete">
+		<div class="complete-screen col-md-8 col-md-offset-2">
+			<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+			<div ng-bind-html="CourseCompletionTextClean_Html"></div>
+			<p>
+				<a class="btn btn-tertiary" ng-click="courseList()">{{ resx.ReturnToCourse_Btn }}</a>
+			</p>
 		</div>
 	</div>
 </div>

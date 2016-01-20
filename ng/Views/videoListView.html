@@ -1,21 +1,18 @@
 ﻿<section class="course-list" ng-hide="viewMode">
-	<div class="module-heading">
-		<div class="container">
-			<div class="row">
-				<h1 class="col-md-12">{{ resx.VideoListPage_Title }}</h1>
+	<div class="page-header">
+		<div class="row">
+			<h1 class="col-sm-9">{{ resx.VideoListPage_Title }}</h1>
+			<div class="col-md-3" ng-show="editMode">
+				<div class="btn-group" uib-dropdown is-open="status.isopen">
+					<button id="single-button" type="button" class="btn btn-default return-button" uib-dropdown-toggle ng-disabled="disabled">
+						<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> {{ resx.CourseManagement_Text }} <span class="caret"></span>
+					</button>
+					<ul class="list-unstyled" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+						<li role="menuitem"><a href="#/categories">{{ resx.EditCategoriesCourse_Btn }}</a></li>
+						<li role="menuitem"><a ng-href="{{ '#/status' }}">{{ resx.ViewCourseProgress_Btn }}</a></li>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row" ng-show="editMode">
-		<div class="col-md-2 pull-right">
-			<a ng-href="{{ '#/status' }}" class="btn btn-xs btn-tertiary btn-edit" aria-label="{{ resx.ViewCourseProgress_Lbl }}">
-				<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> {{ resx.ViewCourseProgress_Btn }}
-			</a>
-		</div>
-		<div class="col-md-2 pull-right">
-			<a href="#/categories" class="btn btn-xs btn-tertiary btn-edit" aria-label="{{ resx.EditCategoriesCourse_Lbl }}">
-				<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> {{ resx.EditCategoriesCourse_Btn }}
-			</a>
 		</div>
 	</div>
 	<ul class="list-unstyled">

@@ -165,7 +165,9 @@ angular
 
 						// Set courseId to RoleID
 						$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
-						var roleLink = "/Admin/Security-Roles/ctl/User%2520Roles/mid/392/RoleId/" +
+						var roleLink = "/Admin/Security-Roles/ctl/User%20Roles/mid/" +
+											390 + // Roles module Id
+											"/RoleId/" +
 											valueCourse.RoleID +
 											"?popUp=true";
 						var roleAction = "javascript:dnnModal.show('" + roleLink + "',/*showReturn*/false,550,950,false,'')";
