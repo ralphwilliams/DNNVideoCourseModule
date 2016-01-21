@@ -76,6 +76,10 @@
 	max-width: 100%!important; /* Override new skin for DNN 8 with important on definition */
 }
 
+.course-list .progress,
+.course-list .progress span { display:block; height:15px;}
+.course-list .progress { background-color: rgba(0,0,0,0.2);}
+
 /* #endregion */
 
 /* #region Edit Category and Course Styles */
@@ -219,6 +223,8 @@
 }
 
 .status-view .checkmark,
+.status-view .complete.not-started .checkmark,
+.status-view .complete.not-started .course-complete,
 .status-view .not-started-text,
 .status-view .complete .progress,
 .status-view .not-started .progress,
@@ -228,6 +234,7 @@
 .status-view .not-started-text { display: none;}
 
 .status-view .complete .checkmark,
+.status-view .complete.not-started .not-started-text,
 .status-view .not-complete .course-status,
 .status-view .not-complete.started .progress,
 .status-view .complete .complete,

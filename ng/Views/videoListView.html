@@ -17,7 +17,7 @@
 	</div>
 	<ul class="list-unstyled">
 		<li class="course-categories" ng-repeat="category in categories">
-			<h1>{{ category.RoleGroupName }}</h1>
+			<h2>{{ category.RoleGroupName }}</h2>
 			<ul class="list-unstyled">
 				<uib-accordion close-others="true">
 					<uib-accordion-group ng-repeat="course in category.Roles" ng-init="status = $first" is-open="status" template-url="/DesktopModules/Calvary_VideoCourse/ng/Views/templates/accordion-group.html">

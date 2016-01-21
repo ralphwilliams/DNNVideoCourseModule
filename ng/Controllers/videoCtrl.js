@@ -6,11 +6,14 @@ angular
 
 		// #region Test for Edit Mode
 
-		if (typeof editMode !== 'undefined') {
+		if (typeof editMode !== 'undefined' || $scope.editMode == true) {
 			$scope.editMode = true;
 		} else {
 			$scope.editMode = false;
 		}
+		console.log(editMode);
+		console.log($scope.editMode);
+
 
 		$scope.viewMode;
 
@@ -129,10 +132,12 @@ angular
 
 					// Set courseId to RoleID
 					$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
+					$scope.categories[keyCategory].Roles[keyCourse].completeTotal = 0;
 
 					// Iterate through list of videos
 					var videoList = [];
 					angular.forEach($scope.videos, function (valueVideo) {
+
 
 						// Check to see that video is in the course
 						if (valueVideo.CourseId == valueCourse.RoleID) {
@@ -146,14 +151,14 @@ angular
 							// Create list of updated videos
 							videoList.push(valueVideo);
 						}
+					
 					}, videoList);
 
 					// Sort the videos
 					videoList.sort(function (a, b) {
 						return a.OrderIndex > b.OrderIndex;
 					});
-					
-					
+
 					// If first video is not complete, mark as isNext
 					// Else, iterate through each video and find the first 
 					// video that is not complete, then break from loop
@@ -177,7 +182,22 @@ angular
 
 					counter++;
 
+					// calculate course completion status
+					angular.forEach($scope.categories[keyCategory].Roles[keyCourse].videos, function (valueVideo) {
+						if (valueVideo.complete == true)
+							$scope.categories[keyCategory].Roles[keyCourse].completeTotal++;
+					});
+					if ($scope.categories[keyCategory].Roles[keyCourse].completeTotal != 0) {
+						$scope.categories[keyCategory].Roles[keyCourse].amountComplete = ($scope.categories[keyCategory].Roles[keyCourse].completeTotal / $scope.categories[keyCategory].Roles[keyCourse].videos.length) * 100;
+						$scope.categories[keyCategory].Roles[keyCourse].percentComplete = $scope.categories[keyCategory].Roles[keyCourse].amountComplete + '%';
+					} else {
+						$scope.categories[keyCategory].Roles[keyCourse].amountComplete = 0;
+						$scope.categories[keyCategory].Roles[keyCourse].percentComplete = $scope.categories[keyCategory].Roles[keyCourse].amountComplete + '%';
+					}
 				});
+
+
+
 			});
 		}
 

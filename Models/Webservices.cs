@@ -79,19 +79,16 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		[ValidateAntiForgeryToken]
         [HttpGet]
-        public HttpResponseMessage GetVideosByUser(int moduleId, int userId)
+        public HttpResponseMessage GetUserInfo()
         {
             try
             {
-                Requires.NotNegative("moduleId", moduleId);
-                Requires.NotNegative("userId", userId);
+				UserInfo _currentUser = UserController.Instance.GetCurrentUserInfo();
+				int UserID = _currentUser.UserID;
 
-                var ctl = new VideoController();
-                var videos = ctl.GetVideos(moduleId).Where(v => v.AssignedUserId == userId).ToJson();
-
-                return Request.CreateResponse(HttpStatusCode.OK, videos);
-            }
-            catch (Exception exc)
+				return Request.CreateResponse(HttpStatusCode.OK, UserID);
+			}
+			catch (Exception exc)
             {
                 Exceptions.LogException(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
@@ -199,7 +196,6 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 
 			var objInfo = new UserInfo(); // DNN Classes
 			objInfo = UserController.GetUserById(PortalSettings.PortalId, UserInfo.UserID);
-
 			var videosComplete = "false";
 			
             if (objInfo != null)
