@@ -11,9 +11,6 @@ angular
 		} else {
 			$scope.editMode = false;
 		}
-		console.log(editMode);
-		console.log($scope.editMode);
-
 
 		$scope.viewMode;
 

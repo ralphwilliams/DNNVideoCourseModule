@@ -113,10 +113,13 @@ function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFact
 
 			function assignOrder() {
 				angular.forEach($scope.videos, function (value, key) {
+					console.log(value.OrderIndex);
 					value.OrderIndex = key;
+					console.log(value.OrderIndex);
 					var video = value;
 					$scope.editVimeo(video);
 				}, $scope.videos);
+				jquery.ui.sortable.refresh();
 			}
 
 			// Sortable directive
@@ -125,6 +128,7 @@ function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFact
 				placeholder: "sortable-placeholder",
 				helper: 'helper',
 				forceHelperSize: true,
+				'ui-floating': true,
 				update: function (e, ui) {
 				},
 				stop: function (e, ui) {

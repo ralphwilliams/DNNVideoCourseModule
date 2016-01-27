@@ -27,9 +27,6 @@
 					</tr>
 				</thead>
 				<tbody ui-sortable="sortableOptions" ng-model="videos">
-					<tr ng-hide="videos.length > 0">
-						<td>No videos have been added. Please add a video</td>
-					</tr>
 					<tr ng-show="videos.length > 0" ng-repeat="video in videos | orderBy: 'OrderIndex'" >
 						<th scope="row" class="video-drag-handle">
 							{{ video.OrderIndex + 1}}
@@ -43,7 +40,7 @@
 						<td class="title">
 							{{ video.title }}
 						</td>
-						<td>{{ video.description }}</td>
+						<td><div>{{ video.description }}</div></td>
 						<td class="vimeo-id-col col-md-2 form-group" ng-class="{'has-error': editVideoInput.$invalid}">
 							<span ng-show="editVideo">
 								{{ video.VimeoId }}<br />

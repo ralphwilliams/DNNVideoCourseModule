@@ -154,6 +154,7 @@ angular
 			localizationFactory.callResx()
 			.then(function (data) {
 				$scope.resx = angular.fromJson(data.ClientResources);
+				$scope.resx.CouresCompletionText_Html = $sce.trustAsHtml($scope.resx.CouresCompletionText_Html);
 			}, function (data) {
 				alert(data);
 			})

@@ -24,6 +24,38 @@
 
 /* #endregion*/
 
+/* #region default layout styles */
+
+	.module-wrap .page-header {
+		background-color:#7ca0c0;
+		color:#fff;
+		padding:10px 20px;
+	}
+		.module-wrap .page-header .btn-group.dropdown {
+			margin-top:22px;
+			width:277px;
+		}
+		.module-wrap .page-header #single-button {
+			width:208px;
+			line-height:30px;
+			text-align:left;
+		}
+		.module-wrap .page-header #single-button .caret {
+			float: right;
+			margin-top: 15px;
+		}
+		.module-wrap .panel-primary>.panel-heading {
+			color: #fff;
+			background-color: #7ca0c0;
+			border-color: #7ca0c0;
+		}
+		.panel-primary {
+			border-color: #7ca0c0;
+		}
+
+
+/* #endregion */
+
 /* #region Video List View */
 
 .video-list-item { opacity: 0.4;}
@@ -105,6 +137,10 @@
 .ng-cloak, 
 .x-ng-cloak { display: none !important;}
 
+#editCourse .title { font-weight: 700;}
+.sortable-placeholder { background-color: rgba(66, 72, 90,0.2); height:140px!important;}
+
+#editCourse td div {height:140px!important; overflow:hidden!important; position:relative; }
 /* #endregion */
 
 
@@ -150,9 +186,6 @@
 	text-align: right;
 	top: 0;
 }
-
-#editCourse .title { font-weight: 700;}
-.sortable-placeholder { background-color: rgba(66, 72, 90,0.2);}
 
 .vimeo-id-col > span {
 	display: inline-block;

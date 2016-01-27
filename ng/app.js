@@ -7,6 +7,7 @@ var convertToMinutes = function (n) { function i(n, t, i) { return (new Array(i 
 angular
 	.module('CCVideoApp', [
 		'ngRoute',
+		'ngSanitize',
 		'videoControllers',
 		'ui.sortable',
 		'ui.bootstrap'
