@@ -3,10 +3,10 @@ DNN SPA module that uses DNN Security Roles and Security Groups to create dynami
 
 ## Getting Started with Development
 
-1. Begin with DNN 7.3.0
-2. Put the repository into the following folder in your site:  ~\DesktopModules\Calvary_VideoCourse\
+1. Begin with DNN 8.0.0
+2. Put the repository into the following folder in your site:  ~\DesktopModules\DNNVideoCourse\
 3. Build
-4. Make sure the RalphWilliams_CalvaryVideo.dll file is generated in the website bin folder
+4. Make sure the RalphWilliams.DNNVideoCourse.dll file is generated in the website bin folder
 5. Run the SQL data provider script(s)
 6. "Install" the module in DNN
 7. Make sure the module shows on a page without error
