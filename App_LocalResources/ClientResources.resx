@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BasicSettings" xml:space="preserve">
-    <value>Basic Calvary_VideoCourse Settings</value>
+    <value>Basic DNNVideoCourse Settings</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete this Item</value>
@@ -126,10 +126,8 @@
   <data name="CouresCompletionText_Html" xml:space="preserve">
     <value>&lt;h2&gt;Congratulations, you have completed this course!&lt;/h2&gt;
 
-&lt;p&gt;The ministry lead has been notified and a staff member will be in touch to go over your next steps as a group leader. We hope you have enjoyed this time of learning and that these lessons have given you confidence in leading your group. As always, if there are any questions of concerns feel free to contact us.&lt;/p&gt;
-
-&lt;p&gt;
-Thank you for your time and heart for serving!&lt;br /&gt;Calvary Church&lt;br /&gt;&lt;a href="http://www.calvarychurchfl.com"&gt;www.CalvaryChurchFL.com&lt;/a&gt;&lt;/p&gt;</value>
+&lt;p&gt;The site administrator has been notified and someone will be in touch to go over your next steps. We hope you have enjoyed this time of learning and that these lessons have given you confidence in your area. As always, if there are any questions of concerns feel free to contact us.&lt;/p&gt;
+</value>
   </data>
   <data name="CourseProgressCompleted_Txt" xml:space="preserve">
     <value>completed</value>

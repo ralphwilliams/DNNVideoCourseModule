@@ -14,9 +14,9 @@ using System;
 using System.Web.Caching;
 using DotNetNuke.ComponentModel.DataAnnotations;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Entities
+namespace RalphWilliams.Modules.DNNVideoCourse.Entities
 {
-	[TableName("Calvary_VideoCourse_Videos")]
+	[TableName("DNNVideoCourse_Videos")]
 	//setup the primary key for table
 	[PrimaryKey("VideoId", AutoIncrement = true)]
 	//configure caching using PetaPoco

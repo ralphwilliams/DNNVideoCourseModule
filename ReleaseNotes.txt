@@ -1,4 +1,4 @@
-﻿<h3>Calvary_VideoCourse Module</h3>
+﻿<h3>DNN Video Course Module</h3>
 <p>
 	Ralph Williams <br />
 	<a href="mailto:me@ralphwilliams.com">me@ralphwilliams.com</a><br />
@@ -6,10 +6,33 @@
 </p>
 <hr/>
 <div>
-	<h3>About the Calvary_VideoCourse Module</h3>
+	<h3>About the DNN Video Course Module</h3>
 	<p>
 		This modue allows you to have a LMS-style video gallery experience for your website visitors, based on security roles, and security role groups.
 	</p>
+	<h4>Version 01.01.00</h4>
+	<p>This Release includes the following:</p>
+	<h5>Enhancements:</h5>
+	<ul>
+		<li>Converted to DNN8 SPA module</li>
+		<li>Renamed module to DNN Video Course</li>
+		<li>Adds Custom Profile Property for saving User's progress to DNN on install.</li>
+		<li>Create Categories (DNN Role Groups) and Courses (DNN Roles) directly from the module.</li>
+		<li>Expand/Collapse functionality for Course list</li>
+		<li>Adds localization</li>
+		<li>Update design to be flexible for multiple skins</li>
+		<li>Added progress bars to Courses on Video List View</li>
+		<li>Added Webservice to get userId.</li>
+		<li>Remove any excess files and other file cleanup</li>
+		<li>Update readme file with new instructions</li>
+	</ul>
+	<h5>Bug Fixes</h5>
+	<ul>
+		<li>Course does not show to user after the Course has been renamed.</li>
+		<li>Clean and organize CSS </li>
+		<li>Updated Edit Ctrl to redirect non admin user to Video List View.</li>
+		<li>Removed some excess files. </li>
+	</ul>
 
 	<h4>Version 01.00.05</h4>
 	<p>This update fixes the following bugs and adds the following features.</p>

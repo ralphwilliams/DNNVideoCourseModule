@@ -12,7 +12,7 @@
 
 using System;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Entities
+namespace RalphWilliams.Modules.DNNVideoCourse.Entities
 {
     [Serializable]
     public class UsersInRoleDTO

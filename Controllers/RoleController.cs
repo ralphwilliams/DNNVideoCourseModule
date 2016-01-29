@@ -16,11 +16,11 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Roles;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Controllers
+namespace RalphWilliams.Modules.DNNVideoCourse.Controllers
 {
     public class RoleController
     {
-        private const string ROLE_GROUP_PREFIX = "CCV_";
+        private const string ROLE_GROUP_PREFIX = "DVC_";
 
         /// <summary>
         /// Gets the role groups.  

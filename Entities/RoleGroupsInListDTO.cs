@@ -13,7 +13,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Entities
+namespace RalphWilliams.Modules.DNNVideoCourse.Entities
 {
     [Serializable]
     public class RoleGroupsInListDTO

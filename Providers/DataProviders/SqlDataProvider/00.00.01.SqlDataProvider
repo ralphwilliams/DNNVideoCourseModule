@@ -8,8 +8,8 @@
 /*****                                                  *****/
 /************************************************************/
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Calvary_VideoCourse_Videos]') AND type in (N'U'))
-CREATE TABLE {databaseOwner}{objectQualifier}Calvary_VideoCourse_Videos
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Videos]') AND type in (N'U'))
+CREATE TABLE {databaseOwner}{objectQualifier}DNNVideoCourse_Videos
     (
     videoId int NOT NULL IDENTITY (1, 1),
     vimeoId int NOT NULL,
@@ -26,9 +26,9 @@ CREATE TABLE {databaseOwner}{objectQualifier}Calvary_VideoCourse_Videos
 GO
 
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Calvary_VideoCourse_Videos]') AND type in (N'U'))
-ALTER TABLE {databaseOwner}{objectQualifier}Calvary_VideoCourse_Videos ADD CONSTRAINT
-    PK_{objectQualifier}Calvary_VideoCourse_Videos PRIMARY KEY CLUSTERED 
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Videos]') AND type in (N'U'))
+ALTER TABLE {databaseOwner}{objectQualifier}DNNVideoCourse_Videos ADD CONSTRAINT
+    PK_{objectQualifier}DNNVideoCourse_Videos PRIMARY KEY CLUSTERED 
     (
     videoId
     ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

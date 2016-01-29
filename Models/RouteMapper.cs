@@ -12,13 +12,13 @@
 
 using DotNetNuke.Web.Api;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
+namespace RalphWilliams.Modules.DNNVideoCourse.Models
 {
 	public class RouteMapper : IServiceRouteMapper
 	{
 		public void RegisterRoutes(IMapRoute mapRouteManager)
 		{
-			mapRouteManager.MapHttpRoute("Calvary_VideoCourse", "default", "{controller}/{action}", new[] { "RalphWilliams.Modules.Calvary_VideoCourse.Models" });
+			mapRouteManager.MapHttpRoute("DNNVideoCourse", "default", "{controller}/{action}", new[] { "RalphWilliams.Modules.DNNVideoCourse.Models" });
 		}
 	}
 }

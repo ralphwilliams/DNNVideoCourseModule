@@ -1,4 +1,4 @@
-﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
+﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
 	.controller('editCategoriesCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', '$location', 'localizationFactory',
@@ -25,7 +25,7 @@ angular
 					.then(function(data) {
 					$scope.categories = angular.fromJson(data);
 						angular.forEach($scope.categories, function(valueCategory, keyCategory) {
-						valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
+						valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('DVC_', '');
 					});
 					loadVids();
 					}, function(data) {

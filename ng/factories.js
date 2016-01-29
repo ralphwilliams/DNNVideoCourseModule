@@ -1,11 +1,11 @@
 ﻿angular
-.module('CCVideoApp')
+.module('DVCideoApp')
 .factory('statusFactory', function ($http, $q) {
 	var service = {};
 	var _users = '';
 
 
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
 
 	// DNN Services Framework
 	var $self = this;
@@ -50,8 +50,8 @@
 	var _courseComplete = [];
 	var _videosComplete = [];
 
-	// var dataUrl = "/DesktopModules/Calvary_VideoCourse/data/users.json";
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
+	// var dataUrl = "/DesktopModules/DNNVideoCourse/data/users.json";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
 
 	// DNN Services Framework
 	var $self = this;
@@ -106,7 +106,7 @@
 	var _userName = '';
 	var _userId = '';
 
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
 
 	// DNN Services Framework
 	var $self = this;
@@ -168,8 +168,8 @@
 .factory('videosFactory', function ($http, $q) {
 	var service = {};
 
-	//var dataUrl = "/DesktopModules/Calvary_VideoCourse/data/videos.json";
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
+	//var dataUrl = "/DesktopModules/DNNVideoCourse/data/videos.json";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
 
 	// DNN Services Framework
 	var $self = this;
@@ -229,7 +229,7 @@
 .factory('categoriesFactory', function ($http, $q) {
 	var service = {};
 
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/GetAllGroups";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/GetAllGroups";
 
 	// DNN Services Framework
 	var $self = this;
@@ -270,7 +270,7 @@
 .factory('localizationFactory', function ($http, $q) {
 	var service = {};
 
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/ResxData";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/ResxData";
 
 
 	// DNN Services Framework
@@ -307,7 +307,7 @@
 .factory('userInfoFactory', function ($http, $q) {
 	var service = {};
 
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/GetUserInfo";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/GetUserInfo";
 
 
 	// DNN Services Framework
@@ -347,8 +347,8 @@
 .factory('emailFactory', function ($http, $q) {
 	var service = {};
 
-	// var dataUrl = "/DesktopModules/Calvary_VideoCourse/data/users.json";
-	var dataUrl = "/DesktopModules/Calvary_VideoCourse/API/Calvary_VideoCourse/";
+	// var dataUrl = "/DesktopModules/DNNVideoCourse/data/users.json";
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
 
 	// DNN Services Framework
 	var $self = this;

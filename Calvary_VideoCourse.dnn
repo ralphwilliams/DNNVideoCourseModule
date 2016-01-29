@@ -1,8 +1,8 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Calvary_VideoCourse" type="Module" version="01.00.06">
-      <friendlyName>Calvary_VideoCourse</friendlyName>
-      <description>Calvary_VideoCourse module</description>
+    <package name="DNNVideoCourse" type="Module" version="01.01.00">
+      <friendlyName>DNN Video Course</friendlyName>
+      <description>DNN Video Course module</description>
       <iconFile>Images/logo_min.png</iconFile>
       <owner>
         <name>Ralph Williams</name>
@@ -19,7 +19,7 @@
       <components>
         <component type="Script">
           <scripts>
-            <basePath>DesktopModules\Calvary_VideoCourse</basePath>
+            <basePath>DesktopModules\DNNVideoCourse</basePath>
             <script type="Install">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>00.00.01.SqlDataProvider</name>
@@ -35,7 +35,7 @@
 
         <component type="ResourceFile">
           <resourceFiles>
-            <basePath>DesktopModules/Calvary_VideoCourse</basePath>
+            <basePath>DesktopModules/DNNVideoCourse</basePath>
             <resourceFile>
               <name>Resources.zip</name>
             </resourceFile>
@@ -44,18 +44,18 @@
 
         <component type="Module">
           <desktopModule>
-            <moduleName>Calvary_VideoCourse</moduleName>
-            <foldername>Calvary_VideoCourse</foldername>
-            <businessControllerClass>RalphWilliams.Modules.Calvary_VideoCourse.Components.FeatureController, RalphWilliams.Calvary_VideoCourse</businessControllerClass>
+            <moduleName>DNNVideoCourse</moduleName>
+            <foldername>DNNVideoCourse</foldername>
+            <businessControllerClass>RalphWilliams.Modules.DNNVideoCourse.Components.FeatureController, RalphWilliams.DNNVideoCourse</businessControllerClass>
             <supportedFeatures />
             <moduleDefinitions>
               <moduleDefinition>
-                <friendlyName>Calvary_VideoCourse</friendlyName>
+                <friendlyName>DNNVideoCourse</friendlyName>
                 <defaultCacheTime>0</defaultCacheTime>
                 <moduleControls>
                   <moduleControl>
                     <controlKey />
-                    <controlSrc>DesktopModules/Calvary_VideoCourse/View.html</controlSrc>
+                    <controlSrc>DesktopModules/DNNVideoCourse/View.html</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle />
                     <controlType>View</controlType>
@@ -71,9 +71,9 @@
             <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
             <processorCommand>UpgradeModule</processorCommand>
             <attributes>
-              <businessControllerClass>RalphWilliams.Modules.Calvary_VideoCourse.Components.FeatureController</businessControllerClass>
+              <businessControllerClass>RalphWilliams.Modules.DNNVideoCourse.Components.FeatureController</businessControllerClass>
               <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.00.06</upgradeVersionsList>
+              <upgradeVersionsList>01.01.00</upgradeVersionsList>
             </attributes>
           </eventMessage>
         </component>
@@ -81,13 +81,13 @@
         <component type="Assembly">
           <assemblies>
             <assembly>
-              <name>RalphWilliams.Calvary_VideoCourse.dll</name>
+              <name>RalphWilliams.DNNVideoCourse.dll</name>
               <path>bin</path>
             </assembly>
           </assemblies>
         </component>
 
-        <component type="Cleanup" version="01.00.06" fileName ="01.00.06.txt" />
+        <component type="Cleanup" version="01.01.00" fileName ="01.01.00.txt" />
         
       </components>
     </package>

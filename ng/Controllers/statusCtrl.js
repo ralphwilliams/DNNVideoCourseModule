@@ -1,6 +1,6 @@
 ﻿/// <reference path="../app.js" />
 /// <reference path="../factories.js" />
-/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
+/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
 	.controller('statusCtrl', ['$scope', '$http', 'statusFactory', 'videosFactory', 'categoriesFactory', 'localizationFactory', '$location',
@@ -19,7 +19,7 @@ angular
 						$scope.userData = angular.fromJson(data);
 						//console.log($scope.userData)
 						angular.forEach($scope.userData, function (valueCategory) {
-							valueCategory.Name = valueCategory.Name.replace('CCV_', '');
+							valueCategory.Name = valueCategory.Name.replace('DVC_', '');
 						});
 						loadCats();
 					}, function(data) {
@@ -34,7 +34,7 @@ angular
 						.then(function(data) {
 							$scope.categories = angular.fromJson(data);
 							angular.forEach($scope.categories, function(valueCategory, keyCategory) {
-								valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
+								valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('DVC_', '');
 							});
 							loadVids();
 						}, function(data) {

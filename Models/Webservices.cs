@@ -21,18 +21,18 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
-using RalphWilliams.Modules.Calvary_VideoCourse.Entities;
+using RalphWilliams.Modules.DNNVideoCourse.Entities;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Mail;
 
 using DotNetNuke.Services.Localization;
 
-using RalphWilliams.Modules.Calvary_VideoCourse.Controllers;
+using RalphWilliams.Modules.DNNVideoCourse.Controllers;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
+namespace RalphWilliams.Modules.DNNVideoCourse.Models
 {
-	public class Calvary_VideoCourseController : DnnApiController
+	public class DNNVideoCourseController : DnnApiController
 	{
 
 		public class InitData
@@ -47,7 +47,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 		public HttpResponseMessage ResxData()
 		{
 			InitData init = new InitData();
-			init.ClientResources = LocalizationProvider.Instance.GetCompiledResourceFile(PortalSettings, "/DesktopModules/Calvary_VideoCourse/App_LocalResources/ClientResources.resx",
+			init.ClientResources = LocalizationProvider.Instance.GetCompiledResourceFile(PortalSettings, "/DesktopModules/DNNVideoCourse/App_LocalResources/ClientResources.resx",
 				System.Threading.Thread.CurrentThread.CurrentCulture.Name);
 			return Request.CreateResponse(HttpStatusCode.OK, init);
 		}
@@ -439,7 +439,7 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Models
 				DotNetNuke.Security.Roles.RoleController oDnnRoleController = new DotNetNuke.Security.Roles.RoleController();
 				RoleGroupInfo oRoleGroup = new RoleGroupInfo();
 				oRoleGroup.PortalID = this.PortalSettings.PortalId;
-				oRoleGroup.RoleGroupName = "CCV_" + roleGroupName.Name;
+				oRoleGroup.RoleGroupName = "DVC_" + roleGroupName.Name;
 				oRoleGroup.RoleGroupID = roleGroupName.RoleGroupID;
 				oRoleGroup.Description = "";
 

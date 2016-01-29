@@ -12,9 +12,9 @@
 
 using DotNetNuke.Entities.Modules;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
+namespace RalphWilliams.Modules.DNNVideoCourse.Components
 {
-	public class Calvary_VideoCourseModuleSettingsBase : ModuleSettingsBase
+	public class DNNVideoCourseModuleSettingsBase : ModuleSettingsBase
 	{
 	}
 }

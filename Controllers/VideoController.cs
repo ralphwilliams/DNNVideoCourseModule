@@ -12,9 +12,9 @@
 
 using System.Collections.Generic;
 using DotNetNuke.Data;
-using RalphWilliams.Modules.Calvary_VideoCourse.Entities;
+using RalphWilliams.Modules.DNNVideoCourse.Entities;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Controllers
+namespace RalphWilliams.Modules.DNNVideoCourse.Controllers
 {
 	class VideoController
 	{

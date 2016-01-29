@@ -6,10 +6,6 @@
     </file>
     <file>
       <path />
-      <name>Edit.ascx</name>
-    </file>
-    <file>
-      <path />
       <name>License.txt</name>
     </file>
     <file>
@@ -22,27 +18,11 @@
     </file>
     <file>
       <path />
-      <name>Settings.ascx</name>
-    </file>
-    <file>
-      <path />
-      <name>View.ascx</name>
-    </file>
-    <file>
-      <path />
       <name>View.html</name>
     </file>
     <file>
       <path>App_LocalResources/</path>
       <name>ClientResources.resx</name>
-    </file>
-    <file>
-      <path>App_LocalResources/</path>
-      <name>Edit.ascx.resx</name>
-    </file>
-    <file>
-      <path>App_LocalResources/</path>
-      <name>Settings.ascx.resx</name>
     </file>
     <file>
       <path>Content/</path>
@@ -282,6 +262,10 @@
     </file>
     <file>
       <path>ng/Views/templates/</path>
+      <name>accordion-group.html</name>
+    </file>
+    <file>
+      <path>ng/Views/templates/</path>
       <name>accordion.html</name>
     </file>
     <file>
@@ -319,6 +303,10 @@
     <file>
       <path>Scripts/</path>
       <name>angular-route.min.js</name>
+    </file>
+    <file>
+      <path>Scripts/</path>
+      <name>angular-sanitize.min.js</name>
     </file>
     <file>
       <path>Scripts/</path>

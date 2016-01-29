@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RalphWilliams.Modules.Calvary_VideoCourse</RootNamespace>
-    <AssemblyName>RalphWilliams.Calvary_VideoCourse</AssemblyName>
+    <RootNamespace>RalphWilliams.Modules.DNNVideoCourse</RootNamespace>
+    <AssemblyName>RalphWilliams.DNNVideoCourse</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -114,7 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="01.00.06.txt" />
+    <Content Include="01.01.00.txt" />
     <Content Include="Content\angular-ui.css" />
     <Content Include="Content\angular-ui.min.css" />
     <Content Include="Content\bootstrap-flat-extras.css" />

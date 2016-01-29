@@ -1,4 +1,4 @@
-﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
+﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers', [])
 	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', 'localizationFactory', '$location',
@@ -37,7 +37,7 @@ angular
 					} else {
 						$scope.viewMode = false;
 						angular.forEach($scope.categories, function(valueCategory) {
-							valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('CCV_', '');
+							valueCategory.RoleGroupName = valueCategory.RoleGroupName.replace('DVC_', '');
 						});
 						loadVids();
 					}

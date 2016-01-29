@@ -13,9 +13,9 @@
 using System;
 using DotNetNuke.Entities.Modules;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
+namespace RalphWilliams.Modules.DNNVideoCourse.Components
 {
-	public class Calvary_VideoCourseModuleBase : PortalModuleBase
+	public class DNNVideoCourseCourseModuleBase : PortalModuleBase
 	{
 		public int videoId
 		{

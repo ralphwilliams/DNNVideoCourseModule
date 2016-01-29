@@ -19,7 +19,7 @@
 				<p>No courses have been set up for this module. Please begin by creating your first Category. Once a Category has been added, you may add more categories and courses.</p>
 				<p>
 					<input ng-model="addNewRoleGroupName" type="text" ng-hide="addCategoryMode" />
-					<button ng-click="addNewRoleGroup()" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="addCategoryMode">Add Category</button>
+					<button ng-click="addNewRoleGroup(addNewRoleGroupName)" type="button" class="btn btn-xs btn-primary btn-edit" ng-hide="addCategoryMode">Add Category</button>
 					<button ng-click="addCategoryMode = !addCategoryMode" type="button" class="btn btn-xs btn-tertiary btn-edit" ng-hide="addCategoryMode">Cancel</button>
 					<button ng-click="addCategoryMode = !addCategoryMode" type="button" class="btn btn-tertiary btn-edit" ng-show="addCategoryMode">Add A New Category</button>
 				</p>

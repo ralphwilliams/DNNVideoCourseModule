@@ -15,12 +15,12 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 
-namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
+namespace RalphWilliams.Modules.DNNVideoCourse.Components
 {
 
 	/// -----------------------------------------------------------------------------
 	/// <summary>
-	/// The Controller class for Calvary_VideoCourse
+	/// The Controller class for DNNVideoCourse
 	/// 
 	/// The FeatureController class is defined as the BusinessController in the manifest file (.dnn)
 	/// DotNetNuke will poll this class to find out which Interfaces the class implements. 
@@ -53,18 +53,18 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 		//{
 		//string strXML = "";
 
-		//List<Calvary_VideoCourseInfo> colCalvary_VideoCourses = GetCalvary_VideoCourses(ModuleID);
-		//if (colCalvary_VideoCourses.Count != 0)
+		//List<DNNVideoCourseInfo> colDNNVideoCourses = GetDNNVideoCourses(ModuleID);
+		//if (colDNNVideoCourses.Count != 0)
 		//{
-		//    strXML += "<Calvary_VideoCourses>";
+		//    strXML += "<DNNVideoCourses>";
 
-		//    foreach (Calvary_VideoCourseInfo objCalvary_VideoCourse in colCalvary_VideoCourses)
+		//    foreach (DNNVideoCourseInfo objDNNVideoCourse in colDNNVideoCourses)
 		//    {
-		//        strXML += "<Calvary_VideoCourse>";
-		//        strXML += "<content>" + DotNetNuke.Common.Utilities.XmlUtils.XMLEncode(objCalvary_VideoCourse.Content) + "</content>";
-		//        strXML += "</Calvary_VideoCourse>";
+		//        strXML += "<DNNVideoCourse>";
+		//        strXML += "<content>" + DotNetNuke.Common.Utilities.XmlUtils.XMLEncode(objDNNVideoCourse.Content) + "</content>";
+		//        strXML += "</DNNVideoCourse>";
 		//    }
-		//    strXML += "</Calvary_VideoCourses>";
+		//    strXML += "</DNNVideoCourses>";
 		//}
 
 		//return strXML;
@@ -83,14 +83,14 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 		/// -----------------------------------------------------------------------------
 		//public void ImportModule(int ModuleID, string Content, string Version, int UserID)
 		//{
-		//XmlNode xmlCalvary_VideoCourses = DotNetNuke.Common.Globals.GetContent(Content, "Calvary_VideoCourses");
-		//foreach (XmlNode xmlCalvary_VideoCourse in xmlCalvary_VideoCourses.SelectNodes("Calvary_VideoCourse"))
+		//XmlNode xmlDNNVideoCourses = DotNetNuke.Common.Globals.GetContent(Content, "DNNVideoCourses");
+		//foreach (XmlNode xmlDNNVideoCourse in xmlDNNVideoCourses.SelectNodes("DNNVideoCourse"))
 		//{
-		//    Calvary_VideoCourseInfo objCalvary_VideoCourse = new Calvary_VideoCourseInfo();
-		//    objCalvary_VideoCourse.ModuleId = ModuleID;
-		//    objCalvary_VideoCourse.Content = xmlCalvary_VideoCourse.SelectSingleNode("content").InnerText;
-		//    objCalvary_VideoCourse.CreatedByUser = UserID;
-		//    AddCalvary_VideoCourse(objCalvary_VideoCourse);
+		//    DNNVideoCourseInfo objDNNVideoCourse = new DNNVideoCourseInfo();
+		//    objDNNVideoCourse.ModuleId = ModuleID;
+		//    objDNNVideoCourse.Content = xmlDNNVideoCourse.SelectSingleNode("content").InnerText;
+		//    objDNNVideoCourse.CreatedByUser = UserID;
+		//    AddDNNVideoCourse(objDNNVideoCourse);
 		//}
 
 		//	throw new System.NotImplementedException("The method or operation is not implemented.");
@@ -106,11 +106,11 @@ namespace RalphWilliams.Modules.Calvary_VideoCourse.Components
 		//{
 		//SearchItemInfoCollection SearchItemCollection = new SearchItemInfoCollection();
 
-		//List<Calvary_VideoCourseInfo> colCalvary_VideoCourses = GetCalvary_VideoCourses(ModInfo.ModuleID);
+		//List<DNNVideoCourseInfo> colDNNVideoCourses = GetDNNVideoCourses(ModInfo.ModuleID);
 
-		//foreach (Calvary_VideoCourseInfo objCalvary_VideoCourse in colCalvary_VideoCourses)
+		//foreach (DNNVideoCourseInfo objDNNVideoCourse in colDNNVideoCourses)
 		//{
-		//    SearchItemInfo SearchItem = new SearchItemInfo(ModInfo.ModuleTitle, objCalvary_VideoCourse.Content, objCalvary_VideoCourse.CreatedByUser, objCalvary_VideoCourse.CreatedDate, ModInfo.ModuleID, objCalvary_VideoCourse.videoId.ToString(), objCalvary_VideoCourse.Content, "videoId=" + objCalvary_VideoCourse.videoId.ToString());
+		//    SearchItemInfo SearchItem = new SearchItemInfo(ModInfo.ModuleTitle, objDNNVideoCourse.Content, objDNNVideoCourse.CreatedByUser, objDNNVideoCourse.CreatedDate, ModInfo.ModuleID, objDNNVideoCourse.videoId.ToString(), objDNNVideoCourse.Content, "videoId=" + objDNNVideoCourse.videoId.ToString());
 		//    SearchItemCollection.Add(SearchItem);
 		//}
 

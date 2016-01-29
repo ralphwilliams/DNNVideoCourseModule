@@ -1,4 +1,4 @@
-﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\Calvary_VideoCourse\Scripts/angular.js" />
+﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
 	.controller('editCourseCtrl', ['$scope', '$routeParams', '$http', '$sce', 'vimeoFactory', '$location', 'videosFactory', 'categoriesFactory', 'localizationFactory',
