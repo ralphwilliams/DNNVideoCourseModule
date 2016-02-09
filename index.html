@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Dnnvideocoursemodule by ralphwilliams</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Dnnvideocoursemodule</h1>
+        <p>DNN SPA module that uses DNN Security Roles and Role Groups to create Courses and Categories. The course videos are created with Vimeo ids.</p>
+
+        <p class="view"><a href="https://github.com/ralphwilliams/DNNVideoCourseModule">View the Project on GitHub <small>ralphwilliams/DNNVideoCourseModule</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ralphwilliams/DNNVideoCourseModule/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ralphwilliams/DNNVideoCourseModule/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ralphwilliams/DNNVideoCourseModule">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="dnnvideocoursemodule" class="anchor" href="#dnnvideocoursemodule" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DNNVideoCourseModule</h1>
+
+<p>DNN SPA module that uses DNN Security Roles and Security Groups to create dynamic Courses and Categories. The course videos are created with Vimeo videos.</p>
+
+<h2>
+<a id="getting-started-with-development" class="anchor" href="#getting-started-with-development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started with Development</h2>
+
+<ol>
+<li>Begin with DNN 8.0.0</li>
+<li>Put the repository into the following folder in your site:  ~\DesktopModules\DNNVideoCourse\</li>
+<li>Build</li>
+<li>Make sure the RalphWilliams.DNNVideoCourse.dll file is generated in the website bin folder</li>
+<li>Run the SQL data provider script(s)</li>
+<li>"Install" the module in DNN</li>
+<li>Make sure the module shows on a page without error</li>
+<li>Pick and/or create an issue in GitHub</li>
+<li>Code</li>
+<li>Submit a pull request</li>
+</ol>
+
+<h2>
+<a id="about-the-module" class="anchor" href="#about-the-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About the Module</h2>
+
+<h3>
+<a id="what-is-the-module" class="anchor" href="#what-is-the-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is the module?</h3>
+
+<p>The DNN Video Course Module provides a way to create courses using videos that allow only the users in specific roles to view the course. The user can only watch videos that have been previously watched or the next unwatched video. The progress of each user is saved to allow the user to watch portions of the course and return to the site to continue watching at a later time. The progress of all the users can be reviewed by a site administrator. Once a user has completed their course, an email will be sent to the site administrator. </p>
+
+<h3>
+<a id="how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How it works</h3>
+
+<h2>
+<a id="roles-and-categories" class="anchor" href="#roles-and-categories" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Roles and Categories</h2>
+
+<p>This module leverages the built in functionality of DNN’s Security Categories and Security Roles. When a new category is created through the module, a new Role Group is created with a string of text (“CCV_”) prepended to the name. This allows the module to filter and show only Role Groups associated to the video course module. All Courses added to the Category will be a Security Role within that specific Role Group.</p>
+
+<h3>
+<a id="user-progress" class="anchor" href="#user-progress" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>User Progress</h3>
+
+<p>During installation of the module, a new hidden User Profile property is added to the User Profile. As a video has been marked as complete by reaching the end of the video (a listener for the Vimeo API is used) the user’s profile is updated with the id for that video. </p>
+
+<h2>
+<a id="module-administration" class="anchor" href="#module-administration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Module Administration</h2>
+
+<h3>
+<a id="installing-the-module" class="anchor" href="#installing-the-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing the module</h3>
+
+<p>This module is installed as any other DNN module is installed.</p>
+
+<ol>
+<li>Once logged into the site as a host, navigate to Host &gt; Extensions.</li>
+<li>Click the Add Extension button and follow the prompts to install your module.</li>
+</ol>
+
+<h2>
+<a id="setting-up-the-module" class="anchor" href="#setting-up-the-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up the module</h2>
+
+<p>Once the module has been installed, add the module to a page. Categories and Courses must be added prior to adding a video. There are no module settings for this module. There are 4 views, however. Course List view (default view), Video Player view, User Status view, Edit Categories and Courses view.</p>
+
+<h3>
+<a id="creating-categories-and-courses" class="anchor" href="#creating-categories-and-courses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating Categories and Courses</h3>
+
+<ol>
+<li>Navigate to the Edit Categories and Courses view by clicking the Course Admin dropdown and selecting “Edit Categories &amp; Courses”.</li>
+<li>Click the “Add A New Category button”.</li>
+<li>Enter a name for the Category and click the “Add Category” button.</li>
+<li>Add Courses to the Category by clicking the “Add A New Course” button.</li>
+<li>Then, enter a name for the Course and click the “Add Course” button.</li>
+<li>Navigate to the Video List view by clicking the “Return to List” button in the top right of the module.</li>
+</ol>
+
+<h3>
+<a id="adding-users-to-courses" class="anchor" href="#adding-users-to-courses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding Users to Courses</h3>
+
+<ol>
+<li>Navigate to the Edit Categories and Courses view.</li>
+<li>Once a course has been created, add existing users to the course by clicking the Users icon for the course where the user will be added.</li>
+<li>In the popup window, select the user from the dropdown and click the “Add User to Role” button.</li>
+<li>Continue adding users to the course as needed.</li>
+<li>Once all needed users have been added to the course, click the Close button.</li>
+</ol>
+
+<h3>
+<a id="removing-users-from-courses" class="anchor" href="#removing-users-from-courses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Removing Users from Courses</h3>
+
+<ol>
+<li>Navigate to the Edit Categories and Courses view.</li>
+<li>Click the Users icon for the course from which the user will be removed.</li>
+<li>In the popup window, click the delete icon for the user that is to be removed.</li>
+<li>Once all needed users have been removed from the course, click the close button.</li>
+</ol>
+
+<h3>
+<a id="renaming-categories-and-courses" class="anchor" href="#renaming-categories-and-courses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Renaming Categories and Courses</h3>
+
+<ol>
+<li>Navigate to the Edit Categories and Courses view</li>
+<li>Click the edit icon to the right of the Category or Course.</li>
+<li>Make the edit to the name and click the “Edit Category/Course Name” button.</li>
+</ol>
+
+<h3>
+<a id="archiving-courses" class="anchor" href="#archiving-courses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Archiving Courses</h3>
+
+<p>A course can be archived, however, it cannot be deleted. If the course needs to be deleted, the role can be removed through the Security Roles in DNN Admin. However, note that deleting a Security Role does fully remove the Role from the database. This means that they Role name will not be able to be reused.
+1. Navigate to the Edit Categories and Courses view.
+2. To archive a course toggle the switch for the specified course to grey.
+3. A course can be reactivated by toggling the switch back to green.</p>
+
+<h3>
+<a id="adding-videos-to-a-course" class="anchor" href="#adding-videos-to-a-course" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding Videos to a Course</h3>
+
+<ol>
+<li>On the Course List view, click the “Edit Videos in Course” button on the right for the course.</li>
+<li>Add the URL for a Vimeo video in the text box in the “Add new Video to Course” section and click the check mark.</li>
+<li>Continue adding videos for the course.</li>
+<li>To change the sort order, click and drag the thumbnail to the desired location.</li>
+</ol>
+
+<h3>
+<a id="removing-a-video-from-a-course" class="anchor" href="#removing-a-video-from-a-course" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Removing a Video from a course</h3>
+
+<ol>
+<li>On the Course List view, click the “Edit Videos in Course” button on the right for the course.</li>
+<li>Click the Edit icon to the right of the video to be removed.</li>
+<li>Click the Delete button for the video.</li>
+</ol>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ralphwilliams">ralphwilliams</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-73563855-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
