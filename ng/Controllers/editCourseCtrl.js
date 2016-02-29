@@ -1,8 +1,25 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
-	.controller('editCourseCtrl', ['$scope', '$routeParams', '$http', '$sce', 'vimeoFactory', '$location', 'videosFactory', 'categoriesFactory', 'localizationFactory',
-function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFactory, categoriesFactory, localizationFactory) {
+	.controller('editCourseCtrl',
+	['$scope',
+		'$routeParams',
+		'$http',
+		'$sce',
+		'vimeoFactory',
+		'$location',
+		'videosFactory',
+		'categoriesFactory',
+		'localizationFactory',
+	function ($scope,
+		$routeParams,
+		$http,
+		$sce,
+		vimeoFactory,
+		$location,
+		videosFactory,
+		categoriesFactory,
+		localizationFactory) {
 
 	// #region Controller Global Variables
 	thisCourse = parseInt($routeParams.courseId);
@@ -13,12 +30,12 @@ function ($scope, $routeParams, $http, $sce, vimeoFactory, $location, videosFact
 		// Get video Data
 		function getVideoData() {
 			videosFactory.callVideosData()
-			.then(function (data) {
-				$scope.videos = angular.fromJson(data);
-				buildVideoList($scope.videos);
-			}, function (data) {
-				alert(data);
-			})
+				.then(function(data) {
+					$scope.videos = angular.fromJson(data);
+					buildVideoList($scope.videos);
+				}, function(data) {
+					alert(data);
+				});
 		}
 		getVideoData();
 

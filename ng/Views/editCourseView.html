@@ -45,6 +45,11 @@
 							<span ng-show="editVideo">
 								{{ video.VimeoId }}<br />
 								<a ng-href="{{'https://vimeo.com/' + video.VimeoId}}" target="_blank">{{ resx.EditCourseWatchOnVimeo_Txt }}</a>
+								<div class="return-btn col-md-3 hidden-xs">
+									<a ng-href="{{ '#/questions/' + video.VideoId }}" class="btn btn-default return-button">
+										<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> {{ resx.ReturnToCourse_Btn }}
+									</a>
+								</div>
 							</span>
 							<div class="input-group" ng-form="editVideoInput" ng-hide="editVideo">
 								<button type="button" class="btn btn-tertiary" ng-click="removeVideo(video)" aria-label="{{ resx.EditCourseRemoveVideo_Btn }}">

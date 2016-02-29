@@ -92,8 +92,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\FeatureController.cs" />
+    <Compile Include="Controllers\AnswerController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Entities\NewAnswerDTO.cs" />
     <Compile Include="Entities\NewRoleGroupDTO.cs" />
+    <Compile Include="Entities\AnswerInfo.cs" />
+    <Compile Include="Entities\NewQuestionDTO.cs" />
+    <Compile Include="Entities\QuestionInfo.cs" />
     <Compile Include="Entities\VideoInfo.cs" />
     <Compile Include="Components\Calvary_VideoCourseModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -114,7 +120,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="01.01.00.txt" />
+    <Content Include="01.01.01.txt" />
     <Content Include="Content\angular-ui.css" />
     <Content Include="Content\angular-ui.min.css" />
     <Content Include="Content\bootstrap-flat-extras.css" />
@@ -167,6 +173,7 @@
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="fonts\icomoon.svg" />
     <Content Include="ng\Controllers\editCourseCtrl.js" />
+    <Content Include="ng\Controllers\editQuestionsCtrl.js" />
     <Content Include="ng\Controllers\statusCtrl.js" />
     <Content Include="ng\Controllers\editCategoriesCtrl.js" />
     <Content Include="ng\Controllers\videoCtrl.js" />
@@ -178,6 +185,7 @@
     <Content Include="ng\app.js" />
     <Content Include="ng\factories.js" />
     <Content Include="ng\Views\editCourseView.html" />
+    <Content Include="ng\Views\editQuestionsView.html" />
     <Content Include="ng\Views\statusView.html" />
     <Content Include="ng\Views\editCategories.html" />
     <Content Include="ng\Views\templates\accordion-group.html" />
@@ -229,6 +237,7 @@
     <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.psm1" />
     <Content Include="packages\repositories.config" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.01.00.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\01.01.01.SqlDataProvider" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

@@ -1,3 +1,7 @@
 ﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Videos]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[{objectQualifier}DNNVideoCourse_Videos]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Questions]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}DNNVideoCourse_Questions]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Answers]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}DNNVideoCourse_Answers]
 GO

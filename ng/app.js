@@ -31,6 +31,10 @@ angular
 				templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/statusView.html',
 				controller: 'statusCtrl'
 			})
+			.when('/questions/:VideoId', {
+				templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/editQuestionsView.html',
+				controller: 'editQuestionsCtrl'
+			})
 			.otherwise({
 				templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/videoListView.html',
 				controller: 'videoCtrl'

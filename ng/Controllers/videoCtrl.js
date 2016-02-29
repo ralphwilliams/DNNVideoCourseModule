@@ -49,10 +49,10 @@ angular
 		// Get videos
 		var loadVids = function () {
 			videosFactory.callVideosData()
-				.then(function(data) {
+				.then(function (data) {
 					$scope.videos = angular.fromJson(data);
 					buildVideoList($scope.videos);
-				}, function(data) {
+				}, function (data) {
 					console.log(data);
 				});
 		}

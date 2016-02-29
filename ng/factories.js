@@ -226,6 +226,125 @@
 	}
 	return service;
 })
+.factory('questionsFactory', function ($http, $q) {
+	var service = {};
+
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
+
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
+	// GET - SET - UPDATE
+	service.setQuestions = function (questions) {
+		var sf = $.ServicesFramework(moduleId);
+
+		return $http({
+			method: 'POST',
+			url: dataUrl + 'AddQuestion?moduleId=' + moduleId,
+			headers: $self.Headers,
+			data: JSON.stringify(questions)
+		});
+	};
+
+	// Delete Question
+	service.deleteQuestion = function (questionToDelete) {
+		var sf = $.ServicesFramework(moduleId);
+
+		return $http({
+			method: 'POST',
+			url: dataUrl + 'DeleteQuestion',
+			headers: $self.Headers,
+			data: angular.fromJson(questionToDelete)
+		});
+	}
+
+	service.callQuestionsData = function (videoId) {
+		var deferred = $q.defer();
+
+		$http({
+			method: 'GET',
+			url: dataUrl + 'GetQuestions?moduleId=' + moduleId + "&videoId=" + videoId,
+			headers: $self.Headers
+		}).success(function (data) {
+			deferred.resolve(data);
+		}).error(function () {
+			console.log('There was an error getting the videos.');
+		});
+		return deferred.promise;
+	}
+	return service;
+})
+.factory('answersFactory', function ($http, $q) {
+	var service = {};
+
+	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
+
+	// DNN Services Framework
+	var $self = this;
+	if ($.ServicesFramework) {
+		var _sf = $.ServicesFramework(moduleId);
+		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
+		$self.ServicePath = $self.ServiceRoot + "Event/";
+		$self.Headers = {
+			"ModuleId": moduleId,
+			"TabId": _sf.getTabId(),
+			"RequestVerificationToken": _sf.getAntiForgeryValue()
+		};
+	}
+
+	// GET - SET - UPDATE
+	service.setAnswers = function (videos) {
+		var sf = $.ServicesFramework(moduleId);
+
+		return $http({
+			method: 'POST',
+			url: dataUrl + 'AddAnswer?moduleId=' + moduleId,
+			headers: $self.Headers,
+			data: JSON.stringify(videos)
+		});
+	};
+
+
+	service.callAnswersData = function (questionId) {
+		var deferred = $q.defer();
+
+		$http({
+			method: 'GET',
+			url: dataUrl + 'GetAnswers?moduleId=' + moduleId + "&questionId=" + questionId,
+			headers: $self.Headers
+		}).success(function (data) {
+			deferred.resolve(data);
+		}).error(function () {
+			console.log('There was an error getting the videos.');
+		});
+		return deferred.promise;
+	}
+	service.callUserAnswersData = function (questionId) {
+		var deferred = $q.defer();
+
+		$http({
+			method: 'GET',
+			url: dataUrl + 'GetUsersAnswers?moduleId=' + moduleId + "&questionId=" + questionId,
+			headers: $self.Headers
+		}).success(function (data) {
+			deferred.resolve(data);
+		}).error(function () {
+			console.log('There was an error getting the videos.');
+		});
+		return deferred.promise;
+	}
+	return service;
+})
 .factory('categoriesFactory', function ($http, $q) {
 	var service = {};
 

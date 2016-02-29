@@ -14,6 +14,8 @@ angular
 		'usersFactory',
 		'userInfoFactory',
 		'localizationFactory',
+		'questionsFactory',
+		'answersFactory',
 		'emailFactory',
 	function ($scope,
 		$routeParams,
@@ -27,16 +29,19 @@ angular
 		usersFactory,
 		userInfoFactory,
 		localizationFactory,
+		questionsFactory,
+		answersFactory,
 		emailFactory) {
 
 		// Get User Info
 		userInfoFactory.callUserInfo()
-		.then(function (data) {
-			$scope.userId = data;
-			loadPlayer();
-		}, function (data) {
-			alert(data);
-		})
+			.then(function(data) {
+				$scope.userId = data;
+				loadPlayer();
+			}, function(data) {
+				alert(data);
+			});
+
 
 		function loadPlayer() {
 			// #region Test for Edit mode
@@ -69,7 +74,7 @@ angular
 			}, function (data) {
 				console.log('Error Getting User Data');
 				console.log(data);
-			})
+			});
 
 			var loadVids = function () {
 				videosFactory.callVideosData()
@@ -79,7 +84,7 @@ angular
 				}, function (data) {
 					console.log('Error getting videos');
 					console.log(data);
-				})
+				});
 			}
 
 			// Get Vimeo data
@@ -91,7 +96,7 @@ angular
 				}, function (data) {
 					console.log('vimeo Ajax Fail');
 					console.log(data);
-				})
+				});
 			}
 
 			// Get categories
@@ -157,7 +162,48 @@ angular
 				$scope.resx.CouresCompletionText_Html = $sce.trustAsHtml($scope.resx.CouresCompletionText_Html);
 			}, function (data) {
 				alert(data);
-			})
+			});
+
+				// Get Questions
+			var questionId = 1;
+
+			var loadQuestions = function (videoId) {
+				questionsFactory.callQuestionsData(videoId)
+					.then(function (data) {
+						$scope.questions = angular.fromJson(data);
+						console.log('$scope.questions');
+						console.log($scope.questions);
+					}, function (data) {
+						console.log(data);
+					});
+			}
+
+
+			var loadAnswers = function () {
+				answersFactory.callAnswersData(questionId)
+					.then(function (data) {
+						$scope.answers = angular.fromJson(data);
+						console.log('$scope.answers');
+						console.log($scope.answers);
+					}, function (data) {
+						console.log(data);
+					});
+			}
+
+			loadAnswers();
+
+			var loadUserAnswers = function () {
+				answersFactory.callUserAnswersData(questionId)
+					.then(function (data) {
+						$scope.userAnswers = angular.fromJson(data);
+						console.log('$scope.userAnswers');
+						console.log($scope.userAnswers);
+					}, function (data) {
+						console.log(data);
+					});
+			}
+
+			loadUserAnswers();
 
 
 			// #endregion
@@ -407,9 +453,19 @@ angular
 
 			};
 
-			// #endregion 
+				// #endregion 
 
-			$scope.toggleComplete = function () {
+			$scope.loadQuestions = function() {
+				var selectedId = $routeParams.VideoId;
+				loadQuestions(selectedId);
+
+				// angular.forEach($scope.questions, function (v, k) {
+					
+				// });
+
+			}
+
+				$scope.toggleComplete = function () {
 				$scope.courseComplete = $scope.courseComplete === false ? true : false;
 			};
 			} else {
@@ -418,6 +474,7 @@ angular
 					$location.path('/videos/');
 				}
 			}
+			$scope.loadQuestions();
 			// #endregion
 
 		}

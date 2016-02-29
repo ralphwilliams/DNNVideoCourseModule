@@ -54,28 +54,188 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		#endregion
 
 		// Get Videos
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetVideos(int moduleId)
 		{
 			try
 			{
-                Requires.NotNegative("moduleId", moduleId);
+				Requires.NotNegative("moduleId", moduleId);
 
 				var ctl = new VideoController();
 				var videos = ctl.GetVideos(moduleId).ToJson();
-				
-                return Request.CreateResponse(HttpStatusCode.OK, videos);
+
+				return Request.CreateResponse(HttpStatusCode.OK, videos);
 			}
 			catch (Exception exc)
-            {
-                Exceptions.LogException(exc);
+			{
+				Exceptions.LogException(exc);
 				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
 			}
 		}
-        
-        // Get Videos
+
+		// Get Questions
+		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		// [ValidateAntiForgeryToken]
+		[HttpGet]
+		public HttpResponseMessage GetQuestions(int moduleId, int videoId)
+		{
+			try
+			{
+				Requires.NotNegative("moduleId", moduleId);
+
+				var ctl = new QuestionController();
+				var questions = ctl.GetQuestions(moduleId).Where(a => a.VideoId == videoId).ToJson();
+
+				return Request.CreateResponse(HttpStatusCode.OK, questions);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+
+
+		// Add Question
+		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		// [ValidateAntiForgeryToken]
+		[HttpPost]
+		public HttpResponseMessage AddQuestion(QuestionInfo questionDto)
+		{
+			try
+			{
+				Requires.NotNull("questionDto", questionDto);
+				Requires.NotNegative("questionDto.QuestionId", questionDto.QuestionId);
+				Requires.NotNegative("questionDto.VideoId", questionDto.VideoId);
+				Requires.NotNull("questionDto.QuestionText", questionDto.QuestionText);
+				Requires.NotNegative("questionDto.ModuleId", questionDto.ModuleId);
+				Requires.NotNegative("questionDto.OrderIndex", questionDto.OrderIndex);
+				Requires.NotNegative("questionDto.CreatedByUserId", questionDto.CreatedByUserId);
+				Requires.NotNegative("questionDto.LastModifiedByUserId", questionDto.LastModifiedByUserId);
+
+				var qc = new QuestionController();
+
+				// get the question from the database to maintain data integrity
+				var question = qc.GetQuestion(questionDto.QuestionId, questionDto.ModuleId);
+
+				if (question == null)
+				{
+					// this is a new question
+					// update all values
+					question = new QuestionInfo()
+					{
+						QuestionId = questionDto.QuestionId,
+						VideoId = questionDto.VideoId,
+						QuestionText = questionDto.QuestionText,
+						ModuleId = questionDto.ModuleId,
+						OrderIndex = questionDto.OrderIndex,
+						CreatedByUserId = questionDto.CreatedByUserId,
+						LastModifiedByUserId = questionDto.LastModifiedByUserId,
+						LastModifiedOnDate = DateTime.Now,
+						CreatedOnDate = DateTime.Now
+					};
+
+					qc.CreateQuestion(question);
+				}
+				else
+				{
+					// this is an existing question that's getting updated
+					// we'll only update the values that are allowed to be updated
+					question.QuestionText = questionDto.QuestionText;
+					question.VideoId = questionDto.VideoId;
+					question.OrderIndex = questionDto.OrderIndex;
+					question.LastModifiedByUserId = questionDto.LastModifiedByUserId;
+					question.LastModifiedOnDate = DateTime.Now;
+
+					qc.UpdateQuestion(question);
+				}
+
+				return Request.CreateResponse(HttpStatusCode.OK);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+
+
+		// Get Answers
+		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		// [ValidateAntiForgeryToken]
+		[HttpGet]
+		public HttpResponseMessage GetAnswers(int moduleId, int questionId)
+		{
+			try
+			{
+				Requires.NotNegative("moduleId", moduleId);
+
+				var ctl = new AnswerController();
+				var answers = ctl.GetAnswers(moduleId).Where(a => a.QuestionId == questionId).ToJson();
+
+
+				return Request.CreateResponse(HttpStatusCode.OK, answers);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+
+		// Get Answers
+		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		// [ValidateAntiForgeryToken]
+		[HttpGet]
+		public HttpResponseMessage GetUsersAnswers(int moduleId, int questionId)
+		{
+			try
+			{
+				Requires.NotNegative("moduleId", moduleId); 
+
+				var ctl = new AnswerController();
+				var answers = ctl.GetAnswers(moduleId).Where(a => a.QuestionId == questionId 
+								&& a.CreatedByUserId == UserInfo.UserID).ToJson();
+
+
+				return Request.CreateResponse(HttpStatusCode.OK, answers);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+
+		// Delete Question
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
+		[HttpPost]
+		public HttpResponseMessage DeleteQuestion(QuestionInfo question)
+		{
+			try
+			{
+				Requires.NotNull("question", question);
+				Requires.NotNegative("question.ModuleId", question.ModuleId);
+				Requires.NotNegative("question.VideoId", question.QuestionId);
+
+				var qc = new QuestionController();
+				qc.DeleteQuestion(question.QuestionId, question.ModuleId);
+
+				return Request.CreateResponse(HttpStatusCode.OK);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
+
+
+
+		// Get User Info
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		[ValidateAntiForgeryToken]
         [HttpGet]
@@ -177,11 +337,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		public HttpResponseMessage GetGroupsByUser()
 		{
 			// Get Role Groups
-		    var portalId = PortalSettings.PortalId;
-            // NOTE: these two variables are never used
-
             var roles = Controllers.RoleController.GetUserRoles(UserInfo);
-
 			var newroleGroup = roles.Where(role => UserInfo.IsInRole(role.RoleName)).Cast<RoleInfo>().ToList();
 
 			return Request.CreateResponse(HttpStatusCode.OK, newroleGroup);
