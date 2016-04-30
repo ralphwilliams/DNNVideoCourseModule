@@ -161,6 +161,29 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 			}
 		}
 
+		// Delete Question
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
+		[HttpPost]
+		public HttpResponseMessage DeleteQuestion(QuestionInfo question)
+		{
+			try
+			{
+				Requires.NotNull("question", question);
+				Requires.NotNegative("question.ModuleId", question.ModuleId);
+				Requires.NotNegative("question.VideoId", question.QuestionId);
+
+				var qc = new QuestionController();
+				qc.DeleteQuestion(question.QuestionId, question.ModuleId);
+
+				return Request.CreateResponse(HttpStatusCode.OK);
+			}
+			catch (Exception exc)
+			{
+				Exceptions.LogException(exc);
+				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+			}
+		}
 
 		// Get Answers
 		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
@@ -189,15 +212,14 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		// [ValidateAntiForgeryToken]
 		[HttpGet]
-		public HttpResponseMessage GetUsersAnswers(int moduleId, int questionId)
+		public HttpResponseMessage GetUsersAnswers(int moduleId)
 		{
 			try
 			{
 				Requires.NotNegative("moduleId", moduleId); 
 
 				var ctl = new AnswerController();
-				var answers = ctl.GetAnswers(moduleId).Where(a => a.QuestionId == questionId 
-								&& a.CreatedByUserId == UserInfo.UserID).ToJson();
+				var answers = ctl.GetAnswers(moduleId).Where(a => a.CreatedByUserId == UserInfo.UserID).ToJson();
 
 
 				return Request.CreateResponse(HttpStatusCode.OK, answers);
@@ -208,21 +230,60 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
 			}
 		}
-
-		// Delete Question
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
-		[ValidateAntiForgeryToken]
+		// Add Question
+		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		// [ValidateAntiForgeryToken]
 		[HttpPost]
-		public HttpResponseMessage DeleteQuestion(QuestionInfo question)
+		public HttpResponseMessage AddAnswer(AnswerInfo answerDto)
 		{
 			try
 			{
-				Requires.NotNull("question", question);
-				Requires.NotNegative("question.ModuleId", question.ModuleId);
-				Requires.NotNegative("question.VideoId", question.QuestionId);
+				Requires.NotNull("answerDto.AnswerId", answerDto.AnswerId);
+				Requires.NotNegative("answerDto.QuestionId", answerDto.QuestionId);
+				Requires.NotNull("answerDto.AnswerText", answerDto.AnswerText);
+				Requires.NotNegative("answerDto.ModuleId", answerDto.ModuleId);
+				Requires.NotNegative("answerDto.OrderIndex", answerDto.OrderIndex);
+				Requires.NotNegative("answerDto.CreatedByUserId", answerDto.CreatedByUserId);
+				Requires.NotNegative("answerDto.LastModifiedByUserId", answerDto.LastModifiedByUserId);
 
-				var qc = new QuestionController();
-				qc.DeleteQuestion(question.QuestionId, question.ModuleId);
+				var ac = new AnswerController();
+
+				// get the answer from the database to maintain data integrity
+				var answer = ac.GetAnswer(answerDto.AnswerId, answerDto.ModuleId);
+
+				if (answer == null)
+				{
+					// this is a new question
+					// update all values
+					answer = new AnswerInfo()
+					{
+						QuestionId				= answerDto.QuestionId,
+						AnswerId				= answerDto.AnswerId,
+						AnswerText				= answerDto.AnswerText,
+						ModuleId				= answerDto.ModuleId,
+						OrderIndex				= answerDto.OrderIndex,
+						CreatedByUserId			= answerDto.CreatedByUserId,
+						LastModifiedByUserId	= answerDto.LastModifiedByUserId,
+						LastModifiedOnDate		= DateTime.Now,
+						CreatedOnDate			= DateTime.Now
+					};
+
+					ac.CreateAnswer(answer);
+				}
+				else
+				{
+					// this is an existing question that's getting updated
+					// we'll only update the values that are allowed to be updated
+					answer.AnswerText				= answerDto.AnswerText;
+					answer.QuestionId				= answerDto.QuestionId;
+					answer.AnswerId					= answerDto.AnswerId;
+					answer.OrderIndex				= answerDto.OrderIndex;
+					answer.LastModifiedByUserId		= answerDto.LastModifiedByUserId;
+					answer.LastModifiedOnDate		= DateTime.Now;
+					answer.CreatedOnDate			= DateTime.Now;
+
+					ac.UpdateAnswer(answer);
+				}
 
 				return Request.CreateResponse(HttpStatusCode.OK);
 			}
@@ -232,7 +293,6 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
 			}
 		}
-
 
 
 		// Get User Info

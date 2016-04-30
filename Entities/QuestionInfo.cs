@@ -23,6 +23,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Entities
 	[Cacheable("Questions", CacheItemPriority.Default, 20)]
 	//scope the objects to the ModuleId of a module on a page (or copy of a module on a page)
 	[Scope("ModuleId")]
+	[Serializable]
 	public class QuestionInfo
 	{
 		///<summary>

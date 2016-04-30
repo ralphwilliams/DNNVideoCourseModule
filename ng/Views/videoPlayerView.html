@@ -26,8 +26,7 @@
 	<div class="row" ng-hide="courseComplete">
 		<div class="col-md-12">
 			<h3>{{selectedVimeo.title}} <!--: {{selectedVimeo.video_id}}--></h3>
-			<p><em>{{ resx.VideoDetailsLength_Text }}: {{showDuration()}}</em><br/>{{ resx.VideoDetailsVideo_Text }} {{ orderIndex + 1 }} {{ resx.VideoDetailsOf_Text }} {{ courseLength }}
-			</p>
+			<p><em>{{ resx.VideoDetailsLength_Text }}: {{showDuration()}}</em><br/>{{ resx.VideoDetailsVideo_Text }} {{ orderIndex + 1 }} {{ resx.VideoDetailsOf_Text }} {{ courseLength }}</p>
 			<p>{{ selectedVimeo.description }}</p>
 		</div>
 	</div>
@@ -35,9 +34,9 @@
 		<div class="col-md-12">
 			<h2>Questions</h2>
 			<ol>
-				<li class="video-questions" ng-repeat="question in questions">
-					{{question.QuestionText}}<br/>
-					<textarea />
+				<li class="video-questions form-group" ng-repeat="question in questions">
+					{{question.QuestionText}}
+					<textarea class="form-control" ng-change="updateQuestion(question.answer)" ng-model="question.answer.AnswerText" ng-model-options="{debounce: {'default': 1000, 'blur': 0}}"/>
 				</li>
 			</ol>
 			<a id="nextVideo" ng-click="moveNext()" class="btn btn-primary pull-right" ng-class="{disabled: selectedVimeo.complete != true}">
@@ -46,6 +45,7 @@
 				{{ nextButton }}
 				<span ng-show="showNext" class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
 			</a>
+			<span>{{ savedStatus }}</span>
 			<a id="prevVideo" ng-click="prevVideo()" class="btn btn-primary pull-left" ng-class="{disabled: orderIndex == 0}"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>{{ resx.VideoPlayerPrevious_Btn }}</a>
 		</div>
 	</div>

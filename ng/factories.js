@@ -303,14 +303,14 @@
 	}
 
 	// GET - SET - UPDATE
-	service.setAnswers = function (videos) {
+	service.setAnswers = function (answer) {
 		var sf = $.ServicesFramework(moduleId);
 
 		return $http({
 			method: 'POST',
 			url: dataUrl + 'AddAnswer?moduleId=' + moduleId,
 			headers: $self.Headers,
-			data: JSON.stringify(videos)
+			data: JSON.stringify(answer)
 		});
 	};
 
@@ -334,7 +334,7 @@
 
 		$http({
 			method: 'GET',
-			url: dataUrl + 'GetUsersAnswers?moduleId=' + moduleId + "&questionId=" + questionId,
+			url: dataUrl + 'GetUsersAnswers?moduleId=' + moduleId,
 			headers: $self.Headers
 		}).success(function (data) {
 			deferred.resolve(data);

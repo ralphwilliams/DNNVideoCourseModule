@@ -32,7 +32,8 @@ angular
 		questionsFactory,
 		answersFactory,
 		emailFactory) {
-
+		var VideoId = $routeParams.VideoId;
+		$scope.answers = '';
 		// Get User Info
 		userInfoFactory.callUserInfo()
 			.then(function(data) {
@@ -50,8 +51,7 @@ angular
 			// #region Controller Global Variables
 
 			$scope.nextButton = 'Next Video'; // Text is localized further down before displaying on view
-			thisVideo = $routeParams.videoId;
-			var thisVideo;
+
 			if (typeof editMode !== 'undefined') {
 				$scope.editMode = true;
 			} else {
@@ -165,46 +165,55 @@ angular
 			});
 
 				// Get Questions
-			var questionId = 1;
+			// var questionId = 1;
 
-			var loadQuestions = function (videoId) {
-				questionsFactory.callQuestionsData(videoId)
+			// var loadQuestions = function (videoId) {
+				questionsFactory.callQuestionsData(VideoId)
 					.then(function (data) {
 						$scope.questions = angular.fromJson(data);
-						console.log('$scope.questions');
-						console.log($scope.questions);
+						loadUserAnswers();
 					}, function (data) {
 						console.log(data);
 					});
-			}
+			// }
 
 
 			var loadAnswers = function () {
 				answersFactory.callAnswersData(questionId)
 					.then(function (data) {
 						$scope.answers = angular.fromJson(data);
-						console.log('$scope.answers');
-						console.log($scope.answers);
 					}, function (data) {
 						console.log(data);
 					});
 			}
 
-			loadAnswers();
 
 			var loadUserAnswers = function () {
-				answersFactory.callUserAnswersData(questionId)
+				answersFactory.callUserAnswersData()
 					.then(function (data) {
-						$scope.userAnswers = angular.fromJson(data);
-						console.log('$scope.userAnswers');
-						console.log($scope.userAnswers);
+						$scope.answers = angular.fromJson(data);
+						buildQandA();
 					}, function (data) {
 						console.log(data);
 					});
 			}
 
-			loadUserAnswers();
+				// Add New Questions
+			function editAnswer(NewAnswerDTO) {
+				answersFactory.setAnswers(NewAnswerDTO)
+					.success(function () {
+						//loadAnswer(videoId);
+						$scope.savedStatus = 'Answers saved';
+					}).
+					error(function (error) {
+						$scope.status = 'Unable to insert question: ' + error.message;
+						console.log(NewAnswerDTO);
+						$scope.savedStatus = 'Error Saving Answers';
+					});
+			}
 
+			$scope.editAnswers = function (answer) {
+			}
 
 			// #endregion
 
@@ -455,14 +464,35 @@ angular
 
 				// #endregion 
 
-			$scope.loadQuestions = function() {
-				var selectedId = $routeParams.VideoId;
-				loadQuestions(selectedId);
+			var buildQandA = function() {
+				angular.forEach($scope.questions, function (qv,qk) {
+					angular.forEach($scope.answers, function (av,ak) {
+						if (qv.QuestionId === av.QuestionId) {
+							$scope.questions[qk].answer = av;
+						}
+					});
+					function savedStuff() {
+						console.log('This is saved!');
+					}
 
-				// angular.forEach($scope.questions, function (v, k) {
-					
-				// });
+						$scope.$watch('questions[qk].answer', savedStuff);
+				});
+			}
 
+			$scope.updateQuestion = function (answer) {
+				$scope.savedStatus = 'Saving...';
+				console.log('say it is saved, please!');
+				function editAnswerObject(answer) {
+					this.AnswerId = answer.AnswerId,
+					this.QuestionId = answer.QuestionId,
+					this.AnswerText = answer.AnswerText,
+					this.ModuleId = moduleId,
+					this.OrderIndex = answer.OrderIndex;
+				}
+				// Update Role Object
+				var newAnswer = new editAnswerObject(answer);
+				editAnswer(newAnswer);
+				// $scope.savedStatus = 'Answers saved';
 			}
 
 				$scope.toggleComplete = function () {
@@ -474,7 +504,7 @@ angular
 					$location.path('/videos/');
 				}
 			}
-			$scope.loadQuestions();
+			// $scope.loadQuestions();
 			// #endregion
 
 		}
