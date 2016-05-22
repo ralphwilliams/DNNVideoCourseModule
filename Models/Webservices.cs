@@ -99,8 +99,8 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 
 		// Add Question
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
-		// [ValidateAntiForgeryToken]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage AddQuestion(QuestionInfo questionDto)
 		{
@@ -230,9 +230,10 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
 			}
 		}
+
 		// Add Question
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
-		// [ValidateAntiForgeryToken]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage AddAnswer(AnswerInfo answerDto)
 		{

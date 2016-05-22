@@ -36,7 +36,7 @@
 			<ol>
 				<li class="video-questions form-group" ng-repeat="question in questions">
 					{{question.QuestionText}}
-					<textarea class="form-control" ng-change="updateQuestion(question.answer)" ng-model="question.answer.AnswerText" ng-model-options="{debounce: {'default': 1000, 'blur': 0}}"/>
+					<textarea class="form-control" ng-change="updateAnswer(question)" ng-model="question.answer.AnswerText" ng-model-options="{debounce: {'default': 1000, 'blur': 0}}"/>
 				</li>
 			</ol>
 			<a id="nextVideo" ng-click="moveNext()" class="btn btn-primary pull-right" ng-class="{disabled: selectedVimeo.complete != true}">

@@ -110,6 +110,7 @@ angular
 				// Update Role Object
 				var newQuestion = new editQuestionObject(QuestionText, QuestionId, VideoId, OrderIndex);
 				editQuestion(newQuestion);
+				$scope.editQuestion = true;
 				$scope.QuestionText = '';
 			}
 
@@ -118,7 +119,7 @@ angular
 			// #region Add Question
 
 			$scope.addNewQuestion = function (newQuestionText) {
-				console.log('$scope.newQuestionText: ' + $scope.newQuestionText);
+				console.log('$scope.addNewQuestionText: ' + newQuestionText);
 				function QuestionText(newQuestionText) {
 					this.VideoId = $routeParams.VideoId,
 					this.QuestionText = newQuestionText,
@@ -128,6 +129,7 @@ angular
 				// Set New Role Object
 				var newQuestion = new QuestionText(newQuestionText);
 				editQuestion(newQuestion);
+				$scope.editQuestion = true;
 				$scope.question.addNewQuestionText = '';
 			}
 

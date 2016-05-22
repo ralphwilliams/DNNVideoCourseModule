@@ -479,18 +479,21 @@ angular
 				});
 			}
 
-			$scope.updateQuestion = function (answer) {
+			$scope.updateAnswer = function (answer) {
 				$scope.savedStatus = 'Saving...';
 				console.log('say it is saved, please!');
+				console.log(answer);
 				function editAnswerObject(answer) {
-					this.AnswerId = answer.AnswerId,
+					this.AnswerId = answer.answer.AnswerId,
 					this.QuestionId = answer.QuestionId,
-					this.AnswerText = answer.AnswerText,
+					this.AnswerText = answer.answer.AnswerText,
 					this.ModuleId = moduleId,
 					this.OrderIndex = answer.OrderIndex;
 				}
 				// Update Role Object
 				var newAnswer = new editAnswerObject(answer);
+				console.log(newAnswer);
+
 				editAnswer(newAnswer);
 				// $scope.savedStatus = 'Answers saved';
 			}
