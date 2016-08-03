@@ -202,7 +202,7 @@ angular
 			function editAnswer(NewAnswerDTO) {
 				answersFactory.setAnswers(NewAnswerDTO)
 					.success(function () {
-						//loadAnswer(videoId);
+					    loadUserAnswers();
 						$scope.savedStatus = 'Answers saved';
 					}).
 					error(function (error) {
@@ -481,7 +481,6 @@ angular
 
 			$scope.updateAnswer = function (answer) {
 				$scope.savedStatus = 'Saving...';
-				console.log('say it is saved, please!');
 				console.log(answer);
 				function editAnswerObject(answer) {
 					this.AnswerId = answer.answer.AnswerId,

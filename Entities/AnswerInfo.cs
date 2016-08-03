@@ -18,7 +18,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Entities
 {
 	[TableName("DNNVideoCourse_Answers")]
 	//setup the primary key for table
-	[PrimaryKey("answerId", AutoIncrement = true)]
+	[PrimaryKey("AnswerId", AutoIncrement = true)]
 	//configure caching using PetaPoco
 	[Cacheable("Answers", CacheItemPriority.Default, 20)]
 	//scope the objects to the ModuleId of a module on a page (or copy of a module on a page)

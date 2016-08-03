@@ -54,8 +54,8 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		#endregion
 
 		// Get Videos
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		// [ValidateAntiForgeryToken]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetVideos(int moduleId)
 		{
@@ -76,8 +76,8 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		}
 
 		// Get Questions
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		// [ValidateAntiForgeryToken]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetQuestions(int moduleId, int videoId)
 		{
@@ -186,8 +186,8 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		}
 
 		// Get Answers
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		// [ValidateAntiForgeryToken]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetAnswers(int moduleId, int questionId)
 		{
@@ -209,8 +209,8 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		}
 
 		// Get Answers
-		// [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		// [ValidateAntiForgeryToken]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+		[ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetUsersAnswers(int moduleId)
 		{
@@ -219,7 +219,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 				Requires.NotNegative("moduleId", moduleId); 
 
 				var ctl = new AnswerController();
-				var answers = ctl.GetAnswers(moduleId).Where(a => a.CreatedByUserId == UserInfo.UserID).ToJson();
+				var answers = ctl.GetAnswers(moduleId).Where(a => a.AssignedUserId == UserInfo.UserID).ToJson();
 
 
 				return Request.CreateResponse(HttpStatusCode.OK, answers);
@@ -232,7 +232,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 		}
 
 		// Add Question
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage AddAnswer(AnswerInfo answerDto)
@@ -254,15 +254,18 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 				if (answer == null)
 				{
-					// this is a new question
-					// update all values
-					answer = new AnswerInfo()
+                    UserInfo _currentUser = UserController.Instance.GetCurrentUserInfo();
+                    int UserID = _currentUser.UserID;
+                    // this is a new question
+                    // update all values
+                    answer = new AnswerInfo()
 					{
 						QuestionId				= answerDto.QuestionId,
 						AnswerId				= answerDto.AnswerId,
 						AnswerText				= answerDto.AnswerText,
 						ModuleId				= answerDto.ModuleId,
 						OrderIndex				= answerDto.OrderIndex,
+                        AssignedUserId          = UserID,
 						CreatedByUserId			= answerDto.CreatedByUserId,
 						LastModifiedByUserId	= answerDto.LastModifiedByUserId,
 						LastModifiedOnDate		= DateTime.Now,

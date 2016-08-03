@@ -52,19 +52,17 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Controllers
 			}
 			return a;
 		}
-
-		public AnswerInfo GetAnswer(int answerId, int moduleId)
-		{
+        public AnswerInfo GetAnswer(int answerId, int moduleId)
+        {
             AnswerInfo a = null;
-			using (IDataContext ctx = DataContext.Instance())
-			{
-				var rep = ctx.GetRepository<AnswerInfo>();
-				a = rep.GetById(answerId, moduleId);
-			}
-			return a;
-		}
-
-		public void UpdateAnswer(AnswerInfo a)
+            using (IDataContext ctx = DataContext.Instance())
+            {
+                var rep = ctx.GetRepository<AnswerInfo>();
+                a = rep.GetById(answerId, moduleId);
+            }
+            return a;
+        }
+        public void UpdateAnswer(AnswerInfo a)
 		{
 			using (IDataContext ctx = DataContext.Instance())
 			{

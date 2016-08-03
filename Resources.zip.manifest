@@ -230,6 +230,10 @@
     </file>
     <file>
       <path>ng/Controllers/</path>
+      <name>editQuestionsCtrl.js</name>
+    </file>
+    <file>
+      <path>ng/Controllers/</path>
       <name>statusCtrl.js</name>
     </file>
     <file>
@@ -247,6 +251,10 @@
     <file>
       <path>ng/Views/</path>
       <name>editCourseView.html</name>
+    </file>
+    <file>
+      <path>ng/Views/</path>
+      <name>editQuestionsView.html</name>
     </file>
     <file>
       <path>ng/Views/</path>
