@@ -110,7 +110,15 @@
 
 .course-list .progress,
 .course-list .progress span { display:block; height:15px;}
-.course-list .progress { background-color: rgba(0,0,0,0.2);}
+.course-list .progress { 
+    background-color: rgba(0,0,0,0.2);
+    margin-bottom: 0;
+}
+
+.print-answers {
+    /*display: none;*/
+}
+
 
 /* #endregion */
 
@@ -272,6 +280,58 @@
 .status-view .not-complete.started .progress,
 .status-view .complete .complete,
 .status-view .not-complete.not-started .not-started-text { display: block;}
+
+.status-view .footer-link {
+    background: #f5f5f5;
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+    font-size: 60%;
+    padding: 1px 6px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* #endregion */
+
+/* #region Edit Course View */
+
+.answer-view .answer {
+    padding-left: 20px; 
+}
+
+    /* printer friendly version */
+    @media print {
+      * {
+          display: none;
+          padding: 0 !important;
+          margin: 0 !important;
+          border: none !important;
+      }
+      .print-me,
+      .print-me * {
+        display: block;
+      }
+      .js-print-me {
+        display: block;
+      }
+      .print-me .return-button,
+      .js-print-me .return-button,
+      .print-me .return-btn,
+      .js-print-me .return-btn {
+          display: none!important;
+      }
+      h1.print-me {
+          margin: 20px 0!important;
+      }
+      .print-me h3 {
+          margin: 10px 0 !important;
+      }
+      .print-me .answer {
+          margin-bottom: 30px !important;
+      }
+    }
 
 /* #endregion */
 

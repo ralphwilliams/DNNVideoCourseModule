@@ -32,8 +32,16 @@ angular
 				controller: 'statusCtrl'
 			})
 			.when('/questions/:VideoId', {
-				templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/editQuestionsView.html',
-				controller: 'editQuestionsCtrl'
+			    templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/editQuestionsView.html',
+			    controller: 'editQuestionsCtrl'
+			})
+			.when('/answers/:CourseId', {
+			    templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/answerListView.html',
+			    controller: 'answerListCtrl'
+			})
+            .when('/answers/:CourseId/user/:UserId', {
+			    templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/answerListView.html',
+			    controller: 'answerListCtrl'
 			})
 			.otherwise({
 				templateUrl: '/DesktopModules/DNNVideoCourse/ng/Views/videoListView.html',

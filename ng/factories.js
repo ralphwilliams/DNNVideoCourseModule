@@ -1,46 +1,46 @@
 ﻿angular
 .module('DVCideoApp')
 .factory('statusFactory', function ($http, $q) {
-	var service = {};
-	var _users = '';
+    var service = {};
+    var _users = '';
 
 
-	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
+    var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
 
-	// DNN Services Framework
-	var $self = this;
-	if ($.ServicesFramework) {
-		var _sf = $.ServicesFramework(moduleId);
-		$self.ServiceRoot = _sf.getServiceRoot(moduleName);
-		$self.ServicePath = $self.ServiceRoot + "Event/";
-		$self.Headers = {
-			"ModuleId": moduleId,
-			"TabId": _sf.getTabId(),
-			"RequestVerificationToken": _sf.getAntiForgeryValue()
-		};
-	}
+    // DNN Services Framework
+    var $self = this;
+    if ($.ServicesFramework) {
+        var _sf = $.ServicesFramework(moduleId);
+        $self.ServiceRoot = _sf.getServiceRoot(moduleName);
+        $self.ServicePath = $self.ServiceRoot + "Event/";
+        $self.Headers = {
+            "ModuleId": moduleId,
+            "TabId": _sf.getTabId(),
+            "RequestVerificationToken": _sf.getAntiForgeryValue()
+        };
+    }
 
-	// GET - SET - UPDATE
-	this.setUsers = function (users) {
-		_users = users;
-	}
-	this.getUsers = function () {
-		return _users;
-	}
-	service.callUsersData = function () {
-		var deferred = $q.defer();
-		$http({
-			method: 'GET',
-			url: dataUrl + "GetListOfUsers",
-			headers: $self.Headers
-	    }).success(function(data) {
-			deferred.resolve(data);
-	    }).error(function() {
-			console.log('There was an error getting the users.');
-	    });
-		return deferred.promise;
-	}
-	return service;
+    // GET - SET - UPDATE
+    this.setUsers = function (users) {
+        _users = users;
+    }
+    this.getUsers = function () {
+        return _users;
+    }
+    service.callUsersData = function () {
+        var deferred = $q.defer();
+        $http({
+            method: 'GET',
+            url: dataUrl + "GetListOfUsers",
+            headers: $self.Headers
+        }).success(function (data) {
+            deferred.resolve(data);
+        }).error(function () {
+            console.log('There was an error getting the users.');
+        });
+        return deferred.promise;
+    }
+    return service;
 })
 .factory('usersFactory', function ($http, $q) {
 	var service = {};

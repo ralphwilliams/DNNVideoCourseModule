@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNNVideoCourse" type="Module" version="01.01.01">
+    <package name="DNNVideoCourse" type="Module" version="01.02.00">
       <friendlyName>DNN Video Course</friendlyName>
       <description>DNN Video Course module</description>
       <iconFile>Images/logo_min.png</iconFile>
@@ -78,7 +78,7 @@
             <attributes>
               <businessControllerClass>RalphWilliams.Modules.DNNVideoCourse.Components.FeatureController</businessControllerClass>
               <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.01.01</upgradeVersionsList>
+              <upgradeVersionsList>01.02.00</upgradeVersionsList>
             </attributes>
           </eventMessage>
         </component>

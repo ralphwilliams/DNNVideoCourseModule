@@ -1,8 +1,8 @@
 ﻿/// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers', [])
-	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'vimeoFactory', 'localizationFactory', '$location',
-	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, vimeoFactory, localizationFactory, $location, $sce) {
+	.controller('videoCtrl', ['$scope', '$http', 'usersFactory', 'rolesFactory', 'videosFactory', 'categoriesFactory', 'questionsFactory', 'vimeoFactory', 'localizationFactory', '$location',
+	function ($scope, $http, usersFactory, rolesFactory, videosFactory, categoriesFactory, questionsFactory, vimeoFactory, localizationFactory, $location, $sce) {
 
 		// #region Test for Edit Mode
 
@@ -13,6 +13,7 @@ angular
 		}
 
 		$scope.viewMode;
+	    $scope.hasQuestions = false;
 
 		// #endregion
 
@@ -21,7 +22,9 @@ angular
 		// Get user's completed videos
 		usersFactory.callUsersData()
 			.then(function (data) {
-				$scope.videosComplete = angular.fromJson(data);
+			    $scope.videosComplete = angular.fromJson(data);
+			    // console.log('videosComplete');
+			    // console.log($scope.videosComplete);
 				loadCats();
 			}, function () {
 				console.log('Error Getting User Data');
@@ -52,7 +55,10 @@ angular
 				.then(function (data) {
 					$scope.videos = angular.fromJson(data);
 					buildVideoList($scope.videos);
-				}, function (data) {
+			        angular.forEach($scope.videos, function(vVideos) {
+			            
+			        });
+			    }, function (data) {
 					console.log(data);
 				});
 		}
@@ -66,6 +72,16 @@ angular
 			}, function () {
 				console.log('vimeo Ajax Fail');
 			});
+		}
+
+        // Get questions
+		var loadQuestions = function (videoId) {
+		    questionsFactory.callQuestionsData(videoId)
+                .then(function (data) {
+                    $scope.questions = angular.fromJson(data);
+                }, function (data) {
+                    console.log(data);
+                });
 		}
 
 		// Get Localization Resources
@@ -130,6 +146,7 @@ angular
 					// Set courseId to RoleID
 					$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
 					$scope.categories[keyCategory].Roles[keyCourse].completeTotal = 0;
+				    $scope.categories[keyCategory].Roles[keyCourse].hasQuestions = false;
 
 					// Iterate through list of videos
 					var videoList = [];
@@ -144,13 +161,20 @@ angular
 									valueVideo.complete = $scope.videosComplete[j] == valueVideo.VideoId ? true : false;
 								}
 							}
-
+						    questionsFactory.callQuestionsData(valueVideo.VideoId).then(function (service) {
+						        $scope.questionList = angular.fromJson(service);
+						        angular.forEach($scope.questionList, function (vQuestion) {
+						            if (vQuestion.VideoId === valueVideo.VideoId) {
+						                $scope.categories[keyCategory].Roles[keyCourse].hasQuestions = true;
+                                    }
+						        });
+						    });
 							// Create list of updated videos
 							videoList.push(valueVideo);
 						}
+
 					
 					}, videoList);
-
 					// Sort the videos
 					videoList.sort(function (a, b) {
 						return a.OrderIndex > b.OrderIndex;
@@ -191,6 +215,7 @@ angular
 						$scope.categories[keyCategory].Roles[keyCourse].amountComplete = 0;
 						$scope.categories[keyCategory].Roles[keyCourse].percentComplete = $scope.categories[keyCategory].Roles[keyCourse].amountComplete + '%';
 					}
+					console.log($scope.categories[keyCategory].Roles[keyCourse]);
 				});
 
 

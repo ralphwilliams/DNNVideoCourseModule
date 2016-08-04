@@ -496,6 +496,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 											LastName = user.LastName,
 											DisplayName = user.DisplayName,
 											Email = user.Email,
+                                            UserId = user.UserID,
 											Videos = user.Profile.GetPropertyValue("videosComplete")
 										});
 									}

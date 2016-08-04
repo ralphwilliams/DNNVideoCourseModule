@@ -120,6 +120,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="01.02.00.txt" />
     <Content Include="01.01.01.txt" />
     <Content Include="Content\angular-ui.css" />
     <Content Include="Content\angular-ui.min.css" />
@@ -172,6 +173,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="fonts\icomoon.svg" />
+    <Content Include="ng\Controllers\answerListCtrl.js" />
     <Content Include="ng\Controllers\editCourseCtrl.js" />
     <Content Include="ng\Controllers\editQuestionsCtrl.js" />
     <Content Include="ng\Controllers\statusCtrl.js" />
@@ -184,6 +186,7 @@
     <Content Include="module.css" />
     <Content Include="ng\app.js" />
     <Content Include="ng\factories.js" />
+    <Content Include="ng\Views\answerListView.html" />
     <Content Include="ng\Views\editCourseView.html" />
     <Content Include="ng\Views\editQuestionsView.html" />
     <Content Include="ng\Views\statusView.html" />

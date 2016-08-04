@@ -1,0 +1,26 @@
+﻿<div class="answer-view">
+    <div class="page-header">
+        <div class="row">
+            <h1 class="col-sm-9 print-me">{{ 'Answers for ' + courseName }}</h1>
+            <a ng-click="courseList()" class="btn btn-default return-button visible-xs-block">
+                <span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> {{ resx.ReturnToCourse_Btn }}
+            </a>
+
+            <div class="return-btn col-md-3 hidden-xs">
+                <a ng-click="courseList()" class="btn btn-default return-button">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> {{ resx.ReturnToCourse_Btn }}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row q-and-a print-me">
+        <div class="col-md-12">
+            <ol class="answer-list">
+                <li ng-repeat="question in questions">
+                    <h3 class="question">{{ question.QuestionText }}</h3>
+                    <div class="answer">{{ question.answer.AnswerText }}</div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

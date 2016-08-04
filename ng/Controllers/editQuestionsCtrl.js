@@ -34,8 +34,6 @@ angular
 				questionsFactory.callQuestionsData(videoId)
 					.then(function (data) {
 						$scope.questions = angular.fromJson(data);
-						console.log('$scope.questions');
-						console.log($scope.questions);
 					}, function (data) {
 						console.log(data);
 					});

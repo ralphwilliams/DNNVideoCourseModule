@@ -135,7 +135,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Components
 
 		    switch (Version)
 		    {
-                case "01.00.06": // should be whichever version number is being upgraded to or currently installed
+                case "01.02.00": // should be whichever version number is being upgraded to or currently installed
                     try
                     {
                         // get a collection of portals to iterate through

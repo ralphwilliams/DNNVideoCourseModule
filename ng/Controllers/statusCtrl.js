@@ -3,8 +3,8 @@
 /// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
-	.controller('statusCtrl', ['$scope', '$http', 'statusFactory', 'videosFactory', 'categoriesFactory', 'localizationFactory', '$location',
-	function ($scope, $http, statusFactory, videosFactory, categoriesFactory, localizationFactory, $location) {
+	.controller('statusCtrl', ['$scope', '$http', 'statusFactory', 'usersFactory', 'videosFactory', 'categoriesFactory', 'localizationFactory', '$location',
+	function ($scope, $http, statusFactory, usersFactory, videosFactory, categoriesFactory, localizationFactory, $location) {
 
 		// #region Controller Global Variables
 
@@ -17,7 +17,7 @@ angular
 				statusFactory.callUsersData()
 					.then(function(data) {
 						$scope.userData = angular.fromJson(data);
-						//console.log($scope.userData)
+						console.log($scope.userData)
 						angular.forEach($scope.userData, function (valueCategory) {
 							valueCategory.Name = valueCategory.Name.replace('DVC_', '');
 						});
@@ -80,6 +80,7 @@ angular
 									angular.forEach(valueUserGroup.Roles, function(valueUserRole) {
 										if (valueUserRole.Id === valueCourse.RoleID) {
 											angular.forEach(valueUserRole.Users, function (valueUser) {
+											    console.log(valueUser);
 												var myCounter = 0;
 												var videoCounter = 0;
 												var videoList = [];

@@ -6,6 +6,10 @@
     </file>
     <file>
       <path />
+      <name>01.02.00.txt</name>
+    </file>
+    <file>
+      <path />
       <name>LICENSE.txt</name>
     </file>
     <file>
@@ -222,6 +226,10 @@
     </file>
     <file>
       <path>ng/Controllers/</path>
+      <name>answerListCtrl.js</name>
+    </file>
+    <file>
+      <path>ng/Controllers/</path>
       <name>editCategoriesCtrl.js</name>
     </file>
     <file>
@@ -243,6 +251,10 @@
     <file>
       <path>ng/Controllers/</path>
       <name>videoPlayerCtrl.js</name>
+    </file>
+    <file>
+      <path>ng/Views/</path>
+      <name>answerListView.html</name>
     </file>
     <file>
       <path>ng/Views/</path>
