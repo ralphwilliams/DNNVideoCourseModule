@@ -121,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="01.02.00.txt" />
-    <Content Include="01.01.01.txt" />
     <Content Include="Content\angular-ui.css" />
     <Content Include="Content\angular-ui.min.css" />
     <Content Include="Content\bootstrap-flat-extras.css" />
@@ -240,7 +239,7 @@
     <Content Include="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.psm1" />
     <Content Include="packages\repositories.config" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.01.00.SqlDataProvider" />
-    <Content Include="Providers\DataProviders\SqlDataProvider\01.01.01.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\01.02.00.SqlDataProvider" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

@@ -208,31 +208,53 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 			}
 		}
 
-		// Get Answers
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
-		[HttpGet]
-		public HttpResponseMessage GetUsersAnswers(int moduleId)
-		{
-			try
-			{
-				Requires.NotNegative("moduleId", moduleId); 
+        // Get Answers
+        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+        [ValidateAntiForgeryToken]
+        [HttpGet]
+        public HttpResponseMessage GetUsersAnswers(int moduleId)
+        {
+            try
+            {
+                Requires.NotNegative("moduleId", moduleId);
 
-				var ctl = new AnswerController();
-				var answers = ctl.GetAnswers(moduleId).Where(a => a.AssignedUserId == UserInfo.UserID).ToJson();
+                var ctl = new AnswerController();
+                var answers = ctl.GetAnswers(moduleId).Where(a => a.AssignedUserId == UserInfo.UserID).ToJson();
 
 
-				return Request.CreateResponse(HttpStatusCode.OK, answers);
-			}
-			catch (Exception exc)
-			{
-				Exceptions.LogException(exc);
-				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
-			}
-		}
+                return Request.CreateResponse(HttpStatusCode.OK, answers);
+            }
+            catch (Exception exc)
+            {
+                Exceptions.LogException(exc);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+            }
+        }
+        // Get Answers
+        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+        [ValidateAntiForgeryToken]
+        [HttpGet]
+        public HttpResponseMessage GetUsersAnswers(int moduleId, int userId)
+        {
+            try
+            {
+                Requires.NotNegative("moduleId", moduleId);
 
-		// Add Question
-		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+                var ctl = new AnswerController();
+                var answers = ctl.GetAnswers(moduleId).Where(a => a.AssignedUserId == userId).ToJson();
+
+
+                return Request.CreateResponse(HttpStatusCode.OK, answers);
+            }
+            catch (Exception exc)
+            {
+                Exceptions.LogException(exc);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+            }
+        }
+
+        // Add Question
+        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
 		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage AddAnswer(AnswerInfo answerDto)

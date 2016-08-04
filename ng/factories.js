@@ -329,19 +329,33 @@
 		});
 		return deferred.promise;
 	}
-	service.callUserAnswersData = function (questionId) {
-		var deferred = $q.defer();
+	service.callUserAnswersData = function () {
+	    var deferred = $q.defer();
 
-		$http({
-			method: 'GET',
-			url: dataUrl + 'GetUsersAnswers?moduleId=' + moduleId,
-			headers: $self.Headers
-		}).success(function (data) {
-			deferred.resolve(data);
-		}).error(function () {
-			console.log('There was an error getting the videos.');
-		});
-		return deferred.promise;
+	    $http({
+	        method: 'GET',
+	        url: dataUrl + 'GetUsersAnswers?moduleId=' + moduleId,
+	        headers: $self.Headers
+	    }).success(function (data) {
+	        deferred.resolve(data);
+	    }).error(function () {
+	        console.log('There was an error getting the videos.');
+	    });
+	    return deferred.promise;
+	}
+	service.callUserAnswersDataAdmin = function (userId) {
+	    var deferred = $q.defer();
+
+	    $http({
+	        method: 'GET',
+	        url: dataUrl + 'GetUsersAnswers?moduleId=' + moduleId + '&UserId=' + userId,
+	        headers: $self.Headers
+	    }).success(function (data) {
+	        deferred.resolve(data);
+	    }).error(function () {
+	        console.log('There was an error getting the videos.');
+	    });
+	    return deferred.promise;
 	}
 	return service;
 })

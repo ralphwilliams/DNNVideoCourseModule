@@ -1,4 +1,4 @@
-Copyright (c) 2015, ralphwilliams
+Copyright (c) 2015, Ralph Williams Consulting, LLC
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

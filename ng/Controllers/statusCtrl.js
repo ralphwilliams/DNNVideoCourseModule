@@ -3,8 +3,8 @@
 /// <reference path="C:\websites\dnndev.me\Website\DesktopModules\DNNVideoCourse\Scripts/angular.js" />
 angular
 	.module('videoControllers')
-	.controller('statusCtrl', ['$scope', '$http', 'statusFactory', 'usersFactory', 'videosFactory', 'categoriesFactory', 'localizationFactory', '$location',
-	function ($scope, $http, statusFactory, usersFactory, videosFactory, categoriesFactory, localizationFactory, $location) {
+	.controller('statusCtrl', ['$scope', '$http', 'statusFactory', 'usersFactory', 'videosFactory', 'categoriesFactory', 'questionsFactory', 'localizationFactory', '$location',
+	function ($scope, $http, statusFactory, usersFactory, videosFactory, categoriesFactory, questionsFactory, localizationFactory, $location) {
 
 		// #region Controller Global Variables
 
@@ -17,7 +17,6 @@ angular
 				statusFactory.callUsersData()
 					.then(function(data) {
 						$scope.userData = angular.fromJson(data);
-						console.log($scope.userData)
 						angular.forEach($scope.userData, function (valueCategory) {
 							valueCategory.Name = valueCategory.Name.replace('DVC_', '');
 						});
@@ -74,13 +73,13 @@ angular
 
 							// Set courseId to RoleID
 							$scope.categories[keyCategory].Roles[keyCourse].CourseId = valueCourse.RoleID;
+							$scope.categories[keyCategory].Roles[keyCourse].hasQuestions = false;
 
 							angular.forEach($scope.userData, function (valueUserGroup) {
 								if (valueUserGroup.Id === valueCategory.RoleGroupID) {
 									angular.forEach(valueUserGroup.Roles, function(valueUserRole) {
 										if (valueUserRole.Id === valueCourse.RoleID) {
 											angular.forEach(valueUserRole.Users, function (valueUser) {
-											    console.log(valueUser);
 												var myCounter = 0;
 												var videoCounter = 0;
 												var videoList = [];
@@ -96,6 +95,15 @@ angular
 														videoCounter++;
 														// Create list of updated videos
 														videoList.push(valueVideo);
+                                                        // Determine if course has questions associated with it
+														questionsFactory.callQuestionsData(valueVideo.VideoId).then(function (service) {
+														    $scope.questionList = angular.fromJson(service);
+														    angular.forEach($scope.questionList, function (vQuestion) {
+														        if (vQuestion.VideoId === valueVideo.VideoId) {
+														            valueUser.hasQuestions = true;
+														        }
+														    });
+														});
 													}
 												}, videoList);
 												valueUser.name = valueUser.DisplayName !== '' ? valueUser.DisplayName : valueUser.Email;

@@ -11,6 +11,7 @@ angular
 		'$location',
 		'localizationFactory',
 		'questionsFactory',
+        'videosFactory',
 	function ($scope,
 		$routeParams,
 		$http,
@@ -19,7 +20,8 @@ angular
 		vimeoFactory,
 		$location,
 		localizationFactory,
-		questionsFactory) {
+		questionsFactory,
+        videosFactory) {
 
 		// #region Test for Edit mode
 		if (typeof editMode !== 'undefined' || editMode === false) {
@@ -28,8 +30,8 @@ angular
 			// #region Get Data from sources
 
 			// Get Questions
-			var videoId = $routeParams.VideoId;
-
+			var videoId = parseInt($routeParams.VideoId);
+		    
 			var loadQuestions = function (videoId) {
 				questionsFactory.callQuestionsData(videoId)
 					.then(function (data) {
@@ -51,6 +53,26 @@ angular
 					});
 			}
 
+		    // Get videos
+			videosFactory.callVideosData()
+                .then(function (data) {
+                    $scope.videos = angular.fromJson(data);
+			        loadVideo();
+			    }, function (data) {
+                    alert(data);
+			    });
+
+		    // Get Vimeo Data
+			function callVimeo(vimeoId, loadVimeoData) {
+			    vimeoFactory.callVimeoData(parseInt(vimeoId))
+                .then(function (data) {
+                    $scope.vimeo = data;
+                    loadVimeoData(data);
+                }, function (data) {
+                    alert('vimeo Ajax Fail');
+                });
+			}
+
 			// Get Localization Resources
 			localizationFactory.callResx()
 				.then(function(data) {
@@ -66,34 +88,38 @@ angular
 				$scope.editQuestion = $scope.editQuestion === false ? true : false;
 			};
 
-			// #region Drag and Drop directive
+		    // #region Drag and Drop directive
 
 			function assignOrder() {
-				angular.forEach($scope.questions, function (value, key) {
-					console.log(value.OrderIndex);
-					value.OrderIndex = key;
-					console.log(value.OrderIndex);
-					var question = value;
-					$scope.editQuestionText(question.QuestionText, question.QuestionId, question.VideoId, question.OrderIndex);
-				}, $scope.questions);
-				//$.ui.sortable.refresh();
+			    angular.forEach($scope.questions, function (value, key) {
+			        console.log(key);
+			        value.OrderIndex = key;
+			        console.log(value);
+			        $scope.EditQuestionOrder(value);
+			    }, $scope.questions);
+			    $(function () {
+
+			        //$.ui.sortable.refresh();
+			    });
 			}
 
-			// Sortable directive
+		    // Sortable directive
 			$scope.sortableOptions = {
-				handle: '> .video-drag-handle',
-				placeholder: "sortable-placeholder",
-				helper: 'helper',
-				forceHelperSize: true,
-				'ui-floating': true,
-				update: function (e, ui) {
-				},
-				stop: function (e, ui) {
-					assignOrder();
-				}
+			    handle: '> .video-drag-handle',
+			    placeholder: "sortable-placeholder",
+			    helper: 'helper',
+			    forceHelperSize: true,
+			    'ui-floating': true,
+			    update: function (e, ui) {
+			        console.log(e);
+			        console.log(ui);
+			        assignOrder();			    },
+			    stop: function (e, ui) {
+
+			    }
 			};
 
-			// #endregion
+		    // #endregion
 
 			// #region Edit Question
 
@@ -112,14 +138,41 @@ angular
 				$scope.QuestionText = '';
 			}
 
-			// #endregion
+		    // #endregion
+
+		    // #region Edit Question Order
+            $scope.EditQuestionOrder = function(question) {
+                // updated Video Class
+                function UpdateQuestion(question) {
+                    this.QuestionId = question.QuestionId;
+                    this.VideoId = question.VideoId;
+                    this.QuestionText = question.QuestionText;
+                    this.OrderIndex = question.OrderIndex;
+                    this.ModuleId = moduleId;
+                }
+
+                // Create updated video object
+                var updatedQuestion = new UpdateQuestion(question);
+                console.log('updatedQuestion');
+                console.log(updatedQuestion);
+                // Save question updated video object
+                questionsFactory.setQuestions(updatedQuestion)
+                    .success(function () {
+                        loadQuestions(videoId);
+                    }).
+                    error(function (error) {
+                        $scope.status = 'Unable to insert question: ' + error.message;
+                        console.log(NewQuestionDTO);
+                    });
+
+            }
 
 			// #region Add Question
 
 			$scope.addNewQuestion = function (newQuestionText) {
 				console.log('$scope.addNewQuestionText: ' + newQuestionText);
 				function QuestionText(newQuestionText) {
-					this.VideoId = $routeParams.VideoId,
+					this.VideoId = videoId,
 					this.QuestionText = newQuestionText,
 					this.ModuleId = moduleId,
 					this.OrderIndex = $scope.questions.length;
@@ -154,7 +207,26 @@ angular
 			// #region Create List of Questions
 			loadQuestions(videoId);
 
-			// #endregion
+		    // #endregion
+
+            function loadVideo() {
+                angular.forEach($scope.videos, function (video, key) {
+                    if (video.VideoId === videoId) {
+                        $scope.thisVideo = video;
+                    }
+                });
+
+			    callVimeo($scope.thisVideo.VimeoId, loadVimeoData);
+			    function loadVimeoData(video) {
+			        $scope.thisVideo.name = video.title;
+			    }
+
+
+
+                $scope.courseId = $scope.thisVideo.CourseId;
+                
+                console.log($scope.thisVideo);
+            }
 
 			$scope.courseList = function () {
 				$location.path('/videos/');

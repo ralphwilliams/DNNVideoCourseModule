@@ -215,7 +215,6 @@ angular
 						$scope.categories[keyCategory].Roles[keyCourse].amountComplete = 0;
 						$scope.categories[keyCategory].Roles[keyCourse].percentComplete = $scope.categories[keyCategory].Roles[keyCourse].amountComplete + '%';
 					}
-					console.log($scope.categories[keyCategory].Roles[keyCourse]);
 				});
 
 

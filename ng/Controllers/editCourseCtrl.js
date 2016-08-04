@@ -136,7 +136,10 @@ angular
 					var video = value;
 					$scope.editVimeo(video);
 				}, $scope.videos);
-				jquery.ui.sortable.refresh();
+			    $(function() {
+			        
+				//$.ui.sortable.refresh();
+			    });
 			}
 
 			// Sortable directive
@@ -181,7 +184,7 @@ angular
 				// Create updated video object
 				var updatedVideo = new updateVideo(video);
 
-				// Save video updated video object
+			    // Save video updated video object
 				videosFactory.setVideos(updatedVideo)
 					.success(function () {
 						$scope.status = 'Upadated Video! Refreshing video list.';

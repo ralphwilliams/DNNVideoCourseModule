@@ -21,7 +21,7 @@
 					<ul class="list-unstyled">
 						<li class="course-courses" ng-repeat="course in category.Roles" ng-cloak>
 							<h3 class="page-header">
-								{{ course.Name }} <!--| {{ course.RoleID }}-->
+								{{ course.Name }}<!--| {{ course.RoleID }}-->
 							</h3>
 							<div class="row">
 								<div class="col-md-12 alert alert-warning" role="alert" ng-hide="course.Users.length > 0">
@@ -45,7 +45,7 @@
                                                 </div>
                                                 <p class="course-status">{{ user.numberComplete + ' of ' + user.totalVideos }} {{ resx.CourseProgressCompleted_Txt }}</p>
                                                 <p class="course-complete" ng-show="user.courseComplete">{{ resx.CourseProgressCourseComplete_Txt }}</p>
-                                                <a class="footer-link btn btn-default" ng-href="{{ '#/answers/' + $parent.course.Id + '/user/' + user.UserId}}">View Q &amp; A</a>
+                                                <a ng-show="user.hasQuestions" class="footer-link btn btn-default" ng-href="{{ '#/answers/' + $parent.course.Id + '/user/' + user.UserId}}">View Q &amp; A</a>
                                             </div>
                                         </div>
                                     </li>

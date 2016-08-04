@@ -301,6 +301,11 @@
     padding-left: 20px; 
 }
 
+.q-and-a ol ol li{
+    list-style: decimal;
+    margin-left: 20px;
+}
+
     /* printer friendly version */
     @media print {
       * {
@@ -330,6 +335,9 @@
       }
       .print-me .answer {
           margin-bottom: 30px !important;
+      }
+      .btn {
+          display: none!important;
       }
     }
 
