@@ -2,11 +2,15 @@
   <files>
     <file>
       <path />
-      <name>01.00.06.txt</name>
+      <name>01.01.01.txt</name>
     </file>
     <file>
       <path />
-      <name>License.txt</name>
+      <name>01.02.00.txt</name>
+    </file>
+    <file>
+      <path />
+      <name>LICENSE.txt</name>
     </file>
     <file>
       <path />
@@ -222,11 +226,19 @@
     </file>
     <file>
       <path>ng/Controllers/</path>
+      <name>answerListCtrl.js</name>
+    </file>
+    <file>
+      <path>ng/Controllers/</path>
       <name>editCategoriesCtrl.js</name>
     </file>
     <file>
       <path>ng/Controllers/</path>
       <name>editCourseCtrl.js</name>
+    </file>
+    <file>
+      <path>ng/Controllers/</path>
+      <name>editQuestionsCtrl.js</name>
     </file>
     <file>
       <path>ng/Controllers/</path>
@@ -242,11 +254,19 @@
     </file>
     <file>
       <path>ng/Views/</path>
+      <name>answerListView.html</name>
+    </file>
+    <file>
+      <path>ng/Views/</path>
       <name>editCategories.html</name>
     </file>
     <file>
       <path>ng/Views/</path>
       <name>editCourseView.html</name>
+    </file>
+    <file>
+      <path>ng/Views/</path>
+      <name>editQuestionsView.html</name>
     </file>
     <file>
       <path>ng/Views/</path>

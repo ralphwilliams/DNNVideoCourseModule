@@ -12,6 +12,7 @@
 						<span class="sr-only">40% Complete (success)</span>
 					</span>
 				</span>
+                <a ng-show="$parent.course.hasQuestions" class="print-answers btn" ng-href="{{ '#/answers/' + $parent.course.CourseId }}">View &amp; print my answers</a>
 			</span>
 			<span class="small">
 				<a ng-href="{{ '#/courses/' + $parent.course.CourseId}}" ng-show="$parent.editMode" class="btn btn-sm btn-default btn-edit pull-right" aria-label="{{ $parent.$parent.resx.EditCourse_Lbl }}">
@@ -21,20 +22,20 @@
 		</h3>
 	</div>
 	<div class="panel-collapse collapse" uib-collapse="!isOpen">
-		<ul class="video-list list-unstyled row">
-			<li class="col-md-3 video-list-item" ng-class="[{complete: video.complete == true}, {next_video: video.isNext == true}]" ng-repeat="video in $parent.course.videos">
-				<h4 class="video-title" title="{{ video.description }}">
-					<a ng-href="{{ '#/videos/' + video.VideoId }}" ng-class="[{disabled: video.complete != true && video.isNext != true}]">
-						{{ video.title }}
-					</a>
-				</h4>
-				<a ng-href="{{ '#/videos/' + video.VideoId }}" class="img-responsive" title="{{ video.description }}" ng-class="[{disabled: video.complete != true && video.isNext != true}]">
-					<span class=""></span>
-					<img class="video-list-thumb img-rounded" ng-src="{{ video.thumbnail_url }}" alt="{{ video.title }}"/>
-				</a>
-				<p class="text-right small">{{ $parent.$parent.resx.Duration_Txt }}: {{ video.duration }}</p>
-			</li>
-		</ul>
+	    <ul class="video-list list-unstyled row">
+	        <li class="col-md-3 video-list-item" ng-class="[{complete: video.complete == true}, {next_video: video.isNext == true}]" ng-repeat="video in $parent.course.videos">
+	            <h4 class="video-title" title="{{ video.description }}">
+	                <a ng-href="{{ '#/videos/' + video.VideoId }}" ng-class="[{disabled: video.complete != true && video.isNext != true}]">
+	                    {{ video.title }}
+	                </a>
+	            </h4>
+	            <a ng-href="{{ '#/videos/' + video.VideoId }}" class="img-responsive" title="{{ video.description }}" ng-class="[{disabled: video.complete != true && video.isNext != true}]">
+	                <span class=""></span>
+	                <img class="video-list-thumb img-rounded" ng-src="{{ video.thumbnail_url }}" alt="{{ video.title }}"/>
+	            </a>
+	            <p class="text-right small">{{ $parent.$parent.resx.Duration_Txt }}: {{ video.duration }}</p>
+	        </li>
+	    </ul>
 		<div class="row" ng-show="!$parent.course.hasVideos">
 			<div class="col-md-12">
 				<p>No videos have been added to this course. <a ng-show="editMode" class="btn btn-secondary" ng-href="{{ '#/courses/' + $parent.course.CourseId}}">Click here to add videos.</a></p>

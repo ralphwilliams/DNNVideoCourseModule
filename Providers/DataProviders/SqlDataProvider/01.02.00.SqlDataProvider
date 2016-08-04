@@ -1,0 +1,56 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Videos]') AND type in (N'U'))
+ALTER TABLE {databaseOwner}[{objectQualifier}DNNVideoCourse_Videos] ADD CONSTRAINT
+    [PK_{objectQualifier}DNNVideoCourse_Videos] PRIMARY KEY CLUSTERED 
+    (
+    videoId
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Questions]') AND type in (N'U'))
+CREATE TABLE {databaseOwner}[{objectQualifier}DNNVideoCourse_Questions]
+    (
+		QuestionId int NOT NULL IDENTITY (1, 1) 
+			CONSTRAINT [PK_{objectQualifier}DNNVideoCourse_Questions] PRIMARY KEY CLUSTERED,
+		OrderIndex int NOT NULL,
+		VideoId int NOT NULL,
+		QuestionText nvarchar(1000) NOT NULL,
+		AssignedUserId int NULL,
+		ModuleId int NOT NULL,
+		CreatedOnDate datetime NOT NULL,
+		CreatedByUserId int NOT NULL,
+		LastModifiedOnDate datetime NOT NULL,
+		LastModifiedByUserId int NOT NULL
+    )  
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DNNVideoCourse_Answers]') AND type in (N'U'))
+CREATE TABLE {databaseOwner}[{objectQualifier}DNNVideoCourse_Answers]
+    (
+		AnswerId int NOT NULL IDENTITY (1, 1) 
+			CONSTRAINT [PK_{objectQualifier}DNNVideoCourse_Answers] PRIMARY KEY CLUSTERED,
+		OrderIndex int NOT NULL,
+		QuestionId int NOT NULL,
+		AnswerText nvarchar(max) NOT NULL,
+		AssignedUserId int NULL,
+		ModuleId int NOT NULL,
+		CreatedOnDate datetime NOT NULL,
+		CreatedByUserId int NOT NULL,
+		LastModifiedOnDate datetime NOT NULL,
+		LastModifiedByUserId int NOT NULL
+    )  
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

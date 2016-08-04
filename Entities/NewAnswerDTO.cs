@@ -14,14 +14,9 @@ using System;
 
 namespace RalphWilliams.Modules.DNNVideoCourse.Entities
 {
-    [Serializable]
-    public class UsersInRoleDTO
+    // [Serializable]
+    public class NewAnswerDTO
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-	    public string DisplayName { get; set; }
-		public string Email { get; set; }
-        public int UserId { get; set; }
-        public string Videos { get; set; }
+        public int AnswerId { get; set; }
     }
 }

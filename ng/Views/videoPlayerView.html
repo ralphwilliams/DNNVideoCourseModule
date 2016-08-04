@@ -26,17 +26,32 @@
 	<div class="row" ng-hide="courseComplete">
 		<div class="col-md-12">
 			<h3>{{selectedVimeo.title}} <!--: {{selectedVimeo.video_id}}--></h3>
-			<p><em>{{ resx.VideoDetailsLength_Text }}: {{showDuration()}}</em><br />{{ resx.VideoDetailsVideo_Text }} {{ orderIndex + 1 }} {{ resx.VideoDetailsOf_Text }} {{ courseLength }}</p>
+			<p><em>{{ resx.VideoDetailsLength_Text }}: {{showDuration()}}</em><br/>{{ resx.VideoDetailsVideo_Text }} {{ orderIndex + 1 }} {{ resx.VideoDetailsOf_Text }} {{ courseLength }}</p>
 			<p>{{ selectedVimeo.description }}</p>
-			<a id="nextVideo" ng-click="moveNext()" class="btn btn-primary pull-right" ng-class="{disabled: selectedVimeo.complete != true}">
-				<span ng-show="courseFinished == true && showNext == false" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-				<span ng-show="showCheck" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-				{{ nextButton }}
-				<span ng-show="showNext" class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-			</a>
-			<a id="prevVideo" ng-click="prevVideo()" class="btn btn-primary pull-left" ng-class="{disabled: orderIndex == 0}"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>{{ resx.VideoPlayerPrevious_Btn }}</a>
 		</div>
 	</div>
+	<div class="row" ng-hide="courseComplete">
+	    <div class="col-md-12">
+            <div class="q-and-a" ng-show="questions.length > 0">
+                <h2>Questions</h2>
+                <ol>
+                    <li class="video-questions form-group" ng-repeat="question in questions">
+                        {{question.QuestionText}}
+                        <textarea class="form-control" ng-change="updateAnswer(question)" ng-model="question.answer.AnswerText" ng-model-options="{debounce: {'default': 1000, 'blur': 0}}" />
+                    </li>
+                </ol>
+            </div>
+	        <a id="nextVideo" ng-click="moveNext()" class="btn btn-primary pull-right" ng-class="{disabled: selectedVimeo.complete != true}">
+	            <span ng-show="courseFinished == true && showNext == false" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+	            <span ng-show="showCheck" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+	            {{ nextButton }}
+	            <span ng-show="showNext" class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+	        </a>
+	        <span>{{ savedStatus }}</span>
+	        <a id="prevVideo" ng-click="prevVideo()" class="btn btn-primary pull-left" ng-class="{disabled: orderIndex == 0}"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>{{ resx.VideoPlayerPrevious_Btn }}</a>
+	    </div>
+	</div>
+
 	<div class="row" ng-show="courseComplete">
 		<div class="complete-screen col-md-8 col-md-offset-2">
 			<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>

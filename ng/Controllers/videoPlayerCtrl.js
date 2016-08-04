@@ -14,6 +14,8 @@ angular
 		'usersFactory',
 		'userInfoFactory',
 		'localizationFactory',
+		'questionsFactory',
+		'answersFactory',
 		'emailFactory',
 	function ($scope,
 		$routeParams,
@@ -27,16 +29,20 @@ angular
 		usersFactory,
 		userInfoFactory,
 		localizationFactory,
+		questionsFactory,
+		answersFactory,
 		emailFactory) {
-
+		var VideoId = $routeParams.VideoId;
+		$scope.answers = '';
 		// Get User Info
 		userInfoFactory.callUserInfo()
-		.then(function (data) {
-			$scope.userId = data;
-			loadPlayer();
-		}, function (data) {
-			alert(data);
-		})
+			.then(function(data) {
+				$scope.userId = data;
+				loadPlayer();
+			}, function(data) {
+				alert(data);
+			});
+
 
 		function loadPlayer() {
 			// #region Test for Edit mode
@@ -45,8 +51,7 @@ angular
 			// #region Controller Global Variables
 
 			$scope.nextButton = 'Next Video'; // Text is localized further down before displaying on view
-			thisVideo = $routeParams.videoId;
-			var thisVideo;
+
 			if (typeof editMode !== 'undefined') {
 				$scope.editMode = true;
 			} else {
@@ -69,7 +74,7 @@ angular
 			}, function (data) {
 				console.log('Error Getting User Data');
 				console.log(data);
-			})
+			});
 
 			var loadVids = function () {
 				videosFactory.callVideosData()
@@ -79,7 +84,7 @@ angular
 				}, function (data) {
 					console.log('Error getting videos');
 					console.log(data);
-				})
+				});
 			}
 
 			// Get Vimeo data
@@ -91,7 +96,7 @@ angular
 				}, function (data) {
 					console.log('vimeo Ajax Fail');
 					console.log(data);
-				})
+				});
 			}
 
 			// Get categories
@@ -157,8 +162,58 @@ angular
 				$scope.resx.CouresCompletionText_Html = $sce.trustAsHtml($scope.resx.CouresCompletionText_Html);
 			}, function (data) {
 				alert(data);
-			})
+			});
 
+				// Get Questions
+			// var questionId = 1;
+
+			// var loadQuestions = function (videoId) {
+				questionsFactory.callQuestionsData(VideoId)
+					.then(function (data) {
+						$scope.questions = angular.fromJson(data);
+						loadUserAnswers();
+					}, function (data) {
+						console.log(data);
+					});
+			// }
+
+
+			var loadAnswers = function () {
+				answersFactory.callAnswersData(questionId)
+					.then(function (data) {
+						$scope.answers = angular.fromJson(data);
+					}, function (data) {
+						console.log(data);
+					});
+			}
+
+
+			var loadUserAnswers = function () {
+				answersFactory.callUserAnswersData()
+					.then(function (data) {
+						$scope.answers = angular.fromJson(data);
+						buildQandA();
+					}, function (data) {
+						console.log(data);
+					});
+			}
+
+				// Add New Questions
+			function editAnswer(NewAnswerDTO) {
+				answersFactory.setAnswers(NewAnswerDTO)
+					.success(function () {
+					    loadUserAnswers();
+						$scope.savedStatus = 'Answers saved';
+					}).
+					error(function (error) {
+						$scope.status = 'Unable to insert question: ' + error.message;
+						console.log(NewAnswerDTO);
+						$scope.savedStatus = 'Error Saving Answers';
+					});
+			}
+
+			$scope.editAnswers = function (answer) {
+			}
 
 			// #endregion
 
@@ -407,9 +462,42 @@ angular
 
 			};
 
-			// #endregion 
+				// #endregion 
 
-			$scope.toggleComplete = function () {
+			var buildQandA = function() {
+				angular.forEach($scope.questions, function (qv,qk) {
+					angular.forEach($scope.answers, function (av,ak) {
+						if (qv.QuestionId === av.QuestionId) {
+							$scope.questions[qk].answer = av;
+						}
+					});
+					function savedStuff() {
+						console.log('This is saved!');
+					}
+
+						$scope.$watch('questions[qk].answer', savedStuff);
+				});
+			}
+
+			$scope.updateAnswer = function (answer) {
+				$scope.savedStatus = 'Saving...';
+				console.log(answer);
+				function editAnswerObject(answer) {
+					this.AnswerId = answer.answer.AnswerId,
+					this.QuestionId = answer.QuestionId,
+					this.AnswerText = answer.answer.AnswerText,
+					this.ModuleId = moduleId,
+					this.OrderIndex = answer.OrderIndex;
+				}
+				// Update Role Object
+				var newAnswer = new editAnswerObject(answer);
+				console.log(newAnswer);
+
+				editAnswer(newAnswer);
+				// $scope.savedStatus = 'Answers saved';
+			}
+
+				$scope.toggleComplete = function () {
 				$scope.courseComplete = $scope.courseComplete === false ? true : false;
 			};
 			} else {
@@ -418,6 +506,7 @@ angular
 					$location.path('/videos/');
 				}
 			}
+			// $scope.loadQuestions();
 			// #endregion
 
 		}

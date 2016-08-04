@@ -1,0 +1,35 @@
+﻿<div class="answer-view" ng-hide="viewMode">
+    <div class="page-header">
+        <div class="row">
+            <h1 class="col-sm-9 print-me">{{ 'Answers for ' + courseName }}</h1>
+            <a ng-click="courseProgress()" class="btn btn-default return-button visible-xs-block">
+                <span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true"></span> {{ returnText }}
+            </a>
+
+            <div class="return-btn col-md-3 hidden-xs">
+                <a ng-click="courseProgress()" class="btn btn-default return-button">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> {{ returnText }}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row q-and-a print-me">
+        <div class="col-md-12">
+            <a ng-click="printMe()" class="btn btn-primary"><span class="glyphicon glyphicon-print"></span> &nbsp;Print Questions and Answers</a>
+            <ol class="answer-list list-unstyled">
+                <li ng-repeat="video in videoList">
+                    <h3>{{ video.name }}</h3>
+                    <ol>
+                        <li ng-repeat="question in video.questions">
+                            <h4 class="question">{{ question.QuestionText }}</h4>
+                            <div class="answer">{{ question.answer.AnswerText }}</div>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div ng-show="viewMode">
+    <p>{{ resx.LoggedOutMessage }}</p>
+</div>

@@ -1,7 +1,5 @@
 ﻿[CSS:{ path: "~/DesktopModules/DNNVideoCourse/Content/bootstrap.min.css"}]
 
-
-[JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js", priority: 50}]
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/Scripts/froogaloop2.min.js"}]
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/Scripts/angular.min.js"}]
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/Scripts/angular-route.min.js"}]
@@ -15,6 +13,8 @@
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/ng/Controllers/editCourseCtrl.js"}]
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/ng/Controllers/editCategoriesCtrl.js"}]
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/ng/Controllers/statusCtrl.js"}]
+[JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/ng/Controllers/answerListCtrl.js"}]
+[JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/ng/Controllers/editQuestionsCtrl.js"}]
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/Scripts/angular-ui/ui-bootstrap.js"}]
 [JavaScript:{ path: "~/DesktopModules/DNNVideoCourse/Scripts/angular-ui/ui-bootstrap-tpls.js"}]
 
@@ -24,10 +24,7 @@
 	var portalId = parseInt("[ModuleContext:PortalId]");
 	var sf = $.ServicesFramework(moduleId);
 	var moduleName = "DNNVideoCourse";
-	if ("[ModuleContext:EditMode]" === 'True') {
-		var editMode = true;
-	}
-	console.log(editMode);
+	if ("[ModuleContext:EditMode]" === 'True')  var editMode = true;
 	var currentDate = d;
 </script>
 <div class="module-wrap" ng-view>
