@@ -59,7 +59,7 @@ Once the module has been installed, add the module to a page. Categories and Cou
 4. Once all needed users have been removed from the course, click the close button.
 
 ### Renaming Categories and Courses
-1. Navigate to the Edit Categories and Courses view
+1. Navigate to the Edit Categories and Courses view.
 2. Click the edit icon to the right of the Category or Course.
 3. Make the edit to the name and click the “Edit Category/Course Name” button.
 
