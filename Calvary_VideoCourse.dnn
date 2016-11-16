@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNNVideoCourse" type="Module" version="01.02.00">
+    <package name="DNNVideoCourse" type="Module" version="01.02.01">
       <friendlyName>DNN Video Course</friendlyName>
       <description>DNN Video Course module</description>
       <iconFile>Images/logo_min.png</iconFile>
@@ -22,8 +22,8 @@
             <basePath>DesktopModules\DNNVideoCourse</basePath>
             <script type="Install">
               <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.02.00.SqlDataProvider</name>
-              <version>01.02.00</version>
+              <name>01.02.01.SqlDataProvider</name>
+              <version>01.02.01</version>
             </script>
             <script type="UnInstall">
               <path>Providers\DataProviders\SqlDataProvider</path>
@@ -73,7 +73,7 @@
             <attributes>
               <businessControllerClass>RalphWilliams.Modules.DNNVideoCourse.Components.FeatureController</businessControllerClass>
               <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.02.00</upgradeVersionsList>
+              <upgradeVersionsList>01.02.01</upgradeVersionsList>
             </attributes>
           </eventMessage>
         </component>
@@ -87,7 +87,7 @@
           </assemblies>
         </component>
 
-        <component type="Cleanup" version="01.02.00" fileName ="01.02.00.txt" />
+        <component type="Cleanup" version="01.02.01" fileName ="01.02.01.txt" />
         
       </components>
     </package>

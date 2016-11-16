@@ -50,7 +50,7 @@
 	var _courseComplete = [];
 	var _videosComplete = [];
 
-	// var dataUrl = "/DesktopModules/DNNVideoCourse/data/users.json";
+    // var dataUrl = "/DesktopModules/DNNVideoCourse/data/users.json";
 	var dataUrl = "/DesktopModules/DNNVideoCourse/API/DNNVideoCourse/";
 
 	// DNN Services Framework

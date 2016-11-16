@@ -2,6 +2,12 @@
 <p>Ralph Williams <br />Ralph Williams Consulting, LLC <br /><a href="mailto:me@ralphwilliams.com">me@ralphwilliams.com</a><br /><a href="http://www.ralphwilliams.com" target="_blank">http://www.ralphwilliams.com</a><br /></p><hr/><div>
 	<h3>About the DNN Video Course Module</h3>
 	<p>This modue allows you to have a LMS-style video gallery experience for your website visitors, based on security roles, and security role groups.</p>
+	<h4>Version 01.02.01</h4>
+	<p>This Release includes the following:</p>
+	<h5>Bug Fixes</h5>
+	<ul>
+		<li>Resolved authentication error when logged in as non admin user.</li>
+	</ul>
 	<h4>Version 01.02.00</h4>
 	<p>This Release includes the following:</p>
 	<h5>Enhancements</h5>

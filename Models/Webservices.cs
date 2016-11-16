@@ -42,7 +42,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		#region Service Methods
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage ResxData()
 		{
@@ -55,7 +55,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		// Get Videos
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetVideos(int moduleId)
 		{
@@ -77,7 +77,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		// Get Questions
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetQuestions(int moduleId, int videoId)
 		{
@@ -187,7 +187,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		// Get Answers
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetAnswers(int moduleId, int questionId)
 		{
@@ -210,7 +210,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
         // Get Answers
         [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-        [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken]
         [HttpGet]
         public HttpResponseMessage GetUsersAnswers(int moduleId)
         {
@@ -255,7 +255,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
         // Add Question
         [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage AddAnswer(AnswerInfo answerDto)
 		{
@@ -323,7 +323,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		// Get User Info
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
         [HttpGet]
         public HttpResponseMessage GetUserInfo()
         {
@@ -343,7 +343,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		//  Get Role Groups
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetAllGroups() 
 		{
@@ -418,7 +418,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
         
 		//  Get Role Groups by User
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetGroupsByUser()
 		{
@@ -431,7 +431,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
         
 		// Get Users Video Complete status
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpGet]
 		public HttpResponseMessage GetVideosComplete()
 		{
@@ -624,7 +624,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		// Save Completion Status
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage SaveComplete(NewVideoDTO thisVideo)
 		{
@@ -762,7 +762,7 @@ namespace RalphWilliams.Modules.DNNVideoCourse.Models
 
 		// Send Email
 		[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
-		[ValidateAntiForgeryToken]
+		// [ValidateAntiForgeryToken]
 		[HttpPost]
 		public HttpResponseMessage SendEmail(SubjLineDTO newEmail)
 		{
