@@ -3,6 +3,9 @@ Module instructions http://ralphwilliams.github.io/DNNVideoCourseModule/
 # DNNVideoCourseModule
 DNN SPA module that uses DNN Security Roles and Security Groups to create dynamic Courses and Categories. The course videos are created with Vimeo videos.
 
+## Special Thanks
+![Jetbrains](/Images/jetbrains-logo.png "Jetbrains") **JetBrains**
+
 ### Known Issues
 This module currently supports DNN 8 only. DNN 9 has known issues with managing users from within the module.
 
